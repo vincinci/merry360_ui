@@ -20,8 +20,8 @@
               </svg>
             </div>
             <div>
-              <h3 class="font-bold text-base sm:text-lg">AI Concierge</h3>
-              <p class="text-white/80 text-xs sm:text-sm">Your personal travel assistant</p>
+              <h3 class="font-bold text-base sm:text-lg">Amani</h3>
+              <p class="text-white/80 text-xs sm:text-sm">Your AI Travel Concierge</p>
             </div>
           </div>
           <button @click="close" class="text-white hover:bg-white/20 p-2 rounded-full transition-colors">
@@ -40,7 +40,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
               </svg>
             </div>
-            <h4 class="font-semibold text-gray-900 mb-2 text-sm sm:text-base">Welcome! How can I help you today?</h4>
+            <h4 class="font-semibold text-gray-900 mb-2 text-sm sm:text-base">Hi, I'm Amani! How can I help you today?</h4>
             <p class="text-gray-600 text-xs sm:text-sm mb-4">Ask me about accommodations, tours, or travel tips!</p>
             
             <!-- Quick Suggestions -->
