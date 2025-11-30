@@ -3,10 +3,10 @@
     <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
       <div class="px-4 sm:px-6">
-        <div class="flex items-center justify-between h-14">
+        <div class="flex items-center justify-between h-16">
           <!-- Logo -->
           <router-link to="/home" class="flex items-center">
-            <img src="/logo.png" alt="Merry360" class="h-12" />
+            <img src="/logo.png" alt="Merry360" class="h-16" />
           </router-link>
 
           <!-- Desktop Navigation -->

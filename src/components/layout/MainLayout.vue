@@ -1,91 +1,124 @@
 <template>
   <div class="min-h-screen flex flex-col">
     <!-- Header -->
-    <header class="bg-white/95 border-b border-gray-100 sticky top-0 z-50 backdrop-blur-xl shadow-sm">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
       <div class="container mx-auto px-4 lg:px-8">
-        <div class="flex items-center justify-between h-20">
+        <div class="flex items-center justify-between h-16">
           <!-- Logo -->
-          <router-link to="/home" class="flex items-center space-x-3 group">
-            <div class="w-12 h-12 bg-gradient-to-br from-primary to-primary rounded-2xl flex items-center justify-center shadow-african transform transition-transform group-hover:scale-110 group-hover:rotate-3">
-              <span class="text-white font-bold text-2xl">M</span>
-            </div>
-            <span class="text-xl font-bold text-text-primary tracking-tight">Merry<span class="text-primary">360X</span></span>
+          <router-link to="/home" class="flex items-center">
+            <img src="/logo.png" alt="Merry360" class="h-16" />
           </router-link>
 
           <!-- Desktop Navigation -->
           <nav class="hidden md:flex items-center space-x-6">
             <router-link 
-              to="/accommodations" 
-              class="text-text-primary hover:text-primary transition-all font-bold text-base relative group"
+              to="/home" 
+              class="text-sm text-gray-600 hover:text-primary transition-colors"
             >
-              Stays
-              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary group-hover:w-full transition-all duration-300"></span>
+              Home
+            </router-link>
+            <router-link 
+              to="/accommodations" 
+              class="text-sm text-gray-600 hover:text-primary transition-colors"
+            >
+              Accommodations
             </router-link>
             <router-link 
               to="/tours" 
-              class="text-text-primary hover:text-primary transition-all font-bold text-base relative group"
+              class="text-sm text-gray-600 hover:text-primary transition-colors"
             >
               Tours
-              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary group-hover:w-full transition-all duration-300"></span>
             </router-link>
             <router-link 
               to="/transport" 
-              class="text-text-primary hover:text-primary transition-all font-bold text-base relative group"
+              class="text-sm text-gray-600 hover:text-primary transition-colors"
             >
               Transport
-              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary group-hover:w-full transition-all duration-300"></span>
             </router-link>
+            <router-link 
+              to="/services" 
+              class="text-sm text-gray-600 hover:text-primary transition-colors"
+            >
+              Services
+            </router-link>
+            <router-link 
+              to="/dashboard" 
+              class="text-sm text-gray-600 hover:text-primary transition-colors"
+            >
+              My Trips
+            </router-link>
+          </nav>
+
+          <!-- Desktop Right -->
+          <div class="hidden md:flex items-center gap-2">
             <!-- Currency Toggle -->
             <button 
               @click="currencyStore.toggleCurrency()"
-              class="glass-primary text-text-primary hover:glass-strong transition-all font-semibold text-xs px-3 py-1.5 rounded-lg flex items-center"
+              class="px-3 py-1.5 border border-gray-200 rounded text-xs font-semibold text-gray-900 hover:border-primary hover:text-primary transition-all bg-white flex items-center gap-1"
               :title="'Switch to ' + (currencyStore.currentCurrency === 'USD' ? 'RWF' : 'USD')"
             >
-              <svg class="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
               {{ currencyStore.currentCurrency }}
             </button>
-            <button class="glass-primary text-text-primary hover:glass-strong transition-all font-semibold text-xs px-3 py-1.5 rounded-lg flex items-center">
-              <svg class="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              {{ currentLanguage.toUpperCase() }}
-            </button>
-          </nav>
 
-          <!-- Right Section -->
-          <div class="flex items-center space-x-4">
-            <!-- AI Concierge Button -->
-            <button class="hidden md:flex items-center space-x-2 px-4 py-2 rounded-xl bg-gradient-to-r from-primary to-primary text-white hover:shadow-african transition-all font-semibold text-sm transform hover:scale-105 border border-white/30">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-              </svg>
-              <span>AI Help</span>
-            </button>
+            <select v-model="selectedLanguage" @change="changeLanguage" class="px-2 py-1 border border-gray-200 rounded text-xs text-gray-900 focus:outline-none focus:ring-1 focus:ring-primary bg-white">
+              <option value="EN">EN</option>
+              <option value="RW">RW</option>
+              <option value="FR">FR</option>
+            </select>
 
-            <!-- User Menu -->
-            <div v-if="isAuthenticated" class="relative">
-              <button @click="toggleUserMenu" class="flex items-center space-x-2 group">
-                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-primary to-primary flex items-center justify-center text-white font-bold text-lg shadow-african transform transition-transform group-hover:scale-110">
-                  {{ user?.name?.charAt(0) || 'U' }}
-                </div>
-              </button>
-              <div v-if="showUserMenu" class="absolute right-0 mt-3 w-56 glass-strong rounded-card shadow-african border border-white/40 py-2 backdrop-blur-xl">
-                <router-link to="/dashboard" class="block px-5 py-3 hover:glass text-text-primary transition-all font-semibold text-sm rounded-lg mx-2">Dashboard</router-link>
-                <router-link to="/dashboard" class="block px-5 py-3 hover:glass text-text-primary transition-all font-semibold text-sm rounded-lg mx-2">My Bookings</router-link>
-                <div class="border-t border-white/20 my-2"></div>
-                <button @click="handleLogout" class="w-full text-left px-5 py-3 hover:glass-primary text-error transition-all font-semibold text-sm rounded-lg mx-2">Logout</button>
-              </div>
-            </div>
-            <router-link v-else to="/login">
-              <Button variant="primary" size="sm">Sign In</Button>
+            <router-link to="/dashboard/watchlist" class="relative p-1.5 hover:bg-gray-50 rounded" title="Wishlist">
+              <svg class="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
             </router-link>
 
-            <!-- Mobile Menu Toggle -->
-            <button @click="toggleMobileMenu" class="md:hidden">
+            <router-link to="/trip-cart" class="relative p-1.5 hover:bg-gray-50 rounded" title="Cart">
+              <svg class="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </router-link>
+
+            <router-link 
+              to="/login"
+              class="px-4 py-1.5 border border-primary text-primary text-sm rounded hover:bg-primary hover:text-white transition-colors font-medium"
+            >
+              Login
+            </router-link>
+          </div>
+
+          <!-- Mobile Right -->
+          <div class="flex md:hidden items-center gap-1">
+            <!-- Currency Toggle Mobile -->
+            <button 
+              @click="currencyStore.toggleCurrency()"
+              class="px-2 py-1 border border-gray-200 rounded text-[10px] font-bold text-gray-900 hover:border-primary hover:text-primary transition-all bg-white"
+            >
+              {{ currencyStore.currentCurrency }}
+            </button>
+
+            <router-link to="/dashboard/watchlist" class="relative p-1.5">
+              <svg class="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </router-link>
+
+            <router-link to="/trip-cart" class="relative p-1.5">
+              <svg class="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </router-link>
+
+            <button 
+              @click="toggleMobileMenu"
+              class="p-1.5 text-gray-900"
+              aria-label="Menu"
+            >
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <path v-if="!showMobileMenu" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
               </svg>
             </button>
           </div>
@@ -93,29 +126,43 @@
       </div>
     </header>
 
-    <!-- Mobile Menu -->
-    <div v-if="showMobileMenu" class="md:hidden bg-white border-b border-gray-200 shadow-xl animate-fade-in-up">
-      <nav class="container mx-auto px-4 py-4 space-y-1">
-        <router-link to="/accommodations" class="block py-3 px-4 text-text-primary hover:text-primary hover:bg-gray-50 rounded-lg transition-all duration-200 font-medium">Stays</router-link>
-        <router-link to="/tours" class="block py-3 px-4 text-text-primary hover:text-primary hover:bg-gray-50 rounded-lg transition-all duration-200 font-medium">Tours</router-link>
-        <router-link to="/transport" class="block py-3 px-4 text-text-primary hover:text-primary hover:bg-gray-50 rounded-lg transition-all duration-200 font-medium">Transport</router-link>
-        <button 
-          @click="currencyStore.toggleCurrency()"
-          class="flex items-center space-x-2 py-3 px-4 text-text-primary hover:text-primary hover:bg-gray-50 rounded-lg transition-all duration-200 w-full font-medium"
-        >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <span>Currency: {{ currencyStore.currentCurrency }}</span>
-        </button>
-        <button class="flex items-center space-x-2 py-3 px-4 text-primary hover:bg-gradient-to-r hover:from-primary hover:to-primary hover:bg-opacity-5 rounded-lg transition-all duration-200 w-full font-medium">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
-          </svg>
-          <span>AI Help</span>
-        </button>
-      </nav>
-    </div>
+    <!-- Mobile Menu Drawer -->
+    <transition name="mobile-menu">
+      <div v-if="showMobileMenu" class="fixed inset-0 z-40 md:hidden">
+        <!-- Backdrop -->
+        <div 
+          class="fixed inset-0 bg-black/50 backdrop-blur-sm"
+          @click="showMobileMenu = false"
+        ></div>
+        
+        <!-- Menu Panel -->
+        <div class="fixed top-0 right-0 bottom-0 w-64 bg-white shadow-xl">
+          <div class="p-4">
+            <nav class="space-y-1">
+              <router-link 
+                v-for="item in mobileNavigation"
+                :key="item.name"
+                :to="item.to"
+                class="block py-3 px-4 text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
+                @click="showMobileMenu = false"
+              >
+                {{ item.name }}
+              </router-link>
+              
+              <div class="pt-4 border-t">
+                <router-link 
+                  to="/login"
+                  class="block py-3 px-4 text-center bg-primary text-white rounded-lg hover:bg-red-600 transition-colors"
+                  @click="showMobileMenu = false"
+                >
+                  Login
+                </router-link>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </transition>
 
     <!-- Main Content -->
     <main class="flex-grow">
@@ -174,34 +221,32 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '../../stores/app'
 import { useCurrencyStore } from '../../stores/currency'
-import Button from '../common/Button.vue'
 
 const router = useRouter()
 const appStore = useAppStore()
 const currencyStore = useCurrencyStore()
 
 const showMobileMenu = ref(false)
-const showUserMenu = ref(false)
+const selectedLanguage = ref('EN')
 
-const isAuthenticated = computed(() => appStore.isAuthenticated)
-const user = computed(() => appStore.user)
-const currentLanguage = computed(() => appStore.currentLanguage)
+const mobileNavigation = [
+  { name: 'Home', to: '/home' },
+  { name: 'Accommodations', to: '/accommodations' },
+  { name: 'Tours', to: '/tours' },
+  { name: 'Transport', to: '/transport' },
+  { name: 'Services', to: '/services' },
+  { name: 'My Trips', to: '/dashboard' }
+]
+
+const changeLanguage = () => {
+  console.log('Language changed to:', selectedLanguage.value)
+}
 
 const toggleMobileMenu = () => {
   showMobileMenu.value = !showMobileMenu.value
-}
-
-const toggleUserMenu = () => {
-  showUserMenu.value = !showUserMenu.value
-}
-
-const handleLogout = () => {
-  appStore.logout()
-  showUserMenu.value = false
-  router.push('/login')
 }
 </script>
