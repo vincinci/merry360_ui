@@ -72,14 +72,18 @@
       <!-- Price -->
       <div class="flex items-center justify-between flex-wrap gap-2">
         <div>
-          <span class="text-base sm:text-lg font-bold text-primary">{{ formatPrice(property.price) }} RWF</span>
-          <span v-if="property.period" class="text-text-secondary text-xs">/{{ property.period }}</span>
+          <span class="text-sm sm:text-base font-bold text-primary">{{ formatPrice(property.price) }} RWF</span>
+          <span class="text-text-secondary text-xs">/night</span>
         </div>
         <button 
-          @click.stop="viewDetails"
-          class="px-3 py-1.5 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-200 text-xs font-medium"
+          @click.stop="addToCart"
+          class="px-2.5 py-1.5 bg-primary text-white rounded-lg hover:bg-red-600 transition-all duration-200 flex items-center gap-1"
+          title="Add to Cart"
         >
-          View Details
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          <span class="text-xs font-medium">Add</span>
         </button>
       </div>
     </div>
@@ -114,6 +118,12 @@ const formatPrice = (price) => {
 
 const toggleFavorite = () => {
   isFavorite.value = !isFavorite.value
+}
+
+const addToCart = () => {
+  // TODO: Implement cart functionality
+  console.log('Added to cart:', props.property.title)
+  // You can emit an event or use a store here
 }
 
 const viewDetails = () => {
