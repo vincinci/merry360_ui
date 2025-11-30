@@ -7,9 +7,9 @@
     <section class="relative bg-gradient-to-br from-gray-800 to-gray-700 py-12 md:py-16">
       <!-- Content -->
       <div class="relative z-10 container mx-auto px-4 sm:px-6 flex flex-col items-center justify-center">
-        <h1 class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 text-center">Driving Success for Real Estate Owners & Tourism Brands</h1>
+        <h1 class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 text-center">{{ t('hero.title') }}</h1>
         <p class="text-white/90 text-xs sm:text-sm mb-6 text-center max-w-2xl px-4">
-          Tailored Marketing & Management solutions for your business needs in Rwanda
+          {{ t('hero.tagline') }}
         </p>
         
         <!-- Search Form - Desktop One Line Design -->

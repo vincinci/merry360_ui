@@ -35,7 +35,7 @@
               {{ currencyStore.currentCurrency }}
             </button>
 
-            <select v-model="selectedLanguage" @change="changeLanguage" class="px-2 py-1 border border-gray-200 rounded text-xs text-gray-900 focus:outline-none focus:ring-1 focus:ring-primary bg-white">
+            <select v-model="languageStore.currentLanguage" @change="languageStore.setLanguage(languageStore.currentLanguage)" class="px-2 py-1 border border-gray-200 rounded text-xs text-gray-900 focus:outline-none focus:ring-1 focus:ring-primary bg-white">
               <option value="EN">EN</option>
               <option value="RW">RW</option>
               <option value="FR">FR</option>
@@ -270,10 +270,12 @@
 import { ref, computed } from 'vue'
 import { useUserStore } from '../../stores/userStore'
 import { useCurrencyStore } from '../../stores/currency'
+import { useLanguageStore } from '../../stores/language'
 import { useTranslation } from '../../composables/useTranslation'
 
 const userStore = useUserStore()
 const currencyStore = useCurrencyStore()
+const languageStore = useLanguageStore()
 const mobileMenuOpen = ref(false)
 const { t } = useTranslation()
 
@@ -285,13 +287,6 @@ const navigation = computed(() => [
   { name: t('nav.services'), to: '/services' },
   { name: t('nav.myTrips'), to: '/dashboard' },
 ])
-
-// Language selection
-const selectedLanguage = ref(userStore.preferences.language)
-
-const changeLanguage = () => {
-  userStore.setLanguage(selectedLanguage.value)
-}
 
 // Theme toggle
 const isDarkMode = computed(() => userStore.preferences.theme === 'dark')

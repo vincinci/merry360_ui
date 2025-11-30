@@ -1,5 +1,5 @@
 import { computed } from 'vue'
-import { useUserStore } from '../stores/userStore'
+import { useLanguageStore } from '../stores/language'
 
 const translations = {
   EN: {
@@ -111,6 +111,28 @@ const translations = {
     'common.save': 'Save',
     'common.delete': 'Delete',
     'common.edit': 'Edit',
+    
+    // Hero Section
+    'hero.title': 'Driving Success for Real Estate Owners & Tourism Brands',
+    'hero.tagline': 'Tailored Marketing & Management solutions for your business needs in Rwanda',
+    
+    // Services Section
+    'services.salesMarketing': 'Sales & Marketing',
+    'services.salesDesc': 'Revenue Growth',
+    'services.management': 'Management',
+    'services.managementDesc': 'Property & Operations',
+    'services.marketInsights': 'Market Insights',
+    'services.marketInsightsDesc': 'Data & Analytics',
+    'services.crmLeads': 'CRM & Leads',
+    'services.crmLeadsDesc': 'Lead Generation',
+    'services.aiConcierge': 'AI Concierge',
+    'services.aiConciergeDesc': 'Ask me anything!',
+    
+    // About Section
+    'about.title': 'Your Partner in Business Growth',
+    'about.description': 'At Merry360Global, we specialize in providing comprehensive marketing and management solutions tailored to the real estate and tourism sectors in Rwanda. Our mission is to drive sustainable growth for property owners and tourism brands through innovative strategies, data-driven insights, and exceptional service delivery.',
+    'about.propertiesManaged': 'Properties Managed',
+    'about.customersServed': 'Customers Served',
   },
   
   RW: {
@@ -222,6 +244,28 @@ const translations = {
     'common.save': 'Bika',
     'common.delete': 'Siba',
     'common.edit': 'Hindura',
+    
+    // Hero Section
+    'hero.title': 'Gutera Intsinzi Abafite Imitungo n\'Ubucuruzi bw\'Ubukerarugendo',
+    'hero.tagline': 'Ibisubizo bya Marketing na Management bikwiranye n\'ubucuruzi bwawe mu Rwanda',
+    
+    // Services Section
+    'services.salesMarketing': 'Kugurisha & Marketing',
+    'services.salesDesc': 'Kwiyongera kw\'Amafaranga',
+    'services.management': 'Ubucuruzi',
+    'services.managementDesc': 'Imitungo & Ibikorwa',
+    'services.marketInsights': 'Amakuru y\'Isoko',
+    'services.marketInsightsDesc': 'Amakuru & Isesengura',
+    'services.crmLeads': 'CRM & Abakiriya',
+    'services.crmLeadsDesc': 'Gushaka Abakiriya',
+    'services.aiConcierge': 'AI Concierge',
+    'services.aiConciergeDesc': 'Baza ikintu icyo ari cyo cyose!',
+    
+    // About Section
+    'about.title': 'Umufatanyabikorwa wawe mu Gukura kw\'Ubucuruzi',
+    'about.description': 'Muri Merry360Global, twitanze ibisubizo byuzuye bya marketing na management byubatswe ku bucuruzi bw\'imitungo n\'ubukerarugendo mu Rwanda. Intego yacu ni ukutera imbere gukura gukomeza kubafite imitungo n\'ubucuruzi bw\'ubukerarugendo binyuze mu ngamba z\'ubuhanga, amakuru ashingiye ku makuru, n\'imirimo myiza.',
+    'about.propertiesManaged': 'Imitungo Icungwa',
+    'about.customersServed': 'Abakiriya Bakoranye',
   },
   
   FR: {
@@ -333,13 +377,35 @@ const translations = {
     'common.save': 'Enregistrer',
     'common.delete': 'Supprimer',
     'common.edit': 'Modifier',
+    
+    // Hero Section
+    'hero.title': 'Stimuler le Succès pour les Propriétaires Immobiliers et les Marques Touristiques',
+    'hero.tagline': 'Solutions de Marketing et Gestion sur mesure pour vos besoins au Rwanda',
+    
+    // Services Section
+    'services.salesMarketing': 'Ventes & Marketing',
+    'services.salesDesc': 'Croissance des Revenus',
+    'services.management': 'Gestion',
+    'services.managementDesc': 'Propriété & Opérations',
+    'services.marketInsights': 'Insights du Marché',
+    'services.marketInsightsDesc': 'Données & Analyses',
+    'services.crmLeads': 'CRM & Prospects',
+    'services.crmLeadsDesc': 'Génération de Prospects',
+    'services.aiConcierge': 'IA Concierge',
+    'services.aiConciergeDesc': 'Posez-moi n\'importe quoi!',
+    
+    // About Section
+    'about.title': 'Votre Partenaire pour la Croissance',
+    'about.description': 'Chez Merry360Global, nous nous spécialisons dans la fourniture de solutions complètes de marketing et de gestion adaptées aux secteurs de l\'immobilier et du tourisme au Rwanda. Notre mission est de stimuler une croissance durable pour les propriétaires immobiliers et les marques touristiques grâce à des stratégies innovantes, des insights basés sur les données et une prestation de services exceptionnelle.',
+    'about.propertiesManaged': 'Propriétés Gérées',
+    'about.customersServed': 'Clients Servis',
   }
 }
 
 export function useTranslation() {
-  const userStore = useUserStore()
+  const languageStore = useLanguageStore()
   
-  const currentLanguage = computed(() => userStore.preferences.language)
+  const currentLanguage = computed(() => languageStore.currentLanguage)
   
   const t = (key) => {
     const lang = currentLanguage.value

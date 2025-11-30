@@ -63,7 +63,7 @@
               {{ currencyStore.currentCurrency }}
             </button>
 
-            <select v-model="selectedLanguage" @change="changeLanguage" class="px-2 py-1 border border-gray-200 rounded text-xs text-gray-900 focus:outline-none focus:ring-1 focus:ring-primary bg-white">
+            <select v-model="languageStore.currentLanguage" @change="languageStore.setLanguage(languageStore.currentLanguage)" class="px-2 py-1 border border-gray-200 rounded text-xs text-gray-900 focus:outline-none focus:ring-1 focus:ring-primary bg-white">
               <option value="EN">EN</option>
               <option value="RW">RW</option>
               <option value="FR">FR</option>
@@ -225,13 +225,14 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '../../stores/app'
 import { useCurrencyStore } from '../../stores/currency'
+import { useLanguageStore } from '../../stores/language'
 
 const router = useRouter()
 const appStore = useAppStore()
 const currencyStore = useCurrencyStore()
+const languageStore = useLanguageStore()
 
 const showMobileMenu = ref(false)
-const selectedLanguage = ref('EN')
 
 const mobileNavigation = [
   { name: 'Home', to: '/home' },
@@ -241,10 +242,6 @@ const mobileNavigation = [
   { name: 'Services', to: '/services' },
   { name: 'My Trips', to: '/dashboard' }
 ]
-
-const changeLanguage = () => {
-  console.log('Language changed to:', selectedLanguage.value)
-}
 
 const toggleMobileMenu = () => {
   showMobileMenu.value = !showMobileMenu.value
