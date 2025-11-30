@@ -72,12 +72,12 @@
       <!-- Price -->
       <div class="flex items-center justify-between flex-wrap gap-2">
         <div>
-          <span class="text-xl sm:text-2xl font-bold text-primary">${{ formatPrice(property.price) }}</span>
-          <span v-if="property.period" class="text-text-secondary text-xs sm:text-sm">/{{ property.period }}</span>
+          <span class="text-base sm:text-lg font-bold text-primary">{{ formatPrice(property.price) }} RWF</span>
+          <span v-if="property.period" class="text-text-secondary text-xs">/{{ property.period }}</span>
         </div>
         <button 
           @click.stop="viewDetails"
-          class="px-3 sm:px-4 py-1.5 sm:py-2 border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-200 text-xs sm:text-sm font-medium transform hover:scale-105"
+          class="px-3 py-1.5 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-200 text-xs font-medium"
         >
           View Details
         </button>
