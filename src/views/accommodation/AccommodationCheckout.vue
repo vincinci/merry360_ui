@@ -1,0 +1,221 @@
+<template>
+  <MainLayout>
+    <div class="container mx-auto px-4 lg:px-8 py-8 max-w-6xl">
+      <h1 class="text-3xl font-bold text-text-primary mb-8">Complete Your Booking</h1>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Main Form -->
+        <div class="lg:col-span-2 space-y-6">
+          <!-- Guest Information -->
+          <Card padding="lg">
+            <h2 class="text-2xl font-bold mb-6">Guest Information</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Input v-model="guestInfo.firstName" placeholder="First Name" />
+              <Input v-model="guestInfo.lastName" placeholder="Last Name" />
+              <Input v-model="guestInfo.email" type="email" placeholder="Email" />
+              <Input v-model="guestInfo.phone" type="tel" placeholder="Phone Number" />
+            </div>
+          </Card>
+
+          <!-- Payment Method -->
+          <Card padding="lg">
+            <h2 class="text-2xl font-bold mb-6">Payment Method</h2>
+            <div class="space-y-4">
+              <label class="flex items-center p-4 border-2 border-gray-200 rounded-button hover:border-primary transition-colors cursor-pointer">
+                <input type="radio" name="payment" value="card" v-model="paymentMethod" class="mr-3" checked />
+                <svg class="w-8 h-8 mr-3 text-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                </svg>
+                <span class="font-medium">Credit / Debit Card</span>
+              </label>
+
+              <label class="flex items-center p-4 border-2 border-gray-200 rounded-button hover:border-primary transition-colors cursor-pointer">
+                <input type="radio" name="payment" value="mobile" v-model="paymentMethod" class="mr-3" />
+                <svg class="w-8 h-8 mr-3 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+                <span class="font-medium">Mobile Money</span>
+              </label>
+
+              <label class="flex items-center p-4 border-2 border-gray-200 rounded-button hover:border-primary transition-colors cursor-pointer">
+                <input type="radio" name="payment" value="crypto" v-model="paymentMethod" class="mr-3" />
+                <svg class="w-8 h-8 mr-3 text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span class="font-medium">Cryptocurrency (Blockchain)</span>
+              </label>
+            </div>
+
+            <div v-if="paymentMethod === 'card'" class="mt-6 space-y-4">
+              <Input v-model="cardInfo.number" placeholder="Card Number" />
+              <div class="grid grid-cols-2 gap-4">
+                <Input v-model="cardInfo.expiry" placeholder="MM/YY" />
+                <Input v-model="cardInfo.cvv" placeholder="CVV" />
+              </div>
+            </div>
+
+            <div v-if="paymentMethod === 'crypto'" class="mt-6">
+              <div class="bg-accent-blue bg-opacity-10 p-4 rounded-button">
+                <div class="flex items-start gap-3">
+                  <svg class="w-5 h-5 text-accent-blue mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                  </svg>
+                  <div>
+                    <p class="font-medium text-accent-blue mb-1">Smart Contract Payment</p>
+                    <p class="text-sm text-text-secondary">Connect your wallet to complete the transaction securely on the blockchain</p>
+                  </div>
+                </div>
+              </div>
+              <Button variant="success" full-width class="mt-4">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                Connect Wallet
+              </Button>
+            </div>
+          </Card>
+
+          <!-- Special Requests -->
+          <Card padding="lg">
+            <h2 class="text-2xl font-bold mb-4">Special Requests</h2>
+            <textarea 
+              v-model="specialRequests"
+              rows="4" 
+              class="w-full px-4 py-3 border border-gray-200 rounded-button focus:outline-none focus:ring-2 focus:ring-accent-blue"
+              placeholder="Any special requirements or requests?"
+            ></textarea>
+          </Card>
+
+          <!-- Terms -->
+          <Card padding="lg">
+            <label class="flex items-start">
+              <input type="checkbox" v-model="acceptTerms" class="mt-1 rounded border-gray-300 text-primary focus:ring-primary mr-3" />
+              <span class="text-sm text-text-secondary">
+                I agree to the <a href="#" class="text-primary hover:underline">cancellation policy</a>, 
+                <a href="#" class="text-primary hover:underline">terms of service</a>, and 
+                <a href="#" class="text-primary hover:underline">privacy policy</a>
+              </span>
+            </label>
+          </Card>
+        </div>
+
+        <!-- Booking Summary -->
+        <div class="lg:col-span-1">
+          <Card padding="lg" class="sticky top-24">
+            <h3 class="font-bold text-xl mb-4">Booking Summary</h3>
+            
+            <div class="mb-4">
+              <img :src="bookingDetails.image" alt="Property" class="w-full h-32 object-cover rounded-button mb-3" />
+              <h4 class="font-semibold text-lg">{{ bookingDetails.name }}</h4>
+              <p class="text-sm text-text-secondary">{{ bookingDetails.location }}</p>
+            </div>
+
+            <div class="space-y-2 py-4 border-t border-b border-gray-200 text-sm">
+              <div class="flex justify-between">
+                <span class="text-text-secondary">Check-in</span>
+                <span class="font-medium">Dec 15, 2025</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-text-secondary">Check-out</span>
+                <span class="font-medium">Dec 18, 2025</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-text-secondary">Guests</span>
+                <span class="font-medium">2 Adults</span>
+              </div>
+            </div>
+
+            <div class="space-y-3 py-4 border-b border-gray-200">
+              <div class="flex justify-between text-sm">
+                <span class="text-text-secondary">${{ bookingDetails.price }} × 3 nights</span>
+                <span class="font-semibold">${{ bookingDetails.price * 3 }}</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-text-secondary">Service fee</span>
+                <span class="font-semibold">$25</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-text-secondary">Taxes</span>
+                <span class="font-semibold">$15</span>
+              </div>
+            </div>
+
+            <div class="flex justify-between pt-4 mb-6">
+              <span class="font-bold text-lg">Total</span>
+              <span class="text-2xl font-bold text-primary">${{ bookingDetails.price * 3 + 40 }}</span>
+            </div>
+
+            <Button 
+              variant="primary" 
+              size="lg" 
+              full-width
+              :disabled="!acceptTerms"
+              :loading="processing"
+              @click="confirmBooking"
+            >
+              Confirm & Pay
+            </Button>
+
+            <div class="mt-4 p-3 bg-success bg-opacity-10 rounded-button">
+              <div class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-success mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <div class="text-sm">
+                  <p class="font-medium text-success mb-1">Free cancellation</p>
+                  <p class="text-text-secondary">Cancel before Dec 10 for a full refund</p>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </div>
+    </div>
+  </MainLayout>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import MainLayout from '../../components/layout/MainLayout.vue'
+import Card from '../../components/common/Card.vue'
+import Input from '../../components/common/Input.vue'
+import Button from '../../components/common/Button.vue'
+
+const router = useRouter()
+const route = useRoute()
+
+const guestInfo = ref({
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: ''
+})
+
+const paymentMethod = ref('card')
+const cardInfo = ref({
+  number: '',
+  expiry: '',
+  cvv: ''
+})
+
+const specialRequests = ref('')
+const acceptTerms = ref(false)
+const processing = ref(false)
+
+const bookingDetails = ref({
+  name: 'Kigali Serena Hotel',
+  location: 'Kigali, Rwanda',
+  price: 150,
+  image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400'
+})
+
+const confirmBooking = () => {
+  processing.value = true
+  
+  setTimeout(() => {
+    processing.value = false
+    router.push('/dashboard')
+  }, 2000)
+}
+</script>

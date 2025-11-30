@@ -1,0 +1,415 @@
+<template>
+  <PropertyLayout>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <!-- Header -->
+      <div class="mb-6 sm:mb-8">
+        <h1 class="text-2xl sm:text-3xl font-bold text-text-primary mb-2">Find Your Perfect Stay</h1>
+        <p class="text-text-secondary text-sm sm:text-base md:text-lg">Discover amazing accommodations across Rwanda and Africa</p>
+      </div>
+
+      <!-- Filters and Search -->
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6">
+        <!-- Filters Sidebar -->
+        <div class="lg:col-span-1">
+          <div class="bg-white rounded-xl shadow-card p-4 sm:p-6 sticky top-24">
+            <h3 class="font-semibold text-base sm:text-lg mb-4">Filters</h3>
+            
+            <!-- View Toggle -->
+            <div class="mb-4 sm:mb-6">
+              <div class="flex gap-2">
+                <button 
+                  @click="viewMode = 'list'"
+                  :class="viewMode === 'list' ? 'bg-primary text-white' : 'bg-gray-100 text-text-primary hover:bg-gray-200'"
+                  class="flex-1 py-2 rounded-lg transition-all duration-200 transform hover:scale-105"
+                >
+                  <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                  </svg>
+                </button>
+                <button 
+                  @click="viewMode = 'map'"
+                  :class="viewMode === 'map' ? 'bg-primary text-white' : 'bg-gray-100 text-text-primary hover:bg-gray-200'"
+                  class="flex-1 py-2 rounded-button transition-colors"
+                >
+                  <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Price Range -->
+            <div class="mb-4 sm:mb-6">
+              <label class="block text-xs sm:text-sm font-medium mb-3">Price Range (per night)</label>
+              <div class="space-y-2">
+                <input 
+                  type="range" 
+                  v-model="filters.maxPrice" 
+                  min="0" 
+                  max="500" 
+                  class="w-full"
+                />
+                <div class="flex justify-between text-sm text-text-secondary">
+                  <span>$0</span>
+                  <span class="font-semibold text-primary">${{ filters.maxPrice }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Property Type -->
+            <div class="mb-6">
+              <label class="block text-sm font-medium mb-3">Property Type</label>
+              <div class="space-y-2">
+                <label v-for="type in propertyTypes" :key="type" class="flex items-center">
+                  <input 
+                    type="checkbox" 
+                    :value="type"
+                    v-model="filters.propertyTypes"
+                    class="rounded border-gray-300 text-primary focus:ring-primary mr-2"
+                  />
+                  <span class="text-sm">{{ type }}</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Rating -->
+            <div class="mb-6">
+              <label class="block text-sm font-medium mb-3">Minimum Rating</label>
+              <div class="flex gap-2">
+                <button
+                  v-for="rating in [3, 4, 4.5]"
+                  :key="rating"
+                  @click="filters.minRating = rating"
+                  :class="filters.minRating === rating ? 'bg-primary text-white' : 'bg-gray-100 text-text-primary hover:bg-gray-200'"
+                  class="flex-1 py-2 px-3 rounded-button text-sm transition-colors"
+                >
+                  {{ rating }}+⭐
+                </button>
+              </div>
+            </div>
+
+            <!-- Amenities -->
+            <div class="mb-6">
+              <label class="block text-sm font-medium mb-3">Amenities</label>
+              <div class="space-y-2">
+                <label v-for="amenity in amenities" :key="amenity" class="flex items-center">
+                  <input 
+                    type="checkbox" 
+                    :value="amenity"
+                    v-model="filters.amenities"
+                    class="rounded border-gray-300 text-primary focus:ring-primary mr-2"
+                  />
+                  <span class="text-sm">{{ amenity }}</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Sustainability Filter -->
+            <div class="mb-4 sm:mb-6">
+              <label class="flex items-center">
+                <input 
+                  type="checkbox" 
+                  v-model="filters.ecoFriendly"
+                  class="rounded border-gray-300 text-green-500 focus:ring-green-500 mr-2"
+                />
+                <span class="text-sm font-medium text-green-600">Eco-Friendly Only</span>
+              </label>
+            </div>
+
+            <button 
+              @click="resetFilters"
+              class="w-full px-4 py-2 border-2 border-gray-300 text-text-primary rounded-lg hover:border-primary hover:text-primary transition-all duration-200 font-medium text-sm"
+            >
+              Reset Filters
+            </button>
+          </div>
+        </div>
+
+        <!-- Listings -->
+        <div class="lg:col-span-3">
+          <!-- Results Header -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
+            <p class="text-text-secondary text-sm sm:text-base">
+              <span class="font-semibold text-text-primary">{{ filteredAccommodations.length }}</span> properties found
+            </p>
+            <select v-model="sortBy" class="px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm sm:text-base">
+              <option value="recommended">Recommended</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+            </select>
+          </div>
+
+          <!-- Map View -->
+          <div v-if="viewMode === 'map'" class="mb-6">
+            <Card padding="none" class="h-96 bg-gray-100 flex items-center justify-center">
+              <div class="text-center">
+                <svg class="w-16 h-16 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                </svg>
+                <p class="text-text-secondary">Map View (Integration with mapping service)</p>
+              </div>
+            </Card>
+          </div>
+
+          <!-- List View -->
+          <div v-if="viewMode === 'list'" class="space-y-4 sm:space-y-6">
+            <div 
+              v-for="accommodation in sortedAccommodations" 
+              :key="accommodation.id"
+              @click="router.push(`/accommodation/${accommodation.id}`)"
+              class="bg-white rounded-xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden cursor-pointer group transform hover:-translate-y-1"
+            >
+              <div class="grid md:grid-cols-3 gap-0">
+                <!-- Image -->
+                <div class="relative h-56 sm:h-64 md:h-auto">
+                  <img 
+                    :src="accommodation.image" 
+                    :alt="accommodation.name" 
+                    class="w-full h-full object-cover"
+                  />
+                  <button 
+                    @click.stop="toggleFavorite(accommodation.id)"
+                    class="absolute top-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center hover:scale-110 transition-transform"
+                  >
+                    <svg 
+                      class="w-6 h-6" 
+                      :class="accommodation.isFavorite ? 'text-primary fill-current' : 'text-gray-400'"
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                  </button>
+                  <div v-if="accommodation.eco" class="absolute top-3 left-3 bg-success text-white px-2 py-1 rounded-lg text-xs font-medium flex items-center">
+                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12zm0-10a4 4 0 100 8 4 4 0 000-8z"/>
+                    </svg>
+                    Eco
+                  </div>
+                </div>
+
+                <!-- Content -->
+                <div class="md:col-span-2 p-6">
+                  <div class="flex items-start justify-between mb-2">
+                    <div class="flex-1">
+                      <div class="flex items-center gap-2 mb-1">
+                        <h3 class="text-xl font-semibold text-text-primary">{{ accommodation.name }}</h3>
+                        <span class="inline-flex items-center px-2 py-1 bg-primary bg-opacity-10 text-primary text-xs font-semibold rounded">
+                          {{ accommodation.type }}
+                        </span>
+                      </div>
+                      <p class="text-text-secondary text-sm flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        {{ accommodation.location }}
+                      </p>
+                    </div>
+                    <div class="text-right">
+                      <div class="flex items-center gap-1 mb-1">
+                        <span class="text-lg font-bold text-text-primary">{{ accommodation.rating }}</span>
+                        <span class="text-yellow-500">⭐</span>
+                      </div>
+                      <p class="text-xs text-text-secondary">{{ accommodation.reviews }} reviews</p>
+                    </div>
+                  </div>
+
+                  <p class="text-text-secondary mb-4">{{ accommodation.description }}</p>
+
+                  <!-- Amenities -->
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    <span 
+                      v-for="amenity in accommodation.amenities.slice(0, 4)" 
+                      :key="amenity"
+                      class="px-2 py-1 bg-gray-100 text-text-secondary text-xs rounded"
+                    >
+                      {{ amenity }}
+                    </span>
+                    <span v-if="accommodation.amenities.length > 4" class="px-2 py-1 text-text-secondary text-xs">
+                      +{{ accommodation.amenities.length - 4 }} more
+                    </span>
+                  </div>
+
+                  <!-- Price and CTA -->
+                  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 pt-4 border-t border-gray-100">
+                    <div>
+                      <div class="flex items-baseline gap-1">
+                        <span class="text-2xl sm:text-3xl font-bold text-primary">${{ accommodation.price }}</span>
+                        <span class="text-text-secondary text-sm sm:text-base">/night</span>
+                      </div>
+                      <p class="text-xs text-text-secondary">Includes taxes and fees</p>
+                    </div>
+                    <button 
+                      @click.stop="router.push(`/accommodation/${accommodation.id}`)"
+                      class="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 bg-primary text-white rounded-lg hover:bg-red-600 transition-all duration-200 font-medium text-sm sm:text-base transform hover:scale-105"
+                    >
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty State -->
+          <div v-if="filteredAccommodations.length === 0" class="text-center py-12 sm:py-16">
+            <svg class="w-20 h-20 sm:w-24 sm:h-24 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <h3 class="text-lg sm:text-xl font-semibold text-text-primary mb-2">No properties found</h3>
+            <p class="text-text-secondary mb-4 text-sm sm:text-base">Try adjusting your filters to see more results</p>
+            <button @click="resetFilters" class="px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-red-600 transition-all duration-200 font-medium transform hover:scale-105">
+              Reset Filters
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </PropertyLayout>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import PropertyLayout from '../../components/layout/PropertyLayout.vue'
+
+const router = useRouter()
+
+const viewMode = ref('list')
+const sortBy = ref('recommended')
+
+const filters = ref({
+  maxPrice: 500,
+  propertyTypes: [],
+  minRating: 0,
+  amenities: [],
+  ecoFriendly: false
+})
+
+const propertyTypes = ['Hotel', 'Resort', 'Apartment', 'Villa', 'Lodge', 'Guesthouse']
+const amenities = ['WiFi', 'Pool', 'Parking', 'Restaurant', 'Spa', 'Gym', 'Air Conditioning', 'Pet Friendly']
+
+const accommodations = ref([
+  {
+    id: 1,
+    name: 'Kigali Serena Hotel',
+    type: 'Hotel',
+    location: 'Kigali, Rwanda',
+    price: 150,
+    rating: 4.8,
+    reviews: 324,
+    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800',
+    description: 'Luxury hotel in the heart of Kigali with stunning city views and world-class amenities.',
+    amenities: ['WiFi', 'Pool', 'Restaurant', 'Spa', 'Gym', 'Air Conditioning'],
+    eco: true,
+    isFavorite: false
+  },
+  {
+    id: 2,
+    name: 'Lake Kivu Resort',
+    type: 'Resort',
+    location: 'Gisenyi, Rwanda',
+    price: 120,
+    rating: 4.6,
+    reviews: 198,
+    image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800',
+    description: 'Beautiful lakeside resort perfect for relaxation and water activities.',
+    amenities: ['WiFi', 'Pool', 'Restaurant', 'Parking', 'Beach Access'],
+    eco: false,
+    isFavorite: false
+  },
+  {
+    id: 3,
+    name: 'Akagera Safari Lodge',
+    type: 'Lodge',
+    location: 'Akagera National Park',
+    price: 180,
+    rating: 4.9,
+    reviews: 267,
+    image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800',
+    description: 'Eco-friendly safari lodge offering unforgettable wildlife experiences.',
+    amenities: ['WiFi', 'Restaurant', 'Safari Tours', 'Parking'],
+    eco: true,
+    isFavorite: false
+  },
+  {
+    id: 4,
+    name: 'Volcanoes View Lodge',
+    type: 'Lodge',
+    location: 'Musanze, Rwanda',
+    price: 200,
+    rating: 4.7,
+    reviews: 156,
+    image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800',
+    description: 'Stunning mountain views with easy access to gorilla trekking.',
+    amenities: ['WiFi', 'Restaurant', 'Parking', 'Fireplace'],
+    eco: true,
+    isFavorite: false
+  },
+  {
+    id: 5,
+    name: 'Nyungwe Forest Lodge',
+    type: 'Lodge',
+    location: 'Nyungwe National Park',
+    price: 190,
+    rating: 4.8,
+    reviews: 189,
+    image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800',
+    description: 'Luxury eco-lodge nestled in the heart of ancient rainforest.',
+    amenities: ['WiFi', 'Restaurant', 'Spa', 'Hiking Tours'],
+    eco: true,
+    isFavorite: false
+  }
+])
+
+const filteredAccommodations = computed(() => {
+  return accommodations.value.filter(acc => {
+    if (acc.price > filters.value.maxPrice) return false
+    if (filters.value.propertyTypes.length > 0 && !filters.value.propertyTypes.includes(acc.type)) return false
+    if (acc.rating < filters.value.minRating) return false
+    if (filters.value.ecoFriendly && !acc.eco) return false
+    if (filters.value.amenities.length > 0) {
+      const hasAllAmenities = filters.value.amenities.every(amenity => 
+        acc.amenities.includes(amenity)
+      )
+      if (!hasAllAmenities) return false
+    }
+    return true
+  })
+})
+
+const sortedAccommodations = computed(() => {
+  const sorted = [...filteredAccommodations.value]
+  
+  switch (sortBy.value) {
+    case 'price-low':
+      return sorted.sort((a, b) => a.price - b.price)
+    case 'price-high':
+      return sorted.sort((a, b) => b.price - a.price)
+    case 'rating':
+      return sorted.sort((a, b) => b.rating - a.rating)
+    default:
+      return sorted
+  }
+})
+
+const resetFilters = () => {
+  filters.value = {
+    maxPrice: 500,
+    propertyTypes: [],
+    minRating: 0,
+    amenities: [],
+    ecoFriendly: false
+  }
+}
+
+const toggleFavorite = (id) => {
+  const accommodation = accommodations.value.find(acc => acc.id === id)
+  if (accommodation) {
+    accommodation.isFavorite = !accommodation.isFavorite
+  }
+}
+</script>

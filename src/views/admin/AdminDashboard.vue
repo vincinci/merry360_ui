@@ -1,0 +1,173 @@
+<template>
+  <div class="min-h-screen bg-gray-50">
+    <!-- Admin Sidebar -->
+    <div class="flex">
+      <aside class="w-64 bg-white border-r border-gray-200 min-h-screen sticky top-0">
+        <div class="p-6 border-b border-gray-200">
+          <div class="flex items-center space-x-2">
+            <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+              <span class="text-white font-bold text-xl">M</span>
+            </div>
+            <span class="text-xl font-bold">Admin Panel</span>
+          </div>
+        </div>
+        <nav class="p-4 space-y-1">
+          <a href="#" class="flex items-center px-4 py-3 bg-primary text-white rounded-button">
+            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+            Dashboard
+          </a>
+          <a href="#" class="flex items-center px-4 py-3 text-text-secondary hover:bg-gray-50 rounded-button">
+            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+            </svg>
+            Accommodations
+          </a>
+          <a href="#" class="flex items-center px-4 py-3 text-text-secondary hover:bg-gray-50 rounded-button">
+            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Tours
+          </a>
+          <a href="#" class="flex items-center px-4 py-3 text-text-secondary hover:bg-gray-50 rounded-button">
+            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+            </svg>
+            Transport
+          </a>
+          <a href="#" class="flex items-center px-4 py-3 text-text-secondary hover:bg-gray-50 rounded-button">
+            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            Payments
+          </a>
+          <a href="#" class="flex items-center px-4 py-3 text-text-secondary hover:bg-gray-50 rounded-button">
+            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            Users
+          </a>
+          <a href="#" class="flex items-center px-4 py-3 text-text-secondary hover:bg-gray-50 rounded-button">
+            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+            Analytics
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1 p-8">
+        <div class="mb-8">
+          <h1 class="text-3xl font-bold mb-2">Admin Dashboard</h1>
+          <p class="text-text-secondary">Platform overview and management</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <Card padding="md">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-text-secondary text-sm mb-1">Total Bookings</p>
+                <p class="text-3xl font-bold">1,284</p>
+                <p class="text-success text-sm mt-1">↑ 12% from last month</p>
+              </div>
+              <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                </svg>
+              </div>
+            </div>
+          </Card>
+
+          <Card padding="md">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-text-secondary text-sm mb-1">Revenue</p>
+                <p class="text-3xl font-bold">$84.2K</p>
+                <p class="text-success text-sm mt-1">↑ 8% from last month</p>
+              </div>
+              <div class="w-12 h-12 bg-accent-blue bg-opacity-10 rounded-full flex items-center justify-center">
+                <svg class="w-6 h-6 text-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+            </div>
+          </Card>
+
+          <Card padding="md">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-text-secondary text-sm mb-1">Active Users</p>
+                <p class="text-3xl font-bold">8,492</p>
+                <p class="text-success text-sm mt-1">↑ 24% from last month</p>
+              </div>
+              <div class="w-12 h-12 bg-success bg-opacity-10 rounded-full flex items-center justify-center">
+                <svg class="w-6 h-6 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+              </div>
+            </div>
+          </Card>
+
+          <Card padding="md">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-text-secondary text-sm mb-1">Properties</p>
+                <p class="text-3xl font-bold">342</p>
+                <p class="text-success text-sm mt-1">↑ 5 new this week</p>
+              </div>
+              <div class="w-12 h-12 bg-warning bg-opacity-10 rounded-full flex items-center justify-center">
+                <svg class="w-6 h-6 text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        <!-- Recent Activity -->
+        <Card padding="lg">
+          <h2 class="text-2xl font-bold mb-6">Recent Bookings</h2>
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead>
+                <tr class="border-b border-gray-200 text-left">
+                  <th class="pb-3 font-semibold text-text-secondary">Booking ID</th>
+                  <th class="pb-3 font-semibold text-text-secondary">Customer</th>
+                  <th class="pb-3 font-semibold text-text-secondary">Property</th>
+                  <th class="pb-3 font-semibold text-text-secondary">Date</th>
+                  <th class="pb-3 font-semibold text-text-secondary">Amount</th>
+                  <th class="pb-3 font-semibold text-text-secondary">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-gray-100">
+                  <td class="py-4 font-medium">#BK-1234</td>
+                  <td class="py-4">John Doe</td>
+                  <td class="py-4">Kigali Serena Hotel</td>
+                  <td class="py-4">Dec 15, 2025</td>
+                  <td class="py-4 font-semibold">$490</td>
+                  <td class="py-4"><span class="px-3 py-1 bg-success bg-opacity-10 text-success text-xs font-medium rounded-full">Confirmed</span></td>
+                </tr>
+                <tr class="border-b border-gray-100">
+                  <td class="py-4 font-medium">#BK-1235</td>
+                  <td class="py-4">Jane Smith</td>
+                  <td class="py-4">Lake Kivu Resort</td>
+                  <td class="py-4">Dec 20, 2025</td>
+                  <td class="py-4 font-semibold">$360</td>
+                  <td class="py-4"><span class="px-3 py-1 bg-warning bg-opacity-10 text-warning text-xs font-medium rounded-full">Pending</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Card>
+      </main>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import Card from '../../components/common/Card.vue'
+</script>
