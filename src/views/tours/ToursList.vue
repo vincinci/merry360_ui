@@ -22,7 +22,7 @@
                 </svg>
                 {{ tour.duration }}
               </span>
-              <span class="text-2xl font-bold text-primary">${{ tour.price }}</span>
+              <span class="text-2xl font-bold text-primary">{{ currencyStore.formatPrice(tour.price) }}</span>
             </div>
             <p class="text-text-secondary text-sm">{{ tour.description }}</p>
           </div>
@@ -35,10 +35,12 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useCurrencyStore } from '../../stores/currency'
 import MainLayout from '../../components/layout/MainLayout.vue'
 import Card from '../../components/common/Card.vue'
 
 const router = useRouter()
+const currencyStore = useCurrencyStore()
 
 const tours = ref([
   {

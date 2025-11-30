@@ -280,7 +280,7 @@
                 </svg>
                 <span>{{ tour.duration }}</span>
               </div>
-              <div class="text-base sm:text-lg font-bold text-primary">${{ tour.price }}</div>
+              <div class="text-base sm:text-lg font-bold text-primary">{{ currencyStore.formatPrice(tour.price) }}</div>
             </div>
           </div>
         </div>
@@ -455,6 +455,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../../stores/userStore'
+import { useCurrencyStore } from '../../stores/currency'
 import { useTranslation } from '../../composables/useTranslation'
 import PropertyLayout from '../../components/layout/PropertyLayout.vue'
 import PropertyCard from '../../components/common/PropertyCard.vue'
@@ -462,6 +463,7 @@ import AIConcierge from '../../components/ai/AIConcierge.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
+const currencyStore = useCurrencyStore()
 const { t } = useTranslation()
 
 // Add sample data on first load

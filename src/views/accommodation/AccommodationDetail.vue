@@ -159,7 +159,7 @@
           <Card padding="lg" class="sticky top-24">
             <div class="mb-6">
               <div class="flex items-baseline gap-2 mb-1">
-                <span class="text-4xl font-bold text-primary">${{ accommodation.price }}</span>
+                <span class="text-4xl font-bold text-primary">{{ currencyStore.formatPrice(accommodation.price) }}</span>
                 <span class="text-text-secondary">/night</span>
               </div>
               <p class="text-sm text-text-secondary">Includes taxes and fees</p>
@@ -193,8 +193,8 @@
 
             <div class="mt-6 pt-6 border-t border-gray-200 space-y-3">
               <div class="flex justify-between text-sm">
-                <span class="text-text-secondary">${{ accommodation.price }} × 3 nights</span>
-                <span class="font-semibold">${{ accommodation.price * 3 }}</span>
+                <span class="text-text-secondary">{{ currencyStore.formatPrice(accommodation.price) }} × 3 nights</span>
+                <span class="font-semibold">{{ currencyStore.formatPrice(accommodation.price * 3) }}</span>
               </div>
               <div class="flex justify-between text-sm">
                 <span class="text-text-secondary">Service fee</span>
@@ -202,7 +202,7 @@
               </div>
               <div class="flex justify-between pt-3 border-t border-gray-200">
                 <span class="font-semibold">Total</span>
-                <span class="text-xl font-bold text-primary">${{ accommodation.price * 3 + 25 }}</span>
+                <span class="text-xl font-bold text-primary">{{ currencyStore.formatPrice(accommodation.price * 3 + 25) }}</span>
               </div>
             </div>
           </Card>
@@ -213,14 +213,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useCurrencyStore } from '../../stores/currency'
 import MainLayout from '../../components/layout/MainLayout.vue'
 import Card from '../../components/common/Card.vue'
 import Button from '../../components/common/Button.vue'
 
 const router = useRouter()
 const route = useRoute()
+const currencyStore = useCurrencyStore()
 
 const accommodation = ref({
   id: route.params.id,
