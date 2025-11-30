@@ -7,9 +7,9 @@
     <section class="relative bg-gradient-to-br from-gray-800 to-gray-700 py-12 md:py-16">
       <!-- Content -->
       <div class="relative z-10 container mx-auto px-4 sm:px-6 flex flex-col items-center justify-center">
-        <h1 class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 text-center">{{ t('home.welcome') }}</h1>
+        <h1 class="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 text-center">Driving Success for Real Estate Owners & Tourism Brands</h1>
         <p class="text-white/90 text-xs sm:text-sm mb-6 text-center max-w-2xl px-4">
-          {{ t('home.tagline') }}
+          Tailored Marketing & Management solutions for your business needs in Rwanda
         </p>
         
         <!-- Search Form - Desktop One Line Design -->
@@ -162,34 +162,47 @@
     <!-- Quick Access Shortcuts -->
     <section class="bg-gray-50 py-8 md:py-12">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-text-primary mb-6 text-center">{{ t('home.whatLookingFor') }}</h2>
+        <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-text-primary mb-6 text-center">Our Comprehensive Services Offered</h2>
         
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6">
           <button @click="navigateTo('/accommodations')" class="bg-white rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 group">
             <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto mb-2 sm:mb-3 md:mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
               <svg class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
               </svg>
             </div>
-            <h3 class="font-semibold text-text-primary text-center text-xs sm:text-sm md:text-base">{{ t('home.accommodations') }}</h3>
+            <h3 class="font-semibold text-text-primary text-center text-xs sm:text-sm md:text-base">Sales & Marketing</h3>
+            <p class="text-text-secondary text-[10px] sm:text-xs text-center mt-1">Revenue Growth</p>
           </button>
 
           <button @click="navigateTo('/tours')" class="bg-white rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 group">
             <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto mb-2 sm:mb-3 md:mb-4 bg-gray-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
               <svg class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
               </svg>
             </div>
-            <h3 class="font-semibold text-text-primary text-center text-xs sm:text-sm md:text-base">{{ t('home.toursActivities') }}</h3>
+            <h3 class="font-semibold text-text-primary text-center text-xs sm:text-sm md:text-base">Management</h3>
+            <p class="text-text-secondary text-[10px] sm:text-xs text-center mt-1">Property & Operations</p>
           </button>
 
           <button @click="navigateTo('/transport')" class="bg-white rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 group">
             <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto mb-2 sm:mb-3 md:mb-4 bg-gray-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
               <svg class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
               </svg>
             </div>
-            <h3 class="font-semibold text-text-primary text-center text-xs sm:text-sm md:text-base">Transportation</h3>
+            <h3 class="font-semibold text-text-primary text-center text-xs sm:text-sm md:text-base">Market Insights</h3>
+            <p class="text-text-secondary text-[10px] sm:text-xs text-center mt-1">Data & Analytics</p>
+          </button>
+
+          <button @click="navigateTo('/services')" class="bg-white rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 group">
+            <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto mb-2 sm:mb-3 md:mb-4 bg-gray-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-text-primary text-center text-xs sm:text-sm md:text-base">CRM & Leads</h3>
+            <p class="text-text-secondary text-[10px] sm:text-xs text-center mt-1">Lead Generation</p>
           </button>
 
           <button @click="showAIConcierge = true" class="relative overflow-hidden bg-gradient-to-br from-primary to-red-600 rounded-xl p-4 sm:p-5 md:p-6 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group">
@@ -404,15 +417,28 @@
     <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
       <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
         <div>
-          <h2 class="text-2xl sm:text-3xl font-bold text-text-primary mb-3 sm:mb-4">Discover More About Property Rental</h2>
+          <h2 class="text-2xl sm:text-3xl font-bold text-text-primary mb-3 sm:mb-4">Your Partner in Business Growth</h2>
           <p class="text-text-secondary mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+            At Merry 360 Global, we specialize in providing management and marketing services tailored to the real estate and tourism industries. Our goal is to empower our clients with effective strategies that enhance operational efficiency, visibility, and customer loyalty.
           </p>
           <p class="text-text-secondary mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            We pride ourselves on delivering measurable results for our clients, helping them to increase sales and productivity. Our strategic support has consistently driven improvements, fostering long-term relationships and a loyal customer base.
           </p>
-          <button class="px-6 sm:px-8 py-2.5 sm:py-3 bg-primary text-white rounded-lg hover:bg-red-600 transition-all duration-200 font-medium transform hover:scale-105">
-            Read More
+          
+          <!-- Stats -->
+          <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="text-center p-4 bg-gray-50 rounded-lg">
+              <div class="text-3xl font-bold text-primary mb-1">180+</div>
+              <div class="text-xs text-text-secondary">Properties Managed</div>
+            </div>
+            <div class="text-center p-4 bg-gray-50 rounded-lg">
+              <div class="text-3xl font-bold text-primary mb-1">3000+</div>
+              <div class="text-xs text-text-secondary">Customers Served</div>
+            </div>
+          </div>
+          
+          <button @click="navigateTo('/about')" class="px-6 sm:px-8 py-2.5 sm:py-3 bg-primary text-white rounded-lg hover:bg-red-600 transition-all duration-200 font-medium transform hover:scale-105">
+            Learn More About Us
           </button>
         </div>
         <div class="order-first md:order-last">
@@ -492,7 +518,7 @@ onMounted(() => {
 })
 
 const searchForm = ref({
-  location: 'Lisbon, Portugal',
+  location: 'Kigali, Rwanda',
   checkIn: '',
   checkOut: '',
   adults: 2,
