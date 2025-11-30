@@ -23,6 +23,18 @@
 
           <!-- Desktop Right -->
           <div class="hidden lg:flex items-center gap-2">
+            <!-- Currency Toggle -->
+            <button 
+              @click="currencyStore.toggleCurrency()"
+              class="px-3 py-1.5 border border-gray-200 rounded text-xs font-semibold text-gray-900 hover:border-primary hover:text-primary transition-all bg-white flex items-center gap-1"
+              :title="'Switch to ' + (currencyStore.currentCurrency === 'USD' ? 'RWF' : 'USD')"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              {{ currencyStore.currentCurrency }}
+            </button>
+
             <select v-model="selectedLanguage" @change="changeLanguage" class="px-2 py-1 border border-gray-200 rounded text-xs text-gray-900 focus:outline-none focus:ring-1 focus:ring-primary bg-white">
               <option value="EN">EN</option>
               <option value="RW">RW</option>
@@ -53,6 +65,14 @@
 
           <!-- Mobile Right -->
           <div class="flex lg:hidden items-center gap-1">
+            <!-- Currency Toggle Mobile -->
+            <button 
+              @click="currencyStore.toggleCurrency()"
+              class="px-2 py-1 border border-gray-200 rounded text-[10px] font-bold text-gray-900 hover:border-primary hover:text-primary transition-all bg-white"
+            >
+              {{ currencyStore.currentCurrency }}
+            </button>
+
             <router-link to="/dashboard/watchlist" class="relative p-1.5">
               <svg class="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
@@ -249,9 +269,11 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useUserStore } from '../../stores/userStore'
+import { useCurrencyStore } from '../../stores/currency'
 import { useTranslation } from '../../composables/useTranslation'
 
 const userStore = useUserStore()
+const currencyStore = useCurrencyStore()
 const mobileMenuOpen = ref(false)
 const { t } = useTranslation()
 

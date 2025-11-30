@@ -72,7 +72,7 @@
       <!-- Price -->
       <div class="flex items-center justify-between flex-wrap gap-2">
         <div>
-          <span class="text-sm sm:text-base font-bold text-primary">${{ formatPrice(property.price) }}</span>
+          <span class="text-sm sm:text-base font-bold text-primary">{{ formatPrice(property.price) }}</span>
           <span class="text-text-secondary text-xs">/night</span>
         </div>
         <button 
@@ -93,6 +93,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useCurrencyStore } from '@/stores/currency'
 
 const props = defineProps({
   property: {
@@ -102,6 +103,7 @@ const props = defineProps({
 })
 
 const router = useRouter()
+const currencyStore = useCurrencyStore()
 const isFavorite = ref(false)
 
 const badgeClass = computed(() => {
@@ -113,7 +115,7 @@ const badgeClass = computed(() => {
 })
 
 const formatPrice = (price) => {
-  return new Intl.NumberFormat('en-US').format(price)
+  return currencyStore.formatPrice(price)
 }
 
 const toggleFavorite = () => {
