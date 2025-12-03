@@ -1,11 +1,11 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-primary overflow-hidden relative">
+  <div class="min-h-screen flex items-center justify-center bg-brand-500 overflow-hidden relative">
     <!-- Content -->
     <div class="text-center">
       <!-- Logo -->
       <div class="mb-8 flex justify-center">
         <div class="w-24 h-24 bg-white rounded-2xl shadow-xl flex items-center justify-center">
-          <span class="text-primary font-bold text-5xl">M</span>
+          <span class="text-brand-600 font-bold text-5xl">M</span>
         </div>
       </div>
 

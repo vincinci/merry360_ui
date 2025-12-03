@@ -12,7 +12,7 @@
       <!-- Chat Window -->
       <div class="relative bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl w-full sm:max-w-2xl max-h-[90vh] sm:max-h-[80vh] flex flex-col animate-slide-up">
         <!-- Header -->
-        <div class="bg-gradient-to-r from-primary to-red-600 text-white p-4 sm:p-6 rounded-t-3xl flex items-center justify-between">
+        <div class="bg-gradient-to-r from-brand-500 to-brand-600 text-white p-4 sm:p-6 rounded-t-3xl flex items-center justify-between">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
               <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,8 +35,8 @@
         <div ref="messagesContainer" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-gray-50">
           <!-- Welcome Message -->
           <div v-if="messages.length === 0" class="text-center py-8">
-            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="w-16 h-16 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
               </svg>
             </div>
@@ -49,7 +49,7 @@
                 v-for="suggestion in quickSuggestions" 
                 :key="suggestion"
                 @click="sendMessage(suggestion)"
-                class="px-3 py-2 bg-white text-gray-700 rounded-full text-xs hover:bg-primary hover:text-white transition-colors shadow-sm"
+                class="px-3 py-2 bg-white text-gray-700 rounded-full text-xs hover:bg-brand-500 hover:text-white transition-colors shadow-sm"
               >
                 {{ suggestion }}
               </button>
@@ -60,7 +60,7 @@
           <div v-for="(message, index) in messages" :key="index">
             <!-- User Message -->
             <div v-if="message.type === 'user'" class="flex justify-end">
-              <div class="bg-primary text-white rounded-2xl rounded-tr-sm px-4 py-2.5 max-w-[80%] shadow-sm">
+              <div class="bg-brand-500 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 max-w-[80%] shadow-sm">
                 <p class="text-sm">{{ message.text }}</p>
               </div>
             </div>
@@ -93,12 +93,12 @@
               @keypress.enter="sendUserMessage"
               type="text" 
               placeholder="Ask me anything..."
-              class="flex-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+              class="flex-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent text-sm"
             />
             <button 
               @click="sendUserMessage"
               :disabled="!inputMessage.trim() || isTyping"
-              class="px-5 py-3 bg-primary hover:bg-red-600 text-white rounded-full font-medium transition-colors flex items-center gap-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+              class="px-5 py-3 bg-brand-500 hover:bg-brand-600 text-white rounded-full font-medium transition-colors flex items-center gap-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>

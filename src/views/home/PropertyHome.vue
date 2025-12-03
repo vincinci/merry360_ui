@@ -17,7 +17,7 @@
           <div class="flex items-center gap-1">
             <!-- Location -->
             <div class="flex-1 flex items-center px-4 py-2 border-r border-gray-200 group hover:bg-gray-50 rounded-l-full transition-colors">
-              <svg class="w-5 h-5 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 text-brand-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
               </svg>
@@ -31,7 +31,7 @@
 
             <!-- Check-in -->
             <div class="flex items-center px-3 py-2 border-r border-gray-200 group hover:bg-gray-50 transition-colors min-w-[140px]">
-              <svg class="w-4 h-4 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 text-brand-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
               </svg>
               <input 
@@ -43,7 +43,7 @@
 
             <!-- Check-out -->
             <div class="flex items-center px-3 py-2 border-r border-gray-200 group hover:bg-gray-50 transition-colors min-w-[140px]">
-              <svg class="w-4 h-4 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 text-brand-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
               </svg>
               <input 
@@ -55,7 +55,7 @@
 
             <!-- Guests -->
             <div class="flex items-center px-3 py-2 group hover:bg-gray-50 transition-colors min-w-[100px]">
-              <svg class="w-4 h-4 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 text-brand-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
               </svg>
               <input 
@@ -71,7 +71,7 @@
             <!-- Search Button -->
             <button 
               @click="handleSearch" 
-              class="px-6 py-3 bg-primary hover:bg-red-600 text-white rounded-full font-semibold transition-all duration-300 flex items-center gap-2 text-sm shadow-lg hover:shadow-xl hover:scale-105 ml-1"
+              class="px-6 py-3 bg-brand-500 hover:bg-red-600 text-white rounded-full font-semibold transition-all duration-300 flex items-center gap-2 text-sm shadow-lg hover:shadow-xl hover:scale-105 ml-1"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -86,7 +86,7 @@
           <div class="space-y-3">
             <!-- Location -->
             <div class="flex items-center px-3 py-2.5 bg-gray-50 rounded-xl">
-              <svg class="w-5 h-5 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 text-brand-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
               </svg>
@@ -101,7 +101,7 @@
             <div class="grid grid-cols-2 gap-3">
               <!-- Check-in -->
               <div class="flex items-center px-3 py-2.5 bg-gray-50 rounded-xl">
-                <svg class="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 text-brand-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
                 <input 
@@ -113,7 +113,7 @@
 
               <!-- Check-out -->
               <div class="flex items-center px-3 py-2.5 bg-gray-50 rounded-xl">
-                <svg class="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 text-brand-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
                 <input 
@@ -126,7 +126,7 @@
 
             <!-- Guests -->
             <div class="flex items-center px-3 py-2.5 bg-gray-50 rounded-xl">
-              <svg class="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 text-brand-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
               </svg>
               <input 
@@ -142,7 +142,7 @@
             <!-- Search Button -->
             <button 
               @click="handleSearch" 
-              class="w-full px-4 py-3 bg-primary hover:bg-red-600 text-white rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 text-sm shadow-lg hover:shadow-xl"
+              class="w-full px-4 py-3 bg-brand-500 hover:bg-red-600 text-white rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 text-sm shadow-lg hover:shadow-xl"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -154,84 +154,15 @@
       </div>
     </section>
 
-    <!-- Quick Access Shortcuts -->
-    <section class="bg-gray-50 py-8 md:py-12">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-text-primary mb-6 text-center">Our Comprehensive Services Offered</h2>
-        
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6">
-          <button @click="navigateTo('/accommodations')" class="bg-white rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 group">
-            <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto mb-2 sm:mb-3 md:mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-              <svg class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-text-primary text-center text-xs sm:text-sm md:text-base">Sales & Marketing</h3>
-            <p class="text-text-secondary text-[10px] sm:text-xs text-center mt-1">Revenue Growth</p>
-          </button>
-
-          <button @click="navigateTo('/tours')" class="bg-white rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 group">
-            <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto mb-2 sm:mb-3 md:mb-4 bg-gray-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-              <svg class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-text-primary text-center text-xs sm:text-sm md:text-base">Management</h3>
-            <p class="text-text-secondary text-[10px] sm:text-xs text-center mt-1">Property & Operations</p>
-          </button>
-
-          <button @click="navigateTo('/transport')" class="bg-white rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 group">
-            <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto mb-2 sm:mb-3 md:mb-4 bg-gray-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-              <svg class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-text-primary text-center text-xs sm:text-sm md:text-base">Market Insights</h3>
-            <p class="text-text-secondary text-[10px] sm:text-xs text-center mt-1">Data & Analytics</p>
-          </button>
-
-          <button @click="navigateTo('/services')" class="bg-white rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 group">
-            <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto mb-2 sm:mb-3 md:mb-4 bg-gray-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-              <svg class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-text-primary text-center text-xs sm:text-sm md:text-base">CRM & Leads</h3>
-            <p class="text-text-secondary text-[10px] sm:text-xs text-center mt-1">Lead Generation</p>
-          </button>
-
-          <button @click="showAIConcierge = true" class="relative overflow-hidden bg-gradient-to-br from-primary to-red-600 rounded-xl p-4 sm:p-5 md:p-6 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group">
-            <!-- Animated background pulse -->
-            <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-            
-            <!-- Sparkle effect -->
-            <div class="absolute top-2 right-2 w-2 h-2 bg-white rounded-full opacity-70 animate-pulse"></div>
-            
-            <div class="relative">
-              <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto mb-2 sm:mb-3 md:mb-4 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                <svg class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-                </svg>
-              </div>
-              <h3 class="font-bold text-white text-center text-xs sm:text-sm md:text-base mb-1">{{ t('home.aiConcierge') }}</h3>
-              <p class="text-white/90 text-[10px] sm:text-xs text-center">Ask me anything!</p>
-            </div>
-          </button>
-        </div>
-      </div>
-    </section>
-
-
-
     <!-- Recommended Stays -->
     <section class="bg-white py-8 md:py-12">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
           <div>
-            <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-text-primary mb-1">Recommended Stays</h2>
+            <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-text-brand-600 mb-1">Recommended Stays</h2>
             <p class="text-text-secondary text-xs sm:text-sm">Handpicked accommodations just for you</p>
           </div>
-          <button class="text-primary hover:text-red-600 font-medium flex items-center transition-colors text-sm self-start sm:self-auto">
+          <button class="text-brand-600 hover:text-red-600 font-medium flex items-center transition-colors text-sm self-start sm:self-auto">
             View all
             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -253,10 +184,10 @@
     <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
         <div>
-          <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-text-primary mb-1">Featured Tours</h2>
+          <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-text-brand-600 mb-1">Featured Tours</h2>
           <p class="text-text-secondary text-xs sm:text-sm">Unforgettable experiences across Rwanda</p>
         </div>
-        <button class="text-primary hover:text-red-600 font-medium flex items-center transition-colors text-sm self-start sm:self-auto">
+        <button class="text-brand-600 hover:text-red-600 font-medium flex items-center transition-colors text-sm self-start sm:self-auto">
           View all
           <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -267,11 +198,11 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
         <div v-for="tour in featuredTours" :key="tour.id" class="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 cursor-pointer group">
           <div class="relative overflow-hidden h-48 sm:h-52 md:h-56">
-            <img :src="tour.image" :alt="tour.title" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-            <span class="absolute top-3 right-3 px-2.5 py-1 bg-white/90 backdrop-blur-sm text-text-primary text-xs font-semibold rounded-full">{{ tour.category }}</span>
+            <img loading="lazy" :src="tour.image" :alt="tour.title" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            <span class="absolute top-3 right-3 px-2.5 py-1 bg-white/90 backdrop-blur-sm text-text-brand-600 text-xs font-semibold rounded-full">{{ tour.category }}</span>
           </div>
           <div class="p-4 sm:p-5">
-            <h3 class="font-bold text-base sm:text-lg text-text-primary mb-1.5 sm:mb-2 line-clamp-2">{{ tour.title }}</h3>
+            <h3 class="font-bold text-base sm:text-lg text-text-brand-600 mb-1.5 sm:mb-2 line-clamp-2">{{ tour.title }}</h3>
             <p class="text-text-secondary text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2">{{ tour.description }}</p>
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-1 text-xs sm:text-sm text-text-secondary">
@@ -280,7 +211,7 @@
                 </svg>
                 <span>{{ tour.duration }}</span>
               </div>
-              <div class="text-base sm:text-lg font-bold text-primary">{{ currencyStore.formatPrice(tour.price) }}</div>
+              <div class="text-base sm:text-lg font-bold text-brand-600">{{ currencyStore.formatPrice(tour.price) }}</div>
             </div>
           </div>
         </div>
@@ -290,8 +221,8 @@
     <!-- Nearby Listed Properties -->
     <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 bg-white">
       <div class="flex items-center justify-between mb-6">
-        <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-text-primary">Nearby Listed Properties</h2>
-        <button class="text-primary hover:text-red-600 font-medium flex items-center text-sm transition-colors">
+        <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-text-brand-600">Nearby Listed Properties</h2>
+        <button class="text-brand-600 hover:text-red-600 font-medium flex items-center text-sm transition-colors">
           View more
           <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -311,8 +242,8 @@
     <!-- Top Rated Properties -->
     <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
       <div class="flex items-center justify-between mb-6">
-        <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-text-primary">Top Rated Properties</h2>
-        <button class="text-primary hover:text-red-600 font-medium flex items-center text-sm transition-colors">
+        <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-text-brand-600">Top Rated Properties</h2>
+        <button class="text-brand-600 hover:text-red-600 font-medium flex items-center text-sm transition-colors">
           View more
           <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -333,7 +264,7 @@
 
     <!-- Featured Properties -->
     <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 bg-white">
-      <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-text-primary mb-6">Featured Properties on our Listing</h2>
+      <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-text-brand-600 mb-6">Featured Properties on our Listing</h2>
       
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
         <PropertyCard
@@ -344,7 +275,7 @@
       </div>
 
       <div class="text-center">
-        <button class="px-6 sm:px-8 py-2.5 sm:py-3 bg-white border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-all duration-200 font-medium transform hover:scale-105">
+        <button class="px-6 sm:px-8 py-2.5 sm:py-3 bg-white border-2 border-brand-500 text-brand-600 rounded-lg hover:bg-brand-600 hover:text-white transition-all duration-200 font-medium transform hover:scale-105">
           Browse More Property
         </button>
       </div>
@@ -352,22 +283,22 @@
 
     <!-- Property Rental Guides -->
     <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-      <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-text-primary mb-6">Property Rental Guides & Tips</h2>
+      <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-text-brand-600 mb-6">Property Rental Guides & Tips</h2>
       
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         <div v-for="guide in guides" :key="guide.id" class="bg-white rounded-xl shadow-card overflow-hidden hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 cursor-pointer">
           <div class="relative overflow-hidden">
-            <img :src="guide.image" :alt="guide.title" class="w-full h-48 sm:h-56 object-cover transform transition-transform duration-500 hover:scale-110" />
+            <img loading="lazy" :src="guide.image" :alt="guide.title" class="w-full h-48 sm:h-56 object-cover transform transition-transform duration-500 hover:scale-110" />
           </div>
           <div class="p-4 sm:p-6">
-            <span class="inline-block px-3 py-1 bg-primary text-white text-xs font-medium rounded-full mb-3">{{ guide.category }}</span>
-            <h3 class="font-semibold text-base sm:text-lg text-text-primary mb-2">{{ guide.title }}</h3>
+            <span class="inline-block px-3 py-1 bg-brand-500 text-white text-xs font-medium rounded-full mb-3">{{ guide.category }}</span>
+            <h3 class="font-semibold text-base sm:text-lg text-text-brand-600 mb-2">{{ guide.title }}</h3>
           </div>
         </div>
       </div>
 
       <div class="text-center mt-6 sm:mt-8">
-        <button class="px-6 sm:px-8 py-2.5 sm:py-3 bg-primary text-white rounded-lg hover:bg-red-600 transition-all duration-200 font-medium transform hover:scale-105">
+        <button class="px-6 sm:px-8 py-2.5 sm:py-3 bg-brand-500 text-white rounded-lg hover:bg-red-600 transition-all duration-200 font-medium transform hover:scale-105">
           View All
         </button>
       </div>
@@ -378,7 +309,7 @@
       <div class="bg-gray-100 rounded-xl md:rounded-2xl p-6 sm:p-8 md:p-12">
         <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div>
-            <h2 class="text-2xl sm:text-3xl font-bold text-text-primary mb-3 sm:mb-4">Download Our Mobile App</h2>
+            <h2 class="text-2xl sm:text-3xl font-bold text-text-brand-600 mb-3 sm:mb-4">Download Our Mobile App</h2>
             <p class="text-text-secondary mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
               Discover more about property buying, selling and renting with our mobile app. Available on iOS and Android.
             </p>
@@ -412,7 +343,7 @@
     <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
       <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
         <div>
-          <h2 class="text-2xl sm:text-3xl font-bold text-text-primary mb-3 sm:mb-4">Your Partner in Business Growth</h2>
+          <h2 class="text-2xl sm:text-3xl font-bold text-text-brand-600 mb-3 sm:mb-4">Your Partner in Business Growth</h2>
           <p class="text-text-secondary mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
             At Merry 360 Global, we specialize in providing management and marketing services tailored to the real estate and tourism industries. Our goal is to empower our clients with effective strategies that enhance operational efficiency, visibility, and customer loyalty.
           </p>
@@ -423,27 +354,27 @@
           <!-- Stats -->
           <div class="grid grid-cols-2 gap-4 mb-6">
             <div class="text-center p-4 bg-gray-50 rounded-lg">
-              <div class="text-3xl font-bold text-primary mb-1">180+</div>
+              <div class="text-3xl font-bold text-brand-600 mb-1">180+</div>
               <div class="text-xs text-text-secondary">Properties Managed</div>
             </div>
             <div class="text-center p-4 bg-gray-50 rounded-lg">
-              <div class="text-3xl font-bold text-primary mb-1">3000+</div>
+              <div class="text-3xl font-bold text-brand-600 mb-1">3000+</div>
               <div class="text-xs text-text-secondary">Customers Served</div>
             </div>
           </div>
           
-          <button @click="navigateTo('/about')" class="px-6 sm:px-8 py-2.5 sm:py-3 bg-primary text-white rounded-lg hover:bg-red-600 transition-all duration-200 font-medium transform hover:scale-105">
+          <button @click="navigateTo('/about')" class="px-6 sm:px-8 py-2.5 sm:py-3 bg-brand-500 text-white rounded-lg hover:bg-red-600 transition-all duration-200 font-medium transform hover:scale-105">
             Learn More About Us
           </button>
         </div>
         <div class="order-first md:order-last">
           <div class="relative overflow-hidden rounded-xl shadow-xl">
-            <img 
+            <img loading="lazy" 
               src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80"
               alt="Property"
               class="w-full h-64 sm:h-80 md:h-96 object-cover transform transition-transform duration-500 hover:scale-105"
             />
-            <span class="absolute top-4 left-4 px-3 py-1 bg-primary text-white text-xs sm:text-sm font-medium rounded-full shadow-lg">Featured</span>
+            <span class="absolute top-4 left-4 px-3 py-1 bg-brand-500 text-white text-xs sm:text-sm font-medium rounded-full shadow-lg">Featured</span>
           </div>
         </div>
       </div>

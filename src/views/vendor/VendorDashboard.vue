@@ -70,8 +70,8 @@
                 <p class="text-3xl font-bold">48</p>
                 <p class="text-success text-sm mt-1">This month</p>
               </div>
-              <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center">
-                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-12 h-12 bg-brand-500 bg-opacity-10 rounded-full flex items-center justify-center">
+                <svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                 </svg>
               </div>
@@ -128,8 +128,8 @@
         <Card padding="lg">
           <h2 class="text-2xl font-bold mb-6">My Listings</h2>
           <div class="space-y-4">
-            <div class="flex gap-4 p-4 border border-gray-200 rounded-button hover:border-primary transition-colors">
-              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=200" alt="Property" class="w-32 h-24 rounded-button object-cover" />
+            <div class="flex gap-4 p-4 border border-gray-200 rounded-button hover:border-brand-500 transition-colors">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=200" alt="Property" class="w-32 h-24 rounded-button object-cover" />
               <div class="flex-1">
                 <div class="flex items-start justify-between mb-2">
                   <div>
@@ -141,7 +141,7 @@
                 <div class="flex items-center gap-6 text-sm">
                   <span class="text-text-secondary">48 bookings</span>
                   <span class="text-text-secondary">4.8 ⭐</span>
-                  <span class="font-semibold text-primary">$150/night</span>
+                  <span class="font-semibold text-brand-600">$150/night</span>
                 </div>
               </div>
               <div class="flex flex-col gap-2">

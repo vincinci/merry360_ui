@@ -1,320 +1,308 @@
 <template>
   <MainLayout>
     <!-- Hero Section with Search -->
-    <section class="relative overflow-hidden py-20 px-4 african-pattern">
-      <div class="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-accent-red opacity-90"></div>
+    <section class="relative min-h-screen overflow-hidden">
+      <!-- Background Video with Overlay -->
       <div class="absolute inset-0">
-        <div class="absolute top-20 left-10 w-72 h-72 bg-accent-purple rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"></div>
-        <div class="absolute top-40 right-20 w-96 h-96 bg-accent-green rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style="animation-delay: 2s"></div>
-        <div class="absolute -bottom-20 left-1/2 w-80 h-80 bg-secondary rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style="animation-delay: 4s"></div>
+        <video 
+          autoplay 
+          muted 
+          loop 
+          playsinline
+          class="w-full h-full object-cover"
+          poster="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920&q=80"
+        >
+          <source src="https://cdn.coverr.co/videos/coverr-ocean-waves-at-sunset-4390/1080p.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40"></div>
       </div>
-      <div class="container mx-auto max-w-6xl relative z-10">
-        <div class="text-center mb-12">
-          <div class="inline-block glass-dark px-6 py-3 rounded-full mb-6 backdrop-blur-xl border border-white/30">
-            <span class="text-white font-bold text-sm">✨ Discover African Wonders</span>
-          </div>
-          <h1 class="text-3xl md:text-5xl font-bold mb-6 text-white drop-shadow-lg">
-            Experience the Soul of <span class="text-red-200">Africa</span>
-          </h1>
-          <p class="text-lg md:text-xl text-white text-opacity-95 max-w-3xl mx-auto font-light leading-relaxed">
-            Embark on unforgettable journeys through Rwanda's vibrant landscapes and rich culture
-          </p>
+
+      <!-- Content -->
+      <div class="relative z-10 container mx-auto px-4 h-full min-h-screen flex flex-col items-center justify-center py-24">
+        <h1 class="text-3xl md:text-[40px] font-bold text-white mb-8 md:mb-10 text-center tracking-wider" style="font-family: 'Montserrat', sans-serif; font-weight: 700; line-height: 1.2; letter-spacing: 0.1em;">
+          FIND
+        </h1>
+
+        <!-- Category Tabs -->
+        <div class="flex gap-6 md:gap-12 mb-8 md:mb-10 overflow-x-auto pb-1">
+          <button 
+            v-for="category in categories" 
+            :key="category"
+            @click="selectedCategory = category"
+            class="text-white text-sm md:text-base font-semibold pb-2 transition-all relative whitespace-nowrap"
+            style="font-family: 'Montserrat', sans-serif; font-weight: 600;"
+            :class="selectedCategory === category ? 'border-b-2 border-white' : 'opacity-80 hover:opacity-100'"
+          >
+            {{ category }}
+          </button>
         </div>
 
         <!-- Search Box -->
-        <Card padding="lg" class="max-w-5xl mx-auto shadow-african backdrop-blur-xl border-2 border-white/40">
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
-            <!-- Destination -->
-            <div class="md:col-span-2">
-              <label class="block text-sm font-bold text-text-primary mb-3">Where to?</label>
-              <div class="relative">
-                <input 
-                  type="text" 
-                  placeholder="Kigali, Akagera, Volcanoes..."
-                  v-model="searchQuery.destination"
-                  class="w-full px-5 py-4 pl-12 glass border border-white/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary focus:glass-strong font-medium text-base backdrop-blur-xl transition-all"
-                />
-                <svg class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-              </div>
-            </div>
-
-            <!-- Dates -->
-            <div>
-              <label class="block text-sm font-bold text-text-primary mb-3">When?</label>
+        <div class="w-full max-w-4xl bg-white rounded-[20px] md:rounded-[35px] shadow-2xl p-3 md:p-2 flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-0" style="min-height: 70px;">
+          <div class="flex-1 grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-0 px-2 md:px-6">
+            <!-- Location -->
+            <div class="md:border-r md:pr-5 pb-3 md:pb-0 border-b md:border-b-0" style="border-color: #DDDDDD;">
+              <label class="block text-xs font-bold mb-1.5" style="font-family: 'Montserrat', sans-serif; color: #484848; font-size: 12px;">Location</label>
               <input 
-                type="date" 
-                v-model="searchQuery.date"
-                class="w-full px-5 py-4 glass border border-white/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary focus:glass-strong font-medium text-base backdrop-blur-xl transition-all"
+                type="text" 
+                placeholder="Which city do you prefer?"
+                v-model="searchQuery.location"
+                class="w-full text-sm font-semibold focus:outline-none placeholder-gray-400"
+                style="font-family: 'Montserrat', sans-serif; color: #484848; font-size: 14px;"
               />
             </div>
 
-            <!-- Type -->
-            <div>
-              <label class="block text-sm font-bold text-text-primary mb-3">Type</label>
-              <select 
-                v-model="searchQuery.type"
-                class="w-full px-5 py-4 glass border border-white/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary focus:glass-strong font-medium text-base backdrop-blur-xl transition-all"
-              >
-                <option value="all">All</option>
-                <option value="stays">Stays</option>
-                <option value="tours">Tours</option>
-                <option value="transport">Transport</option>
-              </select>
+            <!-- Check In -->
+            <div class="md:border-r md:px-5 pb-3 md:pb-0 border-b md:border-b-0" style="border-color: #DDDDDD;">
+              <label class="block text-xs font-bold mb-1.5" style="font-family: 'Montserrat', sans-serif; color: #484848; font-size: 12px;">Check In</label>
+              <input 
+                type="text" 
+                placeholder="Add Dates"
+                v-model="searchQuery.checkIn"
+                class="w-full text-sm font-semibold focus:outline-none placeholder-gray-400"
+                style="font-family: 'Montserrat', sans-serif; color: #484848; font-size: 14px;"
+                @focus="showDatePicker = 'checkIn'"
+              />
+            </div>
+
+            <!-- Check Out -->
+            <div class="md:border-r md:px-5 pb-3 md:pb-0 border-b md:border-b-0" style="border-color: #DDDDDD;">
+              <label class="block text-xs font-bold mb-1.5" style="font-family: 'Montserrat', sans-serif; color: #484848; font-size: 12px;">Check Out</label>
+              <input 
+                type="text" 
+                placeholder="Add Dates"
+                v-model="searchQuery.checkOut"
+                class="w-full text-sm font-semibold focus:outline-none placeholder-gray-400"
+                style="font-family: 'Montserrat', sans-serif; color: #484848; font-size: 14px;"
+                @focus="showDatePicker = 'checkOut'"
+              />
+            </div>
+
+            <!-- Guests -->
+            <div class="md:pl-5">
+              <label class="block text-xs font-bold mb-1.5" style="font-family: 'Montserrat', sans-serif; color: #484848; font-size: 12px;">Guests</label>
+              <input 
+                type="text" 
+                placeholder="Add Guests"
+                v-model="searchQuery.guests"
+                class="w-full text-sm font-semibold focus:outline-none placeholder-gray-400"
+                style="font-family: 'Montserrat', sans-serif; color: #484848; font-size: 14px;"
+              />
             </div>
           </div>
 
-          <Button variant="primary" size="lg" full-width class="mt-4" @click="handleSearch">
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          <!-- Search Button -->
+          <button 
+            @click="handleSearch"
+            class="w-full md:w-[54px] h-[54px] rounded-full flex items-center justify-center hover:scale-105 transition-all duration-200 flex-shrink-0 md:mr-2 shadow-lg"
+            style="background: #FE4F4F;"
+          >
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
-            Search
-          </Button>
-        </Card>
-      </div>
-    </section>
-
-    <!-- Quick Access -->
-    <section class="container mx-auto px-4 lg:px-8 -mt-8 relative z-20">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card hover clickable @click="router.push('/accommodations')" class="text-center overflow-hidden relative group">
-          <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <div class="relative z-10">
-            <div class="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-african transform transition-all group-hover:scale-110 group-hover:rotate-6">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold mb-2 text-text-primary">Accommodations</h3>
-            <p class="text-text-secondary">Discover unique stays across Rwanda</p>
-          </div>
-        </Card>
-
-        <Card hover clickable @click="router.push('/tours')" class="text-center overflow-hidden relative group">
-          <div class="absolute inset-0 bg-gradient-to-br from-accent-green/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <div class="relative z-10">
-            <div class="w-16 h-16 bg-gradient-to-br from-accent-green to-accent-purple rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-african transform transition-all group-hover:scale-110 group-hover:rotate-6">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold mb-2 text-text-primary">Tours & Experiences</h3>
-            <p class="text-text-secondary">Immerse in African culture</p>
-          </div>
-        </Card>
-
-        <Card hover clickable @click="router.push('/transport')" class="text-center overflow-hidden relative group">
-          <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <div class="relative z-10">
-            <div class="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-african transform transition-all group-hover:scale-110 group-hover:rotate-6">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold mb-2 text-text-primary">Transportation</h3>
-            <p class="text-text-secondary">Travel with ease and comfort</p>
-          </div>
-        </Card>
-      </div>
-    </section>
-
-    <!-- Recommended Stays -->
-    <section class="container mx-auto px-4 lg:px-8 mt-20 mb-16">
-      <div class="flex items-center justify-between mb-12">
-        <div>
-          <div class="inline-flex items-center space-x-2 glass-primary px-4 py-2 rounded-full backdrop-blur-xl mb-3">
-            <span class="text-2xl">🌟</span>
-            <span class="text-primary font-bold text-sm">Featured</span>
-          </div>
-          <h2 class="text-2xl md:text-3xl font-bold text-text-primary mb-2">Recommended <span class="text-primary">Stays</span></h2>
-          <p class="text-text-secondary text-base">Handpicked accommodations with African warmth</p>
+          </button>
         </div>
-        <Button variant="text" @click="router.push('/accommodations')">
-          View All
-          <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </Button>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card 
-          v-for="stay in recommendedStays" 
-          :key="stay.id"
-          hover 
-          clickable 
-          padding="none"
-          @click="router.push(`/accommodation/${stay.id}`)"
-          class="overflow-hidden group"
-        >
-          <div class="relative h-56 overflow-hidden">
-            <img :src="stay.image" :alt="stay.name" class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            <div class="absolute top-3 right-3 glass-strong text-text-primary px-3 py-2 rounded-2xl text-sm font-bold backdrop-blur-xl border border-white/40 flex items-center">
-              <span class="text-primary mr-1">⭐</span>
-              {{ stay.rating }}
-            </div>
-            <div v-if="stay.eco" class="absolute top-3 left-3 bg-gradient-to-r from-success to-accent-green text-white px-4 py-2 rounded-2xl text-xs font-bold flex items-center shadow-african">
-              <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12zm0-10a4 4 0 100 8 4 4 0 000-8z"/>
-              </svg>
-              Eco-Friendly
-            </div>
-          </div>
-          <div class="p-5">
-            <h3 class="font-bold text-lg mb-2 text-text-primary">{{ stay.name }}</h3>
-            <p class="text-text-secondary text-sm mb-4 flex items-center">
-              <svg class="w-4 h-4 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              </svg>
-              {{ stay.location }}
-            </p>
-            <div class="flex items-baseline justify-between pt-4 border-t border-white/30">
-              <div class="flex items-baseline">
-                <span class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">${{ stay.price }}</span>
-                <span class="text-text-muted text-sm ml-2">/night</span>
-              </div>
-            </div>
-          </div>
-        </Card>
       </div>
     </section>
 
-    <!-- Featured Tours -->
-    <section class="container mx-auto px-4 lg:px-8 mb-16">
-      <div class="flex items-center justify-between mb-12">
-        <div>
-          <div class="inline-flex items-center space-x-2 glass-primary px-4 py-2 rounded-full backdrop-blur-xl mb-3">
-            <span class="text-2xl">🌍</span>
-            <span class="text-accent-green font-bold text-sm">Experiences</span>
-          </div>
-          <h2 class="text-2xl md:text-3xl font-bold text-text-primary mb-2">Featured <span class="text-accent-green">Tours</span></h2>
-          <p class="text-text-secondary text-base">Authentic African adventures await</p>
-        </div>
-        <Button variant="text" @click="router.push('/tours')">
-          View All
-          <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </Button>
+    <!-- Latest on the Property Listing -->
+    <section class="container mx-auto px-4 py-12 md:py-20">
+      <div class="mb-8 md:mb-12 text-center">
+        <h2 class="text-2xl md:text-4xl font-bold mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 700; line-height: 1.3; color: #484848;">Latest on the Property Listing</h2>
+        <div class="w-24 md:w-36 h-1.5 rounded-full mx-auto bg-brand-500"></div>
       </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+        <PropertyCard v-for="property in latestProperties" :key="property.id" :property="property" />
+      </div>
+    </section>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card 
-          v-for="tour in featuredTours" 
-          :key="tour.id"
-          hover 
-          clickable 
-          padding="none"
-          @click="router.push(`/tour/${tour.id}`)"
-          class="overflow-hidden group"
-        >
-          <div class="relative h-64 overflow-hidden rounded-t-card">
-            <img :src="tour.image" :alt="tour.name" class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-            <div class="absolute top-4 left-4">
-              <span class="inline-block px-4 py-2 glass-dark text-white rounded-2xl text-sm font-bold backdrop-blur-xl border border-white/30">{{ tour.category }}</span>
-            </div>
-            <div class="absolute bottom-4 left-4 right-4 text-white">
-              <h3 class="font-bold text-2xl mb-2 drop-shadow-lg">{{ tour.name }}</h3>
-            </div>
+    <!-- Nearby Listed Properties -->
+    <section class="container mx-auto px-4 py-12 md:py-20">
+      <div class="flex flex-col md:flex-row items-center justify-between mb-8 md:mb-12 max-w-7xl mx-auto">
+        <div class="text-center md:text-left mb-4 md:mb-0">
+          <h2 class="text-2xl md:text-4xl font-bold mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 700; line-height: 1.3; color: #484848;">Nearby Listed Properties</h2>
+          <div class="w-24 md:w-36 h-1.5 rounded-full md:mx-0 mx-auto bg-brand-500"></div>
+        </div>
+        <button class="font-bold text-sm flex items-center hover:opacity-80 transition-all hover:scale-105 duration-200" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px; color: #484848;">
+          <svg class="w-5 h-5 md:w-6 md:h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+          Show On Map
+        </button>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+        <PropertyCard v-for="property in nearbyProperties" :key="property.id" :property="property" />
+      </div>
+    </section>
+
+    <!-- Top Rated Properties -->
+    <section class="container mx-auto px-4 py-20">
+      <div class="mb-12 text-center">
+        <h2 class="text-4xl font-bold mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 36px; line-height: 48px; color: #484848;">Top Rated Properties</h2>
+        <div class="w-36 h-1.5 rounded-full mx-auto" style="background: #484848;"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+        <PropertyCard v-for="property in topRatedProperties" :key="property.id" :property="property" />
+      </div>
+    </section>
+
+    <!-- Try Hosting Banner -->
+    <section class="container mx-auto px-4 py-12 md:py-20">
+      <div class="relative rounded-[30px] md:rounded-[50px] overflow-hidden max-w-7xl mx-auto shadow-2xl" style="min-height: 300px; height: auto;">
+        <img loading="lazy" 
+          src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1920&q=80" 
+          alt="Try Hosting" 
+          class="w-full h-full object-cover absolute inset-0" style="min-height: 300px;"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-white/90 via-white/70 to-transparent flex flex-col items-start justify-center px-6 md:px-20 py-12 md:py-16">
+          <h2 class="text-2xl md:text-5xl font-bold mb-3 md:mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 800; line-height: 1.3; color: #000000;">Try Hosting With Us</h2>
+          <p class="text-sm md:text-base mb-6 md:mb-8" style="font-family: 'Montserrat', sans-serif; font-weight: 700; line-height: 1.5; color: #000000; max-width: 400px;">Earn extra just by renting your property...</p>
+          <button class="px-8 md:px-12 py-3 md:py-4 text-white rounded-full hover:scale-105 transition-all duration-200 shadow-lg" style="background: #000000; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; min-width: 180px; height: 48px;">
+            Become A Host
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Properties -->
+    <section class="container mx-auto px-4 py-12 md:py-20">
+      <div class="mb-8 md:mb-12 text-center">
+        <h2 class="text-2xl md:text-4xl font-bold mb-3 md:mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 700; line-height: 1.3; color: #484848;">Featured Properties on our Listing</h2>
+        <div class="w-24 md:w-36 h-1.5 rounded-full mx-auto" style="background: #484848;"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+        <PropertyCard v-for="property in featuredProperties" :key="property.id" :property="property" />
+      </div>
+    </section>
+
+    <!-- Browse For More -->
+    <section class="py-12 md:py-20" style="background: #EFF0F2;">
+      <div class="container mx-auto px-4">
+        <div class="max-w-7xl mx-auto text-center px-4 md:px-8">
+          <h2 class="text-2xl md:text-5xl font-bold mb-3 md:mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 700; line-height: 1.3; color: #484848;">Browse For More Properties</h2>
+          <p class="text-sm md:text-base mb-8 md:mb-10" style="font-family: 'Montserrat', sans-serif; font-weight: 500; line-height: 1.5; color: #9A9A9A;">Explore properties by their categories/types...</p>
+          <button class="px-8 md:px-12 py-3 md:py-4 text-white rounded-full hover:scale-105 transition-all duration-200 shadow-lg mx-auto" style="background: #FE4F4F; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px; min-width: 180px; height: 48px;">
+            Find A Property
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Property Rental Guides & Tips -->
+    <section class="container mx-auto px-4 py-12 md:py-20">
+      <div class="mb-8 md:mb-12 text-center">
+        <h2 class="text-2xl md:text-4xl font-bold mb-3 md:mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 700; line-height: 1.3; color: #484848;">Property Rental Guides & Tips</h2>
+        <div class="w-24 md:w-36 h-1.5 rounded-full mx-auto" style="background: #484848;"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
+        <div v-for="guide in guides" :key="guide.id" class="rounded-xl overflow-hidden hover:shadow-xl transition-shadow duration-300" style="background: #E0E2E6;">
+          <div class="relative">
+            <img loading="lazy" :src="guide.image" :alt="guide.title" class="w-full object-cover h-48 md:h-64 lg:h-80" />
           </div>
-          <div class="p-6">
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex items-center glass-primary px-3 py-2 rounded-xl backdrop-blur-xl">
-                <svg class="w-5 h-5 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          <div class="p-4 md:p-6">
+            <h3 class="text-base md:text-lg font-bold mb-2" style="font-family: 'Montserrat', sans-serif; font-weight: 700; line-height: 1.3; color: #484848;">{{ guide.title }}</h3>
+            <span class="inline-block text-xs md:text-sm font-semibold" style="font-family: 'Montserrat', sans-serif; font-weight: 600; color: #9A9A9A;">
+              {{ guide.category }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-8 md:mt-12">
+        <button class="px-8 md:px-12 py-3 md:py-4 text-white rounded-full hover:scale-105 transition-all duration-200 shadow-lg" style="background: #FF3B3B; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px; min-width: 180px; height: 48px;">
+          View All Blogs
+        </button>
+      </div>
+    </section>
+
+    <!-- Download Mobile App -->
+    <section class="py-12 md:py-20" style="background: #EFF0F2;">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 max-w-7xl mx-auto">
+          <div class="flex-1 text-center md:text-left">
+            <h2 class="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6" style="font-family: 'Montserrat', sans-serif; font-weight: 700; line-height: 1.3; color: #484848;">Download Our Mobile App</h2>
+            <p class="text-sm md:text-base mb-6 md:mb-10" style="font-family: 'Montserrat', sans-serif; font-weight: 500; line-height: 1.5; color: #9A9A9A;">Available for free on these platforms</p>
+            <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center md:justify-start">
+              <button class="px-4 md:px-6 py-3 rounded-md flex items-center justify-center gap-2 md:gap-3 hover:scale-105 transition-all duration-200 shadow-md w-full sm:w-auto" style="background: #E0E2E6; min-width: 150px; height: 52px;">
+                <svg class="w-5 h-5" fill="#484848" viewBox="0 0 24 24">
+                  <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
                 </svg>
-                <span class="text-text-primary text-sm font-bold">{{ tour.duration }}</span>
-              </div>
-              <div class="flex items-baseline">
-                <span class="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">${{ tour.price }}</span>
-              </div>
+                <span style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 15px; color: #484848;">PlayStore</span>
+              </button>
+              <button class="px-6 py-3 rounded-md flex items-center gap-3 hover:scale-105 transition-all duration-200 shadow-md" style="background: #E0E2E6; width: 172px; height: 52px;">
+                <svg class="w-5 h-5" fill="#484848" viewBox="0 0 24 24">
+                  <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                </svg>
+                <span style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 15px; color: #484848;">AppleStore</span>
+              </button>
             </div>
-            <p class="text-text-secondary leading-relaxed">{{ tour.description }}</p>
           </div>
-        </Card>
+          <div class="flex-1 flex justify-center mt-8 md:mt-0">
+            <div class="w-40 h-40 md:w-52 md:h-52 rounded-xl flex items-center justify-center shadow-lg" style="background: linear-gradient(135deg, #9A9A9A 0%, #C2C6CC 100%);">
+              <svg class="w-20 h-20 md:w-28 md:h-28 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 18H7V5h10v14z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Seasonal Highlights -->
-    <section class="container mx-auto px-4 lg:px-8 mb-16">
-      <div class="relative overflow-hidden rounded-3xl p-12 md:p-16 text-white african-pattern">
-        <div class="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-accent-red"></div>
-        <div class="absolute inset-0">
-          <div class="absolute top-0 right-0 w-96 h-96 bg-secondary rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
-          <div class="absolute bottom-0 left-0 w-96 h-96 bg-accent-purple rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
-        </div>
-        <div class="relative z-10 max-w-3xl">
-          <div class="inline-flex items-center space-x-2 glass-dark px-5 py-3 rounded-full backdrop-blur-xl mb-6 border border-white/30">
-            <span class="text-2xl">🎉</span>
-            <span class="font-bold">Limited Time Offer</span>
-          </div>
-          <h2 class="text-3xl md:text-4xl font-bold mb-6 drop-shadow-lg">Discover Rwanda's Hidden Gems</h2>
-          <p class="text-lg mb-8 text-white/95 leading-relaxed">
-            Experience authentic African culture with exclusive seasonal packages. Book now and save up to 30% on accommodations and guided tours.
+    <!-- Discover More -->
+    <section class="container mx-auto px-4 py-12 md:py-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center max-w-7xl mx-auto">
+        <div>
+          <h2 class="text-2xl md:text-4xl font-bold mb-3 md:mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 700; line-height: 1.3; color: #484848;">Discover More About Property Rental</h2>
+          <div class="w-24 md:w-36 h-1.5 rounded-full mb-6 md:mb-8" style="background: #484848;"></div>
+          <p class="mb-6 md:mb-8 text-sm md:text-base" style="font-family: 'Montserrat', sans-serif; font-weight: 400; line-height: 1.6; color: #9A9A9A;">
+            Discover more about our exceptional property rentals, where comfort meets modern living for every kind of traveler. Explore thoughtfully designed spaces that feel like home, and enjoy a seamless booking experience from start to finish.
           </p>
-          <Button variant="secondary" size="lg">
-            Explore Deals
-          </Button>
+          <div class="flex flex-col sm:flex-row gap-4 md:gap-8 mb-6 md:mb-10">
+            <button class="font-bold hover:scale-105 transition-all duration-200 text-sm md:text-base" style="font-family: 'Montserrat', sans-serif; font-weight: 700; color: #484848;">
+              Ask A Question
+            </button>
+            <button class="font-bold hover:scale-105 transition-all duration-200 text-sm md:text-base" style="font-family: 'Montserrat', sans-serif; font-weight: 700; color: #484848;">
+              Find A Property
+            </button>
+          </div>
+          <button class="px-8 md:px-12 py-3 md:py-4 text-white rounded-full hover:scale-105 transition-all duration-200 shadow-lg w-full sm:w-auto" style="background: #FF3B3B; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px; min-width: 180px; height: 48px;">
+            Discover More
+          </button>
+        </div>
+        <div class="mt-8 md:mt-0">
+          <div class="relative rounded-xl overflow-hidden shadow-2xl">
+            <img loading="lazy" 
+              src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" 
+              alt="Property" 
+              class="w-full h-64 md:h-96 lg:h-[437px] object-cover"
+            />
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- AI Concierge Promo -->
-    <section class="container mx-auto px-4 lg:px-8 mb-16">
-      <Card padding="lg" class="border-2 border-white/40 backdrop-blur-xl">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <div class="inline-flex items-center space-x-2 bg-gradient-to-r from-accent-purple to-accent-green px-5 py-3 rounded-full mb-6 shadow-african">
-              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-              </svg>
-              <span class="text-white font-bold">AI Powered</span>
-            </div>
-            <h2 class="text-2xl md:text-3xl font-bold text-text-primary mb-4">Your Personal <span class="text-primary">Travel Concierge</span></h2>
-            <p class="text-text-secondary text-base mb-8 leading-relaxed">
-              Experience intelligent travel planning with AI that understands African destinations. Get personalized recommendations and instant support.
-            </p>
-            <Button variant="primary" size="lg">
-              Try AI Concierge
-              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-              </svg>
-            </Button>
+    <!-- Newsletter -->
+    <section class="py-12 md:py-20" style="background: #E8EAEC;">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 max-w-6xl mx-auto">
+          <div class="text-center md:text-left md:w-48 mb-2 md:mb-0">
+            <h2 class="font-bold mb-1 text-base md:text-lg" style="font-family: 'Montserrat', sans-serif; font-weight: 700; color: #484848;">NEWSLETTER</h2>
+            <p class="text-xs md:text-sm" style="font-family: 'Montserrat', sans-serif; font-weight: 500; color: #484848;">Stay Upto Date</p>
           </div>
-          <div class="hidden md:block">
-            <div class="glass-strong border-2 border-white/40 rounded-3xl p-8 space-y-5 backdrop-blur-xl shadow-african">
-              <div class="flex items-start space-x-4">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-secondary to-earth-clay flex items-center justify-center flex-shrink-0 shadow-african">
-                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                  </svg>
-                </div>
-                <div class="flex-1">
-                  <div class="glass border border-white/40 rounded-2xl rounded-tl-none p-4 backdrop-blur-xl">
-                    <p class="text-sm font-medium text-text-primary">I want to explore Rwanda's culture and wildlife for 5 days</p>
-                  </div>
-                </div>
-              </div>
-              <div class="flex items-start space-x-4">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 shadow-african">
-                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-                  </svg>
-                </div>
-                <div class="flex-1">
-                  <div class="bg-gradient-to-r from-primary to-secondary text-white rounded-2xl rounded-tl-none p-4 shadow-african">
-                    <p class="text-sm font-medium">Perfect! I've crafted an amazing itinerary: Gorilla trekking in Volcanoes NP, cultural tour in Kigali, safari in Akagera, and traditional dance experiences. All bookings ready!</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="flex items-center gap-3 md:gap-4 flex-1 max-w-3xl w-full">
+            <input 
+              type="email" 
+              placeholder="Your Email..." 
+              class="flex-1 px-4 md:px-6 py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-red-400 transition-all text-sm md:text-base"
+              style="background: #FFFFFF; border: 1px solid #E8EAEC; font-family: 'Montserrat', sans-serif; font-weight: 500; color: #484848; height: 48px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);"
+            />
+            <button class="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center hover:scale-110 transition-all duration-200 flex-shrink-0 shadow-lg" style="background: #FF3B3B;">
+              <svg class="w-5 h-5 md:w-7 md:h-7 text-white transform rotate-90" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              </svg>
+            </button>
           </div>
         </div>
-      </Card>
+      </div>
     </section>
   </MainLayout>
 </template>
@@ -322,94 +310,123 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import MainLayout from '../../components/layout/MainLayout.vue'
-import Card from '../../components/common/Card.vue'
-import Button from '../../components/common/Button.vue'
+import MainLayout from '@/components/layout/MainLayout.vue'
+import PropertyCard from '@/components/common/PropertyCard.vue'
 
 const router = useRouter()
 
+const categories = ['Houses', 'Hotels', 'Motels', 'Hostels']
+const selectedCategory = ref('Houses')
+const showDatePicker = ref(null)
+
 const searchQuery = ref({
-  destination: '',
-  date: '',
-  type: 'all'
+  location: '',
+  checkIn: '',
+  checkOut: '',
+  guests: ''
 })
 
-const recommendedStays = ref([
+const latestProperties = ref([
   {
     id: 1,
-    name: 'Kigali Serena Hotel',
+    title: 'Modern Apartment',
     location: 'Kigali, Rwanda',
-    price: 150,
-    rating: 4.8,
-    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400',
-    eco: true
+    price: 250000,
+    beds: 3,
+    baths: 2,
+    area: 1200,
+    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80',
+    badge: 'For Sale',
+    images: [
+      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80',
+      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80&sat=-100',
+      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80&crop=left',
+      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80&crop=right',
+      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80&crop=top'
+    ]
   },
   {
     id: 2,
-    name: 'Lake Kivu Resort',
-    location: 'Gisenyi, Rwanda',
-    price: 120,
-    rating: 4.6,
-    image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400',
-    eco: false
+    title: 'Luxury Villa',
+    location: 'Rubavu, Rwanda',
+    price: 450000,
+    beds: 5,
+    baths: 4,
+    area: 2500,
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
+    badge: 'Featured',
+    images: [
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&sat=-100',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&crop=left',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&crop=right',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&crop=top'
+    ]
   },
   {
     id: 3,
-    name: 'Akagera Safari Lodge',
-    location: 'Akagera National Park',
-    price: 180,
-    rating: 4.9,
-    image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400',
-    eco: true
+    title: 'Cozy House',
+    location: 'Musanze, Rwanda',
+    price: 180000,
+    beds: 4,
+    baths: 3,
+    area: 1800,
+    image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80',
+    badge: 'New',
+    images: [
+      'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80',
+      'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80&sat=-100',
+      'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80&crop=left',
+      'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80&crop=right',
+      'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80&crop=top'
+    ]
   },
   {
     id: 4,
-    name: 'Volcanoes View Lodge',
-    location: 'Musanze, Rwanda',
-    price: 200,
-    rating: 4.7,
-    image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=400',
-    eco: true
+    title: 'Lake View Property',
+    location: 'Kivu, Rwanda',
+    price: 320000,
+    beds: 3,
+    baths: 2,
+    area: 1500,
+    image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80',
+    badge: 'Hot Offer',
+    images: [
+      'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80',
+      'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80&sat=-100',
+      'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80&crop=left',
+      'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80&crop=right',
+      'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80&crop=top'
+    ]
   }
 ])
 
-const featuredTours = ref([
+const nearbyProperties = ref(latestProperties.value)
+const topRatedProperties = ref(latestProperties.value)
+const featuredProperties = ref([...latestProperties.value, ...latestProperties.value].slice(0, 6))
+
+const guides = ref([
   {
     id: 1,
-    name: 'Gorilla Trekking Experience',
-    category: 'Adventure',
-    duration: '1 Day',
-    price: 1500,
-    image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=600',
-    description: 'Get up close with mountain gorillas in their natural habitat'
+    title: 'Choose the right apartment',
+    category: 'Apartment',
+    image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&q=80'
   },
   {
     id: 2,
-    name: 'Kigali City Cultural Tour',
-    category: 'Cultural',
-    duration: '4 Hours',
-    price: 50,
-    image: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=600',
-    description: 'Explore the vibrant culture and history of Rwanda\'s capital'
+    title: 'Best environment for rental',
+    category: 'Environment',
+    image: 'https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?w=400&q=80'
   },
   {
     id: 3,
-    name: 'Lake Kivu Island Hopping',
-    category: 'Nature',
-    duration: '1 Day',
-    price: 80,
-    image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600',
-    description: 'Discover the beautiful islands and beaches of Lake Kivu'
+    title: 'Things About Apartment',
+    category: 'Tips',
+    image: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=400&q=80'
   }
 ])
 
 const handleSearch = () => {
-  if (searchQuery.value.type === 'stays' || searchQuery.value.type === 'all') {
-    router.push('/accommodations')
-  } else if (searchQuery.value.type === 'tours') {
-    router.push('/tours')
-  } else if (searchQuery.value.type === 'transport') {
-    router.push('/transport')
-  }
+  router.push('/accommodations')
 }
 </script>

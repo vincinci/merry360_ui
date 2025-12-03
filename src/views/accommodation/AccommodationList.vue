@@ -1,14 +1,42 @@
 <template>
   <PropertyLayout>
+    <!-- Search Bar Section -->
+    <div class="w-full py-12" style="margin-top: 80px;">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <div class="bg-white rounded-[20px] md:rounded-[35px] shadow-2xl p-3 md:p-2 flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-0" style="min-height: 70px;">
+          <div class="flex-1 px-2 md:px-6">
+            <label class="block text-xs font-bold mb-1.5" style="font-family: Montserrat, sans-serif; color: #484848; font-size: 12px;">Search Accommodations</label>
+            <input 
+              v-model="searchQuery"
+              type="text" 
+              placeholder="Search by name, location, or type..."
+              class="w-full text-sm font-semibold focus:outline-none placeholder-gray-400"
+              style="font-family: Montserrat, sans-serif; color: #484848; font-size: 14px;"
+              @keyup.enter="performSearch"
+            />
+          </div>
+          <button 
+            @click="performSearch"
+            class="w-full md:w-[54px] h-[54px] rounded-full flex items-center justify-center hover:scale-105 transition-all duration-200 flex-shrink-0 md:mr-2 shadow-lg"
+            style="background: #FE4F4F;"
+          >
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
       <!-- Header -->
       <div class="mb-6 sm:mb-8">
-        <h1 class="text-2xl sm:text-3xl font-bold text-text-primary mb-2">Find Your Perfect Stay</h1>
+        <h1 class="text-2xl sm:text-3xl font-bold text-text-brand-600 mb-2">Find Your Perfect Stay</h1>
         <p class="text-text-secondary text-sm sm:text-base md:text-lg">Discover amazing accommodations across Rwanda and Africa</p>
       </div>
 
       <!-- Filters and Search -->
-      <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6">
         <!-- Filters Sidebar -->
         <div class="lg:col-span-1">
           <div class="bg-white rounded-xl shadow-card p-4 sm:p-6 sticky top-24">
@@ -19,7 +47,7 @@
               <div class="flex gap-2">
                 <button 
                   @click="viewMode = 'list'"
-                  :class="viewMode === 'list' ? 'bg-primary text-white' : 'bg-gray-100 text-text-primary hover:bg-gray-200'"
+                  :class="viewMode === 'list' ? 'bg-primary text-white' : 'bg-gray-100 text-text-brand-600 hover:bg-gray-200'"
                   class="flex-1 py-2 rounded-lg transition-all duration-200 transform hover:scale-105"
                 >
                   <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -28,7 +56,7 @@
                 </button>
                 <button 
                   @click="viewMode = 'map'"
-                  :class="viewMode === 'map' ? 'bg-primary text-white' : 'bg-gray-100 text-text-primary hover:bg-gray-200'"
+                  :class="viewMode === 'map' ? 'bg-primary text-white' : 'bg-gray-100 text-text-brand-600 hover:bg-gray-200'"
                   class="flex-1 py-2 rounded-button transition-colors"
                 >
                   <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,7 +79,7 @@
                 />
                 <div class="flex justify-between text-sm text-text-secondary">
                   <span>$0</span>
-                  <span class="font-semibold text-primary">${{ filters.maxPrice }}</span>
+                  <span class="font-semibold text-brand-600">${{ filters.maxPrice }}</span>
                 </div>
               </div>
             </div>
@@ -65,7 +93,7 @@
                     type="checkbox" 
                     :value="type"
                     v-model="filters.propertyTypes"
-                    class="rounded border-gray-300 text-primary focus:ring-primary mr-2"
+                    class="rounded border-gray-300 text-brand-600 focus:ring-brand-500 mr-2"
                   />
                   <span class="text-sm">{{ type }}</span>
                 </label>
@@ -80,7 +108,7 @@
                   v-for="rating in [3, 4, 4.5]"
                   :key="rating"
                   @click="filters.minRating = rating"
-                  :class="filters.minRating === rating ? 'bg-primary text-white' : 'bg-gray-100 text-text-primary hover:bg-gray-200'"
+                  :class="filters.minRating === rating ? 'bg-primary text-white' : 'bg-gray-100 text-text-brand-600 hover:bg-gray-200'"
                   class="flex-1 py-2 px-3 rounded-button text-sm transition-colors"
                 >
                   {{ rating }}+⭐
@@ -97,7 +125,7 @@
                     type="checkbox" 
                     :value="amenity"
                     v-model="filters.amenities"
-                    class="rounded border-gray-300 text-primary focus:ring-primary mr-2"
+                    class="rounded border-gray-300 text-brand-600 focus:ring-brand-500 mr-2"
                   />
                   <span class="text-sm">{{ amenity }}</span>
                 </label>
@@ -110,15 +138,15 @@
                 <input 
                   type="checkbox" 
                   v-model="filters.ecoFriendly"
-                  class="rounded border-gray-300 text-green-500 focus:ring-green-500 mr-2"
+                  class="rounded border-gray-300 text-brand-500 focus:ring-brand-500 mr-2"
                 />
-                <span class="text-sm font-medium text-green-600">Eco-Friendly Only</span>
+                <span class="text-sm font-medium text-brand-600">Eco-Friendly Only</span>
               </label>
             </div>
 
             <button 
               @click="resetFilters"
-              class="w-full px-4 py-2 border-2 border-gray-300 text-text-primary rounded-lg hover:border-primary hover:text-primary transition-all duration-200 font-medium text-sm"
+              class="w-full px-4 py-2 border-2 border-gray-300 text-text-brand-600 rounded-lg hover:border-brand-500 hover:text-brand-600 transition-all duration-200 font-medium text-sm"
             >
               Reset Filters
             </button>
@@ -126,13 +154,13 @@
         </div>
 
         <!-- Listings -->
-        <div class="lg:col-span-3">
+        <div class="lg:col-span-4">
           <!-- Results Header -->
           <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
             <p class="text-text-secondary text-sm sm:text-base">
-              <span class="font-semibold text-text-primary">{{ filteredAccommodations.length }}</span> properties found
+              <span class="font-semibold text-text-brand-600">{{ filteredAccommodations.length }}</span> properties found
             </p>
-            <select v-model="sortBy" class="px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm sm:text-base">
+            <select v-model="sortBy" class="px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm sm:text-base">
               <option value="recommended">Recommended</option>
               <option value="price-low">Price: Low to High</option>
               <option value="price-high">Price: High to Low</option>
@@ -142,14 +170,11 @@
 
           <!-- Map View -->
           <div v-if="viewMode === 'map'" class="mb-6">
-            <Card padding="none" class="h-96 bg-gray-100 flex items-center justify-center">
-              <div class="text-center">
-                <svg class="w-16 h-16 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
-                </svg>
-                <p class="text-text-secondary">Map View (Integration with mapping service)</p>
-              </div>
-            </Card>
+            <MapView 
+              :properties="filteredAccommodations"
+              @selectProperty="handlePropertySelect"
+              @locationSearch="handleLocationSearch"
+            />
           </div>
 
           <!-- List View -->
@@ -163,7 +188,7 @@
               <div class="grid md:grid-cols-3 gap-0">
                 <!-- Image -->
                 <div class="relative h-56 sm:h-64 md:h-auto">
-                  <img 
+                  <img loading="lazy" 
                     :src="accommodation.image" 
                     :alt="accommodation.name" 
                     class="w-full h-full object-cover"
@@ -174,7 +199,7 @@
                   >
                     <svg 
                       class="w-6 h-6" 
-                      :class="accommodation.isFavorite ? 'text-primary fill-current' : 'text-gray-400'"
+                      :class="accommodation.isFavorite ? 'text-brand-600 fill-current' : 'text-gray-400'"
                       fill="none" 
                       stroke="currentColor" 
                       viewBox="0 0 24 24"
@@ -195,8 +220,8 @@
                   <div class="flex items-start justify-between mb-2">
                     <div class="flex-1">
                       <div class="flex items-center gap-2 mb-1">
-                        <h3 class="text-xl font-semibold text-text-primary">{{ accommodation.name }}</h3>
-                        <span class="inline-flex items-center px-2 py-1 bg-primary bg-opacity-10 text-primary text-xs font-semibold rounded">
+                        <h3 class="text-xl font-semibold text-text-brand-600">{{ accommodation.name }}</h3>
+                        <span class="inline-flex items-center px-2 py-1 bg-brand-500 bg-opacity-10 text-brand-600 text-xs font-semibold rounded">
                           {{ accommodation.type }}
                         </span>
                       </div>
@@ -210,7 +235,7 @@
                     </div>
                     <div class="text-right">
                       <div class="flex items-center gap-1 mb-1">
-                        <span class="text-lg font-bold text-text-primary">{{ accommodation.rating }}</span>
+                        <span class="text-lg font-bold text-text-brand-600">{{ accommodation.rating }}</span>
                         <span class="text-yellow-500">⭐</span>
                       </div>
                       <p class="text-xs text-text-secondary">{{ accommodation.reviews }} reviews</p>
@@ -236,15 +261,15 @@
                   <!-- Price and CTA -->
                   <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 pt-4 border-t border-gray-100">
                     <div>
-                      <div class="flex items-baseline gap-1">
-                        <span class="text-2xl sm:text-3xl font-bold text-primary">${{ accommodation.price }}</span>
-                        <span class="text-text-secondary text-sm sm:text-base">/night</span>
+                      <div class="flex items-baseline gap-1 flex-wrap">
+                        <span class="text-2xl sm:text-3xl font-bold text-brand-600">${{ accommodation.price }}</span>
+                        <span class="text-text-secondary text-sm sm:text-base whitespace-nowrap">/night</span>
                       </div>
                       <p class="text-xs text-text-secondary">Includes taxes and fees</p>
                     </div>
                     <button 
                       @click.stop="router.push(`/accommodation/${accommodation.id}`)"
-                      class="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 bg-primary text-white rounded-lg hover:bg-red-600 transition-all duration-200 font-medium text-sm sm:text-base transform hover:scale-105"
+                      class="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 bg-brand-500 text-white rounded-lg hover:bg-red-600 transition-all duration-200 font-medium text-sm sm:text-base transform hover:scale-105"
                     >
                       View Details
                     </button>
@@ -259,9 +284,9 @@
             <svg class="w-20 h-20 sm:w-24 sm:h-24 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
-            <h3 class="text-lg sm:text-xl font-semibold text-text-primary mb-2">No properties found</h3>
+            <h3 class="text-lg sm:text-xl font-semibold text-text-brand-600 mb-2">No properties found</h3>
             <p class="text-text-secondary mb-4 text-sm sm:text-base">Try adjusting your filters to see more results</p>
-            <button @click="resetFilters" class="px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-red-600 transition-all duration-200 font-medium transform hover:scale-105">
+            <button @click="resetFilters" class="px-6 py-2.5 bg-brand-500 text-white rounded-lg hover:bg-red-600 transition-all duration-200 font-medium transform hover:scale-105">
               Reset Filters
             </button>
           </div>
@@ -275,11 +300,21 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import PropertyLayout from '../../components/layout/PropertyLayout.vue'
+import Card from '../../components/common/Card.vue'
+import MapView from '../../components/common/MapView.vue'
 
 const router = useRouter()
 
 const viewMode = ref('list')
 const sortBy = ref('recommended')
+const searchQuery = ref('')
+
+const performSearch = () => {
+  if (searchQuery.value.trim()) {
+    // Add search logic here - filter accommodations based on searchQuery
+    console.log('Searching for:', searchQuery.value)
+  }
+}
 
 const filters = ref({
   maxPrice: 500,
@@ -411,5 +446,14 @@ const toggleFavorite = (id) => {
   if (accommodation) {
     accommodation.isFavorite = !accommodation.isFavorite
   }
+}
+
+const handlePropertySelect = (property) => {
+  router.push(`/accommodation/${property.id}`)
+}
+
+const handleLocationSearch = (location) => {
+  console.log('Searching for location:', location)
+  // Implement location-based search filtering here
 }
 </script>

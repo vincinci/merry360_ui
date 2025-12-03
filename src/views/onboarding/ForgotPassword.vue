@@ -4,12 +4,12 @@
       <!-- Logo -->
       <div class="text-center mb-8 animate-fade-in">
         <router-link to="/" class="inline-flex items-center justify-center space-x-2">
-          <div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center">
+          <div class="w-12 h-12 bg-brand-500 rounded-xl flex items-center justify-center">
             <span class="text-white font-bold text-2xl">M</span>
           </div>
-          <span class="text-2xl font-bold text-text-primary">Merry360X</span>
+          <span class="text-2xl font-bold text-text-brand-600">Merry360X</span>
         </router-link>
-        <h2 class="mt-6 text-3xl font-bold text-text-primary">Forgot Password?</h2>
+        <h2 class="mt-6 text-3xl font-bold text-text-brand-600">Forgot Password?</h2>
         <p class="mt-2 text-text-secondary">No worries, we'll send you reset instructions</p>
       </div>
 
@@ -18,7 +18,7 @@
         <form v-if="!emailSent" @submit.prevent="handleSubmit" class="space-y-5">
           <!-- Email -->
           <div>
-            <label class="block text-sm font-medium text-text-primary mb-2">Email Address</label>
+            <label class="block text-sm font-medium text-text-brand-600 mb-2">Email Address</label>
             <Input
               v-model="email"
               type="email"
@@ -41,7 +41,7 @@
 
           <!-- Back to Login -->
           <div class="text-center">
-            <router-link to="/login" class="text-sm text-text-secondary hover:text-primary inline-flex items-center">
+            <router-link to="/login" class="text-sm text-text-secondary hover:text-brand-600 inline-flex items-center">
               <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
               </svg>
@@ -57,15 +57,15 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-text-primary">Check your email</h3>
+          <h3 class="text-xl font-semibold text-text-brand-600">Check your email</h3>
           <p class="text-text-secondary">
             We've sent a password reset link to<br>
-            <span class="font-medium text-text-primary">{{ email }}</span>
+            <span class="font-medium text-text-brand-600">{{ email }}</span>
           </p>
           <Button variant="primary" size="md" full-width @click="router.push('/login')">
             Back to Login
           </Button>
-          <button @click="resendEmail" class="text-sm text-primary hover:text-opacity-80">
+          <button @click="resendEmail" class="text-sm text-brand-600 hover:text-opacity-80">
             Didn't receive the email? Click to resend
           </button>
         </div>

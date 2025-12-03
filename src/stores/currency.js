@@ -2,46 +2,76 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useCurrencyStore = defineStore('currency', () => {
-  // Exchange rate: 1 USD = 1300 RWF (approximate as of 2025)
-  const exchangeRate = ref(1300)
+  // Exchange rates relative to USD
+  const exchangeRates = ref({
+    USD: 1,
+    EUR: 0.92,
+    GBP: 0.79,
+    CNY: 7.24,
+    RWF: 1300
+  })
+
+  const currencies = ['USD', 'EUR', 'GBP', 'CNY', 'RWF']
+  const currencySymbols = {
+    USD: '$',
+    EUR: '€',
+    GBP: '£',
+    CNY: '¥',
+    RWF: 'RWF'
+  }
   
-  // Current currency: 'USD' or 'RWF' - default to USD
+  // Current currency - default to USD
   const storedCurrency = localStorage.getItem('merry360_currency')
-  const currentCurrency = ref(storedCurrency && ['USD', 'RWF'].includes(storedCurrency) ? storedCurrency : 'USD')
+  const currentCurrency = ref(storedCurrency && currencies.includes(storedCurrency) ? storedCurrency : 'USD')
   
-  // Toggle between currencies
+  // Set currency
+  const setCurrency = (currency) => {
+    if (currencies.includes(currency)) {
+      currentCurrency.value = currency
+      localStorage.setItem('merry360_currency', currency)
+    }
+  }
+  
+  // Toggle between currencies (cycle through)
   const toggleCurrency = () => {
-    currentCurrency.value = currentCurrency.value === 'USD' ? 'RWF' : 'USD'
-    localStorage.setItem('merry360_currency', currentCurrency.value)
+    const currentIndex = currencies.indexOf(currentCurrency.value)
+    const nextIndex = (currentIndex + 1) % currencies.length
+    setCurrency(currencies[nextIndex])
   }
   
   // Convert price based on current currency
   const convertPrice = (priceInUSD) => {
-    if (currentCurrency.value === 'RWF') {
-      return priceInUSD * exchangeRate.value
-    }
-    return priceInUSD
+    const rate = exchangeRates.value[currentCurrency.value]
+    return priceInUSD * rate
   }
   
   // Format price with proper currency symbol
   const formatPrice = (priceInUSD) => {
     const convertedPrice = convertPrice(priceInUSD)
-    const formatted = new Intl.NumberFormat('en-US').format(convertedPrice)
+    const formatted = new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: currentCurrency.value === 'RWF' ? 0 : 2,
+      maximumFractionDigits: currentCurrency.value === 'RWF' ? 0 : 2
+    }).format(convertedPrice)
     
-    if (currentCurrency.value === 'RWF') {
-      return `${formatted} RWF`
+    const symbol = currencySymbols[currentCurrency.value]
+    
+    if (currentCurrency.value === 'RWF' || currentCurrency.value === 'CNY') {
+      return `${formatted} ${symbol}`
     }
-    return `$${formatted}`
+    return `${symbol}${formatted}`
   }
   
   // Get currency symbol
   const currencySymbol = computed(() => {
-    return currentCurrency.value === 'USD' ? '$' : 'RWF'
+    return currencySymbols[currentCurrency.value]
   })
   
   return {
     currentCurrency,
-    exchangeRate,
+    exchangeRates,
+    currencies,
+    currencySymbols,
+    setCurrency,
     toggleCurrency,
     convertPrice,
     formatPrice,

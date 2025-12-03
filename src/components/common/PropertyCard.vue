@@ -3,13 +3,36 @@
     class="bg-white rounded-xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden cursor-pointer group transform hover:-translate-y-1"
     @click="goToDetail"
   >
-    <!-- Image -->
-    <div class="relative h-48 sm:h-56 md:h-60 overflow-hidden">
-      <img 
-        :src="property.image" 
+    <!-- Image Gallery -->
+    <div 
+      class="relative aspect-square overflow-hidden"
+      @mouseenter="startAutoScroll"
+      @mouseleave="stopAutoScroll"
+    >
+      <!-- Main Image -->
+      <img loading="lazy" 
+        :src="currentImage" 
         :alt="property.title"
-        class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
+        class="w-full h-full object-cover transform transition-all duration-500 group-hover:scale-110"
       />
+      
+      <!-- Image Navigation Dots -->
+      <div v-if="propertyImages.length > 1" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+        <button
+          v-for="(img, index) in propertyImages.slice(0, 5)"
+          :key="index"
+          @click.stop="currentImageIndex = index"
+          class="w-1.5 h-1.5 rounded-full transition-all"
+          :class="currentImageIndex === index ? 'bg-white w-4' : 'bg-white/60 hover:bg-white/80'"
+        ></button>
+        <button
+          v-if="propertyImages.length > 5"
+          @click.stop="showAllImages"
+          class="px-2 py-0.5 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-semibold text-gray-800 hover:bg-white transition-all"
+        >
+          +{{ propertyImages.length - 5 }}
+        </button>
+      </div>
       
       <!-- Badge -->
       <span 
@@ -25,16 +48,36 @@
         @click.stop="toggleFavorite"
         class="absolute top-3 right-3 w-8 h-8 sm:w-9 sm:h-9 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all shadow-md hover:scale-110"
       >
-        <svg class="w-4 h-4 sm:w-5 sm:h-5" :class="isFavorite ? 'text-primary fill-current' : 'text-gray-600'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4 sm:w-5 sm:h-5" :class="isFavorite ? 'text-brand-500 fill-current' : 'text-gray-600'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+        </svg>
+      </button>
+
+      <!-- Image Navigation Arrows -->
+      <button
+        v-if="propertyImages.length > 1"
+        @click.stop="previousImage"
+        class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all shadow-md opacity-0 group-hover:opacity-100"
+      >
+        <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
+      <button
+        v-if="propertyImages.length > 1"
+        @click.stop="nextImage"
+        class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all shadow-md opacity-0 group-hover:opacity-100"
+      >
+        <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
         </svg>
       </button>
     </div>
 
     <!-- Content -->
-    <div class="p-4 sm:p-5">
+    <div class="p-2 sm:p-3">
       <!-- Title -->
-      <h3 class="font-bold text-base sm:text-lg text-text-primary mb-2 line-clamp-1 group-hover:text-primary transition-colors">
+      <h3 class="font-bold text-base sm:text-lg text-text-primary mb-2 line-clamp-1 group-hover:text-brand-600 transition-colors">
         {{ property.title }}
       </h3>
 
@@ -71,17 +114,17 @@
 
       <!-- Price -->
       <div class="flex items-center justify-between flex-wrap gap-2">
-        <div>
-          <span class="text-sm sm:text-base font-bold text-primary">{{ formatPrice(property.price) }}</span>
-          <span class="text-text-secondary text-xs">/night</span>
+        <div class="flex items-baseline gap-1">
+          <span class="text-sm sm:text-base font-bold text-brand-600">{{ formatPrice(property.price) }}</span>
+          <span class="text-text-secondary text-xs whitespace-nowrap">/night</span>
         </div>
         <button 
           @click.stop="addToCart"
-          class="px-2.5 py-1.5 bg-primary text-white rounded-lg hover:bg-red-600 transition-all duration-200 flex items-center gap-1"
-          title="Add to Cart"
+          class="px-2.5 py-1.5 bg-brand-500 text-white rounded-lg hover:bg-brand-600 transition-all duration-200 flex items-center gap-1 shadow-sm"
+          title="Add to Trip"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 8l2 2 4-4"></path>
           </svg>
           <span class="text-xs font-medium">Add</span>
         </button>
@@ -91,7 +134,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCurrencyStore } from '@/stores/currency'
 
@@ -105,12 +148,54 @@ const props = defineProps({
 const router = useRouter()
 const currencyStore = useCurrencyStore()
 const isFavorite = ref(false)
+const currentImageIndex = ref(0)
+let autoScrollInterval = null
+
+// Handle multiple images - use property.images array or fallback to single image
+const propertyImages = computed(() => {
+  if (props.property.images && Array.isArray(props.property.images)) {
+    return props.property.images
+  }
+  // Fallback to single image or generate placeholder images
+  return props.property.image ? [
+    props.property.image,
+    props.property.image,
+    props.property.image,
+    props.property.image,
+    props.property.image
+  ] : []
+})
+
+const currentImage = computed(() => {
+  return propertyImages.value[currentImageIndex.value] || props.property.image
+})
+
+const previousImage = () => {
+  if (currentImageIndex.value > 0) {
+    currentImageIndex.value--
+  } else {
+    currentImageIndex.value = propertyImages.value.length - 1
+  }
+}
+
+const nextImage = () => {
+  if (currentImageIndex.value < propertyImages.value.length - 1) {
+    currentImageIndex.value++
+  } else {
+    currentImageIndex.value = 0
+  }
+}
+
+const showAllImages = () => {
+  // Navigate to detail page to show all images
+  goToDetail()
+}
 
 const badgeClass = computed(() => {
   const badgeType = props.property.badge?.toLowerCase()
   if (badgeType === 'featured') return 'bg-primary'
   if (badgeType === 'hot offer') return 'bg-orange-500'
-  if (badgeType === 'new listing') return 'bg-green-500'
+  if (badgeType === 'new listing') return 'bg-brand-500'
   return 'bg-primary'
 })
 
@@ -135,4 +220,23 @@ const viewDetails = () => {
 const goToDetail = () => {
   router.push(`/accommodation/${props.property.id}`)
 }
+
+const startAutoScroll = () => {
+  if (propertyImages.value.length > 1) {
+    autoScrollInterval = setInterval(() => {
+      nextImage()
+    }, 1500) // Change image every 1.5 seconds
+  }
+}
+
+const stopAutoScroll = () => {
+  if (autoScrollInterval) {
+    clearInterval(autoScrollInterval)
+    autoScrollInterval = null
+  }
+}
+
+onUnmounted(() => {
+  stopAutoScroll()
+})
 </script>

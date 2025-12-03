@@ -45,7 +45,7 @@ const props = defineProps({
 const emit = defineEmits(['click'])
 
 const buttonClasses = computed(() => {
-  const baseClasses = 'font-bold rounded-button transition-all duration-300 ease-out inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 backdrop-blur-md transform hover:scale-105 active:scale-95'
+  const baseClasses = 'font-semibold rounded-button transition-all duration-200 ease-out inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 transform hover:scale-105 active:scale-95'
   
   const sizeClasses = {
     sm: 'px-6 py-2.5 text-sm',
@@ -54,11 +54,11 @@ const buttonClasses = computed(() => {
   }
   
   const variantClasses = {
-    primary: 'bg-gradient-to-r from-primary to-primary text-white hover:shadow-african focus:ring-primary shadow-card border border-white/30',
-    secondary: 'glass-strong text-text-primary hover:bg-gray-50 border-gray-200 shadow-glass',
-    outline: 'border-2 border-primary/60 text-primary hover:glass-primary backdrop-blur-sm',
-    text: 'text-primary hover:glass-primary',
-    success: 'bg-primary text-white hover:bg-red-600 focus:ring-primary border border-white/30'
+    primary: 'bg-brand-500 text-white shadow-card hover:shadow-card-hover focus:ring-brand-500',
+    secondary: 'bg-white text-text-primary border border-gray-200 hover:bg-gray-50',
+    outline: 'border-2 border-brand-500 text-brand-500 hover:bg-brand-50',
+    text: 'text-brand-500 hover:text-brand-600',
+    success: 'bg-brand-600 text-white hover:bg-brand-700 focus:ring-brand-600'
   }
   
   const widthClass = props.fullWidth ? 'w-full' : ''

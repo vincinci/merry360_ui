@@ -34,14 +34,14 @@ import ToursPage from '../views/tours/ToursPage.vue'
 import UserDashboard from '../views/dashboard/UserDashboard.vue'
 import MyTrips from '../views/dashboard/MyTrips.vue'
 
-// Services
-import ServicesPage from '../views/services/ServicesPage.vue'
-
 // Cart
 import TripCart from '../views/cart/TripCart.vue'
 
 // Wishlist
 import Wishlist from '../views/wishlist/Wishlist.vue'
+
+// Stories
+import ShareStories from '../views/stories/ShareStories.vue'
 
 // Admin
 import AdminDashboard from '../views/admin/AdminDashboard.vue'
@@ -53,7 +53,11 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: PropertyHome
+    component: Home
+  },
+  {
+    path: '/home',
+    redirect: '/'
   },
   {
     path: '/splash',
@@ -79,6 +83,11 @@ const routes = [
     path: '/forgot-password',
     name: 'forgot-password',
     component: ForgotPassword
+  },
+  {
+    path: '/stories',
+    name: 'stories',
+    component: ShareStories
   },
   {
     path: '/home-old',
@@ -141,6 +150,11 @@ const routes = [
     component: MyTrips
   },
   {
+    path: '/profile',
+    name: 'profile',
+    component: () => import('../views/dashboard/Profile.vue')
+  },
+  {
     path: '/dashboard/watchlist',
     name: 'wishlist',
     component: Wishlist
@@ -149,11 +163,6 @@ const routes = [
     path: '/dashboard/old',
     name: 'dashboard-old',
     component: UserDashboard
-  },
-  {
-    path: '/services',
-    name: 'services',
-    component: ServicesPage
   },
   {
     path: '/trip-cart',

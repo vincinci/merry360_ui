@@ -4,12 +4,12 @@
       <!-- Logo -->
       <div class="text-center mb-8">
         <router-link to="/" class="inline-flex items-center justify-center space-x-2">
-          <div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center">
+          <div class="w-12 h-12 bg-brand-500 rounded-xl flex items-center justify-center">
             <span class="text-white font-bold text-2xl">M</span>
           </div>
-          <span class="text-2xl font-bold text-text-primary">Merry360X</span>
+          <span class="text-2xl font-bold text-text-brand-600">Merry360X</span>
         </router-link>
-        <h2 class="mt-6 text-3xl font-bold text-text-primary">Welcome Back</h2>
+        <h2 class="mt-6 text-3xl font-bold text-text-brand-600">Welcome Back</h2>
         <p class="mt-2 text-text-secondary">Sign in to continue your journey</p>
       </div>
 
@@ -18,35 +18,35 @@
         <form @submit.prevent="handleLogin" class="space-y-6">
           <!-- Email -->
           <div>
-            <label class="block text-sm font-medium text-text-primary mb-2">Email Address</label>
+            <label class="block text-sm font-medium text-text-brand-600 mb-2">Email Address</label>
             <Input
               v-model="formData.email"
               type="email"
               placeholder="you@example.com"
               :error="errors.email"
-              :icon="emailIcon"
             />
+            <p v-if="errors.email" class="mt-1 text-sm text-red-600">{{ errors.email }}</p>
           </div>
 
           <!-- Password -->
           <div>
-            <label class="block text-sm font-medium text-text-primary mb-2">Password</label>
+            <label class="block text-sm font-medium text-text-brand-600 mb-2">Password</label>
             <Input
               v-model="formData.password"
               type="password"
               placeholder="Enter your password"
               :error="errors.password"
-              :icon="lockIcon"
             />
+            <p v-if="errors.password" class="mt-1 text-sm text-red-600">{{ errors.password }}</p>
           </div>
 
           <!-- Remember & Forgot -->
           <div class="flex items-center justify-between">
             <label class="flex items-center">
-              <input type="checkbox" v-model="formData.remember" class="rounded border-gray-300 text-primary focus:ring-primary">
+              <input type="checkbox" v-model="formData.remember" class="rounded border-gray-300 text-brand-600 focus:ring-brand-500">
               <span class="ml-2 text-sm text-text-secondary">Remember me</span>
             </label>
-            <router-link to="/forgot-password" class="text-sm text-primary hover:text-opacity-80">
+            <router-link to="/forgot-password" class="text-sm text-brand-600 hover:text-opacity-80">
               Forgot password?
             </router-link>
           </div>
@@ -92,8 +92,8 @@
 
           <!-- Language Selection -->
           <div class="pt-4">
-            <label class="block text-sm font-medium text-text-primary mb-2">Language</label>
-            <select v-model="selectedLanguage" class="w-full px-4 py-3 border border-gray-200 rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-20">
+            <label class="block text-sm font-medium text-text-brand-600 mb-2">Language</label>
+            <select v-model="selectedLanguage" class="w-full px-4 py-3 border border-gray-200 rounded-button focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-opacity-20">
               <option value="en">English</option>
               <option value="rw">Kinyarwanda</option>
               <option value="fr">Français</option>
@@ -106,7 +106,7 @@
       <div class="mt-6 text-center">
         <p class="text-text-secondary">
           Don't have an account? 
-          <router-link to="/signup" class="text-primary font-medium hover:text-opacity-80 ml-1">
+          <router-link to="/signup" class="text-brand-600 font-medium hover:text-opacity-80 ml-1">
             Sign up for free
           </router-link>
         </p>
@@ -118,12 +118,14 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '../../stores/userStore'
 import { useAppStore } from '../../stores/app'
 import Card from '../../components/common/Card.vue'
 import Input from '../../components/common/Input.vue'
 import Button from '../../components/common/Button.vue'
 
 const router = useRouter()
+const userStore = useUserStore()
 const appStore = useAppStore()
 
 const formData = ref({
@@ -139,14 +141,6 @@ const errors = ref({
 
 const loading = ref(false)
 const selectedLanguage = ref('en')
-
-const emailIcon = {
-  template: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`
-}
-
-const lockIcon = {
-  template: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>`
-}
 
 watch(selectedLanguage, (newLang) => {
   appStore.setLanguage(newLang)
@@ -176,18 +170,47 @@ const validateForm = () => {
 }
 
 const handleLogin = async () => {
-  if (!validateForm()) return
+  console.log('Login form submitted', formData.value)
+  
+  // Reset errors
+  errors.value = { email: '', password: '' }
+  
+  if (!validateForm()) {
+    console.log('Validation failed', errors.value)
+    return
+  }
 
+  console.log('Validation passed, logging in...')
   loading.value = true
   
-  // Simulate API call
-  setTimeout(() => {
-    appStore.login({
+  try {
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    
+    // Login the user
+    userStore.login({
+      id: 1,
       name: 'John Doe',
-      email: formData.value.email
+      email: formData.value.email,
+      phone: '+250 788 123 456',
+      dateOfBirth: '1990-01-01',
+      bio: 'Travel enthusiast exploring Rwanda and beyond',
+      memberSince: 'Jan 2024'
     })
+    
+    // Set some initial data
+    userStore.loyaltyPoints = 2450
+    userStore.addToWatchlist({ id: 1, type: 'accommodation', name: 'Sample Property' })
+    
+    console.log('Login successful, redirecting to dashboard')
     loading.value = false
-    router.push('/home')
-  }, 1500)
+    
+    // Navigate to dashboard
+    router.push('/dashboard')
+  } catch (error) {
+    console.error('Login error:', error)
+    loading.value = false
+    errors.value.password = 'Login failed. Please try again.'
+  }
 }
 </script>

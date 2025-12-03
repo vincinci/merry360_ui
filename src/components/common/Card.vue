@@ -35,7 +35,7 @@ const cardClasses = computed(() => {
     lg: 'p-8'
   }
   
-  const hoverClass = props.hover ? 'shadow-card hover:shadow-african hover:border-primary/20 transform hover:-translate-y-1' : 'shadow-card'
+  const hoverClass = props.hover ? 'shadow-card hover:shadow-card-hover hover:border-brand-100 transform hover:-translate-y-1' : 'shadow-card'
   const clickableClass = props.clickable ? 'cursor-pointer' : ''
   
   return [baseClasses, paddingClasses[props.padding], hoverClass, clickableClass].join(' ')

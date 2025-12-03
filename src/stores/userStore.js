@@ -2,9 +2,13 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
 export const useUserStore = defineStore('user', () => {
+  // Load initial state from localStorage
+  const savedUser = localStorage.getItem('user')
+  const savedAuth = localStorage.getItem('isAuthenticated')
+  
   // User data
-  const user = ref(null)
-  const isAuthenticated = ref(false)
+  const user = ref(savedUser ? JSON.parse(savedUser) : null)
+  const isAuthenticated = ref(savedAuth === 'true')
   
   // Watchlist / Saved Items
   const watchlist = ref([])
@@ -54,6 +58,9 @@ export const useUserStore = defineStore('user', () => {
   const login = (userData) => {
     user.value = userData
     isAuthenticated.value = true
+    // Persist to localStorage
+    localStorage.setItem('user', JSON.stringify(userData))
+    localStorage.setItem('isAuthenticated', 'true')
   }
   
   const logout = () => {
@@ -61,6 +68,9 @@ export const useUserStore = defineStore('user', () => {
     isAuthenticated.value = false
     watchlist.value = []
     tripCart.value = []
+    // Clear localStorage
+    localStorage.removeItem('user')
+    localStorage.removeItem('isAuthenticated')
   }
   
   const addToWatchlist = (item) => {

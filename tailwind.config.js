@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
@@ -7,11 +7,26 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#F25757',
+        primary: '#FE4F4F', // Brand red color
+        secondary: '#FF3B3B', // Darker red
+        'accent-blue': '#FE4F4F',
+        'accent-green': '#FE4F4F',
+        'accent-teal': '#FE4F4F',
+        brand: {
+          50: '#FFF1F1',
+          100: '#FFE1E1',
+          200: '#FFC4C4',
+          300: '#FEA2A2',
+          400: '#FE7676',
+          500: '#FE4F4F', // Peach Red primary
+          600: '#FF3B3B',
+          700: '#F25757',
+          800: '#D83434',
+          900: '#B22222',
+        },
         text: {
-          primary: '#000000',
-          secondary: '#4B5563',
-          muted: '#9CA3AF',
+          primary: '#484848',
+          secondary: '#9A9A9A',
         },
       },
       fontFamily: {

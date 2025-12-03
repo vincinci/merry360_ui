@@ -1,60 +1,60 @@
 <template>
-  <div class="min-h-screen flex flex-col">
+  <div class="min-h-screen flex flex-col bg-white font-sans">
     <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-      <div class="container mx-auto px-4 lg:px-8">
-        <div class="flex items-center justify-between h-16">
+    <header class="bg-white/70 backdrop-blur-xl shadow-lg sticky top-0 z-50 border-b border-white/20">
+      <div class="px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20 md:h-24">
           <!-- Logo -->
-          <router-link to="/home" class="flex items-center">
-            <img src="/logo.png" alt="Merry360" class="h-16" />
+          <router-link to="/" class="flex items-center">
+            <img loading="lazy" src="/logo.png" alt="Merry360" class="h-12 md:h-16 w-auto" />
           </router-link>
 
           <!-- Desktop Navigation -->
-          <nav class="hidden md:flex items-center space-x-6">
+          <nav class="hidden lg:flex items-center gap-0.5">
             <router-link 
-              to="/home" 
-              class="text-sm text-gray-600 hover:text-primary transition-colors"
+              to="/"
+              class="text-sm text-gray-700 font-medium hover:text-brand-600 transition-all px-4 py-2 border border-transparent rounded-[25px]"
+              active-class="!border-brand-500 !text-brand-600"
+              exact
             >
               Home
             </router-link>
             <router-link 
-              to="/accommodations" 
-              class="text-sm text-gray-600 hover:text-primary transition-colors"
+              to="/accommodations"
+              class="text-sm text-gray-700 font-medium hover:text-brand-600 transition-all px-4 py-2 border border-transparent rounded-[25px]"
+              active-class="!border-brand-500 !text-brand-600"
             >
               Accommodations
             </router-link>
             <router-link 
-              to="/tours" 
-              class="text-sm text-gray-600 hover:text-primary transition-colors"
+              to="/tours"
+              class="text-sm text-gray-700 font-medium hover:text-brand-600 transition-all px-4 py-2 border border-transparent rounded-[25px]"
+              active-class="!border-brand-500 !text-brand-600"
             >
               Tours
             </router-link>
             <router-link 
-              to="/transport" 
-              class="text-sm text-gray-600 hover:text-primary transition-colors"
+              to="/transport"
+              class="text-sm text-gray-700 font-medium hover:text-brand-600 transition-all px-4 py-2 border border-transparent rounded-[25px]"
+              active-class="!border-brand-500 !text-brand-600"
             >
               Transport
             </router-link>
             <router-link 
-              to="/services" 
-              class="text-sm text-gray-600 hover:text-primary transition-colors"
-            >
-              Services
-            </router-link>
-            <router-link 
-              to="/dashboard" 
-              class="text-sm text-gray-600 hover:text-primary transition-colors"
+              to="/dashboard"
+              class="text-sm text-gray-700 font-medium hover:text-brand-600 transition-all px-4 py-2 border border-transparent rounded-[25px]"
+              active-class="!border-brand-500 !text-brand-600"
             >
               My Trips
             </router-link>
           </nav>
 
           <!-- Desktop Right -->
-          <div class="hidden md:flex items-center gap-2">
+          <div class="hidden lg:flex items-center gap-2">
             <!-- Currency Toggle -->
             <button 
               @click="currencyStore.toggleCurrency()"
-              class="px-3 py-1.5 border border-gray-200 rounded text-xs font-semibold text-gray-900 hover:border-primary hover:text-primary transition-all bg-white flex items-center gap-1"
+              class="px-4 py-2 border border-brand-500 rounded-[20px] text-sm font-medium text-gray-700 hover:text-brand-600 transition-all bg-transparent flex items-center gap-2"
               :title="'Switch to ' + (currencyStore.currentCurrency === 'USD' ? 'RWF' : 'USD')"
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,38 +63,117 @@
               {{ currencyStore.currentCurrency }}
             </button>
 
-            <select v-model="languageStore.currentLanguage" @change="languageStore.setLanguage(languageStore.currentLanguage)" class="px-2 py-1 border border-gray-200 rounded text-xs text-gray-900 focus:outline-none focus:ring-1 focus:ring-primary bg-white">
+            <select v-model="languageStore.currentLanguage" @change="languageStore.setLanguage(languageStore.currentLanguage)" class="px-4 py-2 border border-brand-500 rounded-[20px] text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 bg-transparent cursor-pointer transition-all">
               <option value="EN">EN</option>
               <option value="RW">RW</option>
               <option value="FR">FR</option>
             </select>
 
-            <router-link to="/dashboard/watchlist" class="relative p-1.5 hover:bg-gray-50 rounded" title="Wishlist">
+            <router-link to="/dashboard/watchlist" class="relative p-1.5 hover:bg-transparent rounded" title="Wishlist">
               <svg class="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
               </svg>
             </router-link>
 
-            <router-link to="/trip-cart" class="relative p-1.5 hover:bg-gray-50 rounded" title="Cart">
-              <svg class="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-              </svg>
+            <router-link to="/trip-cart" class="px-4 py-2 bg-brand-500 text-white rounded-[20px] text-sm font-semibold hover:bg-brand-600 transition-all shadow-sm hover:shadow-md" title="Trip Cart">
+              TripCart
             </router-link>
 
+            <!-- User Menu (when authenticated) -->
+            <div v-if="userStore.isAuthenticated" class="relative" v-click-outside="closeUserMenu">
+              <button 
+                @click.stop="showUserMenu = !showUserMenu"
+                class="relative flex items-center gap-2 bg-transparent border border-gray-200 rounded-[20px] px-2 py-1 hover:shadow-md transition-all"
+              >
+                <svg class="w-5 h-5 text-gray-800" fill="currentColor" viewBox="0 0 24 24">
+                  <rect x="2" y="5" width="20" height="2" rx="1"/>
+                  <rect x="2" y="11" width="20" height="2" rx="1"/>
+                  <rect x="2" y="17" width="20" height="2" rx="1"/>
+                </svg>
+                <div class="w-8 h-8 bg-gradient-to-br from-brand-500 to-red-600 rounded-full flex items-center justify-center">
+                  <span class="text-white text-xs font-bold">{{ userStore.user?.name?.substring(0, 2).toUpperCase() || 'U' }}</span>
+                </div>
+              </button>
+
+              <!-- Dropdown Menu -->
+              <transition name="dropdown">
+                <div v-if="showUserMenu" class="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50">
+                  <div class="px-4 py-3 border-b border-gray-100">
+                    <p class="font-semibold text-sm">{{ userStore.user?.name || 'User' }}</p>
+                    <p class="text-xs text-text-secondary">{{ userStore.user?.email || '' }}</p>
+                  </div>
+                  
+                  <router-link 
+                    to="/profile" 
+                    @click="showUserMenu = false"
+                    class="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors"
+                  >
+                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                    <span class="text-sm">My Profile</span>
+                  </router-link>
+
+                  <router-link 
+                    to="/dashboard" 
+                    @click="showUserMenu = false"
+                    class="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors"
+                  >
+                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                    </svg>
+                    <span class="text-sm">My Trips</span>
+                  </router-link>
+
+                  <router-link 
+                    to="/dashboard/watchlist" 
+                    @click="showUserMenu = false"
+                    class="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors"
+                  >
+                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                    <span class="text-sm">Wishlist</span>
+                  </router-link>
+
+                  <div class="border-t border-gray-100 mt-2 pt-2">
+                    <button 
+                      @click="handleLogout"
+                      class="flex items-center gap-3 px-4 py-3 hover:bg-red-50 transition-colors w-full text-left text-red-600"
+                    >
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                      </svg>
+                      <span class="text-sm font-medium">Logout</span>
+                    </button>
+                  </div>
+                </div>
+              </transition>
+            </div>
+
+            <!-- Login Button (when not authenticated) -->
             <router-link 
+              v-else
               to="/login"
-              class="px-4 py-1.5 border border-primary text-primary text-sm rounded hover:bg-primary hover:text-white transition-colors font-medium"
+              class="relative flex items-center gap-2 bg-transparent border border-gray-200 rounded-[20px] px-2 py-1 hover:shadow-md transition-all"
             >
-              Login
+              <svg class="w-5 h-5 text-gray-800" fill="currentColor" viewBox="0 0 24 24">
+                <rect x="2" y="5" width="20" height="2" rx="1"/>
+                <rect x="2" y="11" width="20" height="2" rx="1"/>
+                <rect x="2" y="17" width="20" height="2" rx="1"/>
+              </svg>
+              <svg class="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+              </svg>
             </router-link>
           </div>
 
           <!-- Mobile Right -->
-          <div class="flex md:hidden items-center gap-1">
+          <div class="flex lg:hidden items-center gap-1">
             <!-- Currency Toggle Mobile -->
             <button 
               @click="currencyStore.toggleCurrency()"
-              class="px-2 py-1 border border-gray-200 rounded text-[10px] font-bold text-gray-900 hover:border-primary hover:text-primary transition-all bg-white"
+              class="px-3 py-1.5 border border-brand-500 rounded-[15px] text-xs font-semibold text-gray-700 hover:text-brand-600 transition-all bg-transparent"
             >
               {{ currencyStore.currentCurrency }}
             </button>
@@ -105,19 +184,17 @@
               </svg>
             </router-link>
 
-            <router-link to="/trip-cart" class="relative p-1.5">
-              <svg class="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-              </svg>
+            <router-link to="/trip-cart" class="px-3 py-1.5 bg-brand-500 text-white rounded-[15px] text-xs font-semibold hover:bg-brand-600 transition-all">
+              TripCart
             </router-link>
 
             <button 
-              @click="toggleMobileMenu"
+              @click="mobileMenuOpen = !mobileMenuOpen"
               class="p-1.5 text-gray-900"
               aria-label="Menu"
             >
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path v-if="!showMobileMenu" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
               </svg>
             </button>
@@ -128,37 +205,181 @@
 
     <!-- Mobile Menu Drawer -->
     <transition name="mobile-menu">
-      <div v-if="showMobileMenu" class="fixed inset-0 z-40 md:hidden">
+      <div v-if="mobileMenuOpen" class="fixed inset-0 z-40 lg:hidden">
         <!-- Backdrop -->
         <div 
-          class="fixed inset-0 bg-black/50 backdrop-blur-sm"
-          @click="showMobileMenu = false"
+          class="fixed inset-0 bg-black/60 backdrop-blur-sm"
+          @click="mobileMenuOpen = false"
         ></div>
         
         <!-- Menu Panel -->
-        <div class="fixed top-0 right-0 bottom-0 w-64 bg-white shadow-xl">
-          <div class="p-4">
-            <nav class="space-y-1">
-              <router-link 
-                v-for="item in mobileNavigation"
-                :key="item.name"
-                :to="item.to"
-                class="block py-3 px-4 text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
-                @click="showMobileMenu = false"
-              >
-                {{ item.name }}
-              </router-link>
-              
-              <div class="pt-4 border-t">
-                <router-link 
-                  to="/login"
-                  class="block py-3 px-4 text-center bg-primary text-white rounded-lg hover:bg-red-600 transition-colors"
-                  @click="showMobileMenu = false"
-                >
-                  Login
-                </router-link>
+        <div class="fixed top-0 right-0 bottom-0 w-72 sm:w-80 bg-white shadow-2xl overflow-y-auto">
+          <!-- Header -->
+          <div class="sticky top-0 bg-gradient-to-r from-red-500 to-red-600 px-6 py-4 flex items-center justify-between shadow-md">
+            <h3 class="text-white font-bold text-lg" style="font-family: 'Montserrat', sans-serif;">Menu</h3>
+            <button @click="mobileMenuOpen = false" class="text-white p-1 hover:bg-white/20 rounded-lg transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+
+          <div class="p-5">
+            <!-- User Profile Section (when authenticated) -->
+            <div v-if="userStore.isAuthenticated" class="mb-6 p-4 bg-gradient-to-r from-red-50 to-orange-50 rounded-xl">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-12 h-12 bg-gradient-to-br from-brand-500 to-red-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span class="text-white text-sm font-bold">{{ userStore.user?.name?.substring(0, 2).toUpperCase() || 'U' }}</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-bold text-sm text-gray-900 truncate">{{ userStore.user?.name || 'User' }}</p>
+                  <p class="text-xs text-gray-600 truncate">{{ userStore.user?.email || '' }}</p>
+                </div>
               </div>
+              <router-link 
+                to="/profile" 
+                @click="mobileMenuOpen = false"
+                class="block w-full py-2 px-4 bg-brand-500 text-white text-center rounded-lg text-sm font-semibold hover:bg-brand-600 transition-colors"
+              >
+                View Profile
+              </router-link>
+            </div>
+
+            <!-- Login Button (when not authenticated) -->
+            <div v-else class="mb-6">
+              <router-link 
+                to="/login" 
+                @click="mobileMenuOpen = false"
+                class="block w-full py-3 px-4 bg-brand-500 text-white text-center rounded-lg text-sm font-bold hover:bg-brand-600 transition-colors"
+              >
+                Sign In / Sign Up
+              </router-link>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="space-y-2 mb-6">
+              <router-link 
+                to="/"
+                class="flex items-center gap-3 py-3 px-4 text-gray-800 hover:bg-red-50 rounded-lg transition-colors font-semibold"
+                style="font-family: 'Montserrat', sans-serif;"
+                @click="mobileMenuOpen = false"
+              >
+                <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                Home
+              </router-link>
+              <router-link 
+                to="/accommodations"
+                class="flex items-center gap-3 py-3 px-4 text-gray-800 hover:bg-red-50 rounded-lg transition-colors font-semibold"
+                style="font-family: 'Montserrat', sans-serif;"
+                @click="mobileMenuOpen = false"
+              >
+                <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+                Accommodations
+              </router-link>
+              <router-link 
+                to="/tours"
+                class="flex items-center gap-3 py-3 px-4 text-gray-800 hover:bg-red-50 rounded-lg transition-colors font-semibold"
+                style="font-family: 'Montserrat', sans-serif;"
+                @click="mobileMenuOpen = false"
+              >
+                <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Tours
+              </router-link>
+              <router-link 
+                to="/transport"
+                class="flex items-center gap-3 py-3 px-4 text-gray-800 hover:bg-red-50 rounded-lg transition-colors font-semibold"
+                style="font-family: 'Montserrat', sans-serif;"
+                @click="mobileMenuOpen = false"
+              >
+                <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                </svg>
+                Transport
+              </router-link>
+              <router-link 
+                to="/dashboard"
+                class="flex items-center gap-3 py-3 px-4 text-gray-800 hover:bg-red-50 rounded-lg transition-colors font-semibold"
+                style="font-family: 'Montserrat', sans-serif;"
+                @click="mobileMenuOpen = false"
+              >
+                <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                </svg>
+                My Trips
+              </router-link>
+              <button
+                class="flex items-center gap-3 py-3 px-4 text-gray-800 hover:bg-red-50 rounded-lg transition-colors font-semibold w-full text-left"
+                style="font-family: 'Montserrat', sans-serif;"
+              >
+                <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+                Download Mobile App
+              </button>
             </nav>
+
+            <!-- Divider -->
+            <div class="border-t border-gray-200 my-6"></div>
+
+            <!-- Settings Section -->
+            <div class="space-y-4 mb-6">
+              <div>
+                <label class="block text-xs font-bold text-gray-600 mb-2 uppercase" style="font-family: 'Montserrat', sans-serif;">Currency</label>
+                <select 
+                  v-model="currencyStore.currentCurrency"
+                  @change="currencyStore.setCurrency(currencyStore.currentCurrency)"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm font-semibold text-gray-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white"
+                  style="font-family: 'Montserrat', sans-serif;"
+                >
+                  <option value="USD">$ USD</option>
+                  <option value="EUR">€ EUR</option>
+                  <option value="GBP">£ GBP</option>
+                  <option value="CNY">¥ CNY</option>
+                  <option value="RWF">RWF</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-gray-600 mb-2 uppercase" style="font-family: 'Montserrat', sans-serif;">Language</label>
+                <select 
+                  v-model="languageStore.currentLanguage" 
+                  @change="languageStore.setLanguage(languageStore.currentLanguage)" 
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm font-semibold text-gray-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white"
+                  style="font-family: 'Montserrat', sans-serif;"
+                >
+                  <option value="EN">English</option>
+                  <option value="RW">Kinyarwanda</option>
+                  <option value="FR">Français</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="space-y-3">
+              <router-link 
+                v-if="!userStore.isAuthenticated"
+                to="/login"
+                class="block w-full py-3 px-4 text-center bg-gradient-to-r from-red-500 to-red-600 text-white font-bold rounded-lg hover:from-red-600 hover:to-red-700 transition-all shadow-md"
+                style="font-family: 'Montserrat', sans-serif;"
+                @click="mobileMenuOpen = false"
+              >
+                Sign In
+              </router-link>
+              <button
+                v-if="userStore.isAuthenticated"
+                @click="handleLogout"
+                class="block w-full py-3 px-4 text-center border-2 border-red-500 text-red-600 font-bold rounded-lg hover:bg-red-50 transition-all"
+                style="font-family: 'Montserrat', sans-serif;"
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -169,13 +390,35 @@
       <slot></slot>
     </main>
 
+    <!-- AI Concierge Button - Draggable -->
+    <div 
+      ref="aiButtonContainer"
+      :style="{ position: 'fixed', left: aiPosition.x + 'px', top: aiPosition.y + 'px', zIndex: 1000 }"
+      @mousedown="startDrag"
+      @touchstart="startDrag"
+      class="cursor-move"
+    >
+      <button 
+        @click="showAIConcierge = true"
+        class="w-14 h-14 bg-gradient-to-br from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+        title="AI Concierge"
+      >
+        <svg class="w-7 h-7 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- AI Concierge Component -->
+    <AIConcierge v-if="showAIConcierge" @close="showAIConcierge = false" />
+
     <!-- Footer -->
-    <footer class="glass-dark border-t border-white/20 mt-20 backdrop-blur-xl relative overflow-hidden african-pattern">
+    <footer class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-t border-white/10 mt-20 relative overflow-hidden">
       <div class="container mx-auto px-4 lg:px-8 py-16 relative z-10">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
             <div class="flex items-center space-x-3 mb-6">
-              <div class="w-12 h-12 bg-gradient-to-br from-primary to-primary rounded-2xl flex items-center justify-center shadow-african">
+              <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg">
                 <span class="text-white font-bold text-2xl">M</span>
               </div>
               <span class="text-xl font-bold text-white tracking-tight">Merry<span class="text-red-300">360X</span></span>
@@ -183,36 +426,36 @@
             <p class="text-white/80 text-sm leading-relaxed">Discover the warmth of African hospitality with modern travel solutions.</p>
           </div>
           <div>
-            <h4 class="font-bold mb-5 text-red-300 text-base">Explore</h4>
+            <h4 class="font-bold mb-5 text-red-400 text-base" style="font-family: 'Montserrat', sans-serif;">Explore</h4>
             <ul class="space-y-3 text-white/70 text-sm">
-              <li><router-link to="/accommodations" class="hover:text-red-300 transition-all hover:translate-x-1 inline-block">🏠 Accommodations</router-link></li>
-              <li><router-link to="/tours" class="hover:text-red-300 transition-all hover:translate-x-1 inline-block">🌍 Tours</router-link></li>
-              <li><router-link to="/transport" class="hover:text-red-300 transition-all hover:translate-x-1 inline-block">🚗 Transport</router-link></li>
+              <li><router-link to="/accommodations" class="hover:text-red-400 transition-all hover:translate-x-1 inline-block">🏠 Accommodations</router-link></li>
+              <li><router-link to="/tours" class="hover:text-red-400 transition-all hover:translate-x-1 inline-block">🌍 Tours</router-link></li>
+              <li><router-link to="/transport" class="hover:text-red-400 transition-all hover:translate-x-1 inline-block">🚗 Transport</router-link></li>
             </ul>
           </div>
           <div>
-            <h4 class="font-bold mb-5 text-red-300 text-base">Company</h4>
+            <h4 class="font-bold mb-5 text-red-400 text-base" style="font-family: 'Montserrat', sans-serif;">Company</h4>
             <ul class="space-y-3 text-white/70 text-sm">
-              <li><a href="#" class="hover:text-red-300 transition-all hover:translate-x-1 inline-block">About Us</a></li>
-              <li><a href="#" class="hover:text-red-300 transition-all hover:translate-x-1 inline-block">Contact</a></li>
-              <li><a href="#" class="hover:text-red-300 transition-all hover:translate-x-1 inline-block">Careers</a></li>
+              <li><a href="#" class="hover:text-red-400 transition-all hover:translate-x-1 inline-block">About Us</a></li>
+              <li><a href="#" class="hover:text-red-400 transition-all hover:translate-x-1 inline-block">Contact</a></li>
+              <li><a href="#" class="hover:text-red-400 transition-all hover:translate-x-1 inline-block">Careers</a></li>
             </ul>
           </div>
           <div>
-            <h4 class="font-bold mb-5 text-red-300 text-base">Support</h4>
+            <h4 class="font-bold mb-5 text-red-400 text-base" style="font-family: 'Montserrat', sans-serif;">Support</h4>
             <ul class="space-y-3 text-white/70 text-sm">
-              <li><a href="#" class="hover:text-red-300 transition-all hover:translate-x-1 inline-block">Help Center</a></li>
-              <li><a href="#" class="hover:text-red-300 transition-all hover:translate-x-1 inline-block">Safety</a></li>
-              <li><a href="#" class="hover:text-red-300 transition-all hover:translate-x-1 inline-block">Terms</a></li>
+              <li><a href="#" class="hover:text-red-400 transition-all hover:translate-x-1 inline-block">Help Center</a></li>
+              <li><a href="#" class="hover:text-red-400 transition-all hover:translate-x-1 inline-block">Safety</a></li>
+              <li><a href="#" class="hover:text-red-400 transition-all hover:translate-x-1 inline-block">Terms</a></li>
             </ul>
           </div>
         </div>
         <div class="mt-12 pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center">
           <p class="text-white/60 text-sm">© 2025 Merry360X. Crafted with ❤️ in Africa</p>
           <div class="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" class="text-white/60 hover:text-red-300 text-sm transition-colors">Privacy</a>
-            <a href="#" class="text-white/60 hover:text-red-300 text-sm transition-colors">Terms</a>
-            <a href="#" class="text-white/60 hover:text-red-300 text-sm transition-colors">Cookies</a>
+            <a href="#" class="text-white/60 hover:text-red-400 text-sm transition-colors">Privacy</a>
+            <a href="#" class="text-white/60 hover:text-red-400 text-sm transition-colors">Terms</a>
+            <a href="#" class="text-white/60 hover:text-red-400 text-sm transition-colors">Cookies</a>
           </div>
         </div>
       </div>
@@ -221,29 +464,166 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '../../stores/app'
+import { useUserStore } from '../../stores/userStore'
 import { useCurrencyStore } from '../../stores/currency'
 import { useLanguageStore } from '../../stores/language'
+import AIConcierge from '../ai/AIConcierge.vue'
 
 const router = useRouter()
 const appStore = useAppStore()
+const userStore = useUserStore()
 const currencyStore = useCurrencyStore()
 const languageStore = useLanguageStore()
 
-const showMobileMenu = ref(false)
+const mobileMenuOpen = ref(false)
+const showAIConcierge = ref(false)
+const showUserMenu = ref(false)
+
+// AI Button draggable functionality
+const aiButtonContainer = ref(null)
+const aiPosition = ref({ x: window.innerWidth - 90, y: window.innerHeight - 90 })
+const isDragging = ref(false)
+const dragOffset = ref({ x: 0, y: 0 })
+
+const startDrag = (e) => {
+  isDragging.value = true
+  const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX
+  const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY
+  
+  dragOffset.value = {
+    x: clientX - aiPosition.value.x,
+    y: clientY - aiPosition.value.y
+  }
+  
+  document.addEventListener('mousemove', onDrag)
+  document.addEventListener('mouseup', stopDrag)
+  document.addEventListener('touchmove', onDrag)
+  document.addEventListener('touchend', stopDrag)
+}
+
+const onDrag = (e) => {
+  if (!isDragging.value) return
+  
+  e.preventDefault()
+  const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX
+  const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY
+  
+  let newX = clientX - dragOffset.value.x
+  let newY = clientY - dragOffset.value.y
+  
+  // Keep within viewport bounds
+  const maxX = window.innerWidth - 70
+  const maxY = window.innerHeight - 70
+  
+  newX = Math.max(10, Math.min(newX, maxX))
+  newY = Math.max(10, Math.min(newY, maxY))
+  
+  aiPosition.value = { x: newX, y: newY }
+}
+
+const stopDrag = () => {
+  isDragging.value = false
+  document.removeEventListener('mousemove', onDrag)
+  document.removeEventListener('mouseup', stopDrag)
+  document.removeEventListener('touchmove', onDrag)
+  document.removeEventListener('touchend', stopDrag)
+}
+
+// Initialize position
+onMounted(() => {
+  aiPosition.value = { 
+    x: window.innerWidth - 90, 
+    y: window.innerHeight - 90 
+  }
+})
+
+onUnmounted(() => {
+  document.removeEventListener('mousemove', onDrag)
+  document.removeEventListener('mouseup', stopDrag)
+  document.removeEventListener('touchmove', onDrag)
+  document.removeEventListener('touchend', stopDrag)
+})
 
 const mobileNavigation = [
   { name: 'Home', to: '/home' },
   { name: 'Accommodations', to: '/accommodations' },
   { name: 'Tours', to: '/tours' },
   { name: 'Transport', to: '/transport' },
-  { name: 'Services', to: '/services' },
   { name: 'My Trips', to: '/dashboard' }
 ]
 
 const toggleMobileMenu = () => {
-  showMobileMenu.value = !showMobileMenu.value
+  mobileMenuOpen.value = !mobileMenuOpen.value
+}
+
+const closeUserMenu = () => {
+  showUserMenu.value = false
+}
+
+const handleLogout = () => {
+  if (confirm('Are you sure you want to logout?')) {
+    userStore.logout()
+    showUserMenu.value = false
+    mobileMenuOpen.value = false
+    router.push('/login')
+  }
+}
+
+// Click outside directive
+const vClickOutside = {
+  mounted(el, binding) {
+    el.clickOutsideEvent = (event) => {
+      if (!(el === event.target || el.contains(event.target))) {
+        binding.value()
+      }
+    }
+    document.addEventListener('click', el.clickOutsideEvent)
+  },
+  unmounted(el) {
+    document.removeEventListener('click', el.clickOutsideEvent)
+  }
 }
 </script>
+
+<style scoped>
+/* Dropdown animation */
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: all 0.2s ease;
+}
+
+.dropdown-enter-from,
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* Mobile menu slide animation */
+.mobile-menu-enter-active,
+.mobile-menu-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.mobile-menu-enter-active > div:last-child,
+.mobile-menu-leave-active > div:last-child {
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu-enter-from,
+.mobile-menu-leave-to {
+  opacity: 0;
+}
+
+.mobile-menu-enter-from > div:last-child,
+.mobile-menu-leave-to > div:last-child {
+  transform: translateX(100%);
+}
+
+.mobile-menu-enter-to > div:last-child,
+.mobile-menu-leave-from > div:last-child {
+  transform: translateX(0);
+}
+</style>

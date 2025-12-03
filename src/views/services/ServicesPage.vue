@@ -4,7 +4,7 @@
     <section class="relative bg-gray-50 py-8 md:py-12">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl">
-          <h1 class="text-2xl sm:text-3xl font-bold mb-2 text-text-primary">Services</h1>
+          <h1 class="text-2xl sm:text-3xl font-bold mb-2 text-text-brand-600">Services</h1>
           <p class="text-sm md:text-base text-text-secondary">Everything you need for a perfect trip</p>
         </div>
       </div>
@@ -24,17 +24,17 @@
               >
                 <component :is="service.icon" :class="['w-10 h-10', service.iconColor]" />
               </div>
-              <h3 class="text-lg font-bold text-text-primary mb-2 text-center">{{ service.title }}</h3>
+              <h3 class="text-lg font-bold text-text-brand-600 mb-2 text-center">{{ service.title }}</h3>
               <p class="text-sm text-text-secondary mb-4 text-center">{{ service.description }}</p>
               <ul class="space-y-2 mb-4">
                 <li v-for="feature in service.features" :key="feature" class="flex items-center text-xs text-text-secondary">
-                  <svg class="w-4 h-4 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4 text-brand-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
                   {{ feature }}
                 </li>
               </ul>
-              <button @click="bookService(service)" class="w-full px-5 py-2.5 bg-primary text-sm text-white rounded-xl font-semibold hover:bg-red-600 transition-colors">
+              <button @click="bookService(service)" class="w-full px-5 py-2.5 bg-brand-500 text-sm text-white rounded-xl font-semibold hover:bg-red-600 transition-colors">
                 Book Now
               </button>
             </div>
@@ -118,7 +118,7 @@ const services = ref([
     description: 'Hassle-free pickup and drop-off',
     icon: AirportIcon,
     bgColor: 'bg-primary/10',
-    iconColor: 'text-primary',
+    iconColor: 'text-brand-600',
     features: [
       'Meet & greet at airport',
       'Professional drivers',

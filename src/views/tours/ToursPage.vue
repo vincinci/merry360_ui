@@ -1,11 +1,51 @@
 <template>
   <PropertyLayout>
-    <!-- Hero Section -->
-    <section class="relative bg-gray-50 py-8 md:py-12">
+    <!-- Hero Section with Search -->
+    <section class="relative bg-gradient-to-br from-brand-50 to-white py-12 md:py-16">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl">
-          <h1 class="text-2xl sm:text-3xl font-bold mb-2 text-text-primary">Tours & Experiences</h1>
-          <p class="text-sm md:text-base text-text-secondary">Discover the beauty of Rwanda</p>
+        <div class="max-w-4xl mx-auto text-center mb-8">
+          <h1 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900">Tours & Experiences</h1>
+          <p class="text-base md:text-lg text-gray-600">Discover the beauty of Rwanda</p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="max-w-3xl mx-auto">
+          <div class="bg-white rounded-2xl shadow-xl p-4 flex flex-col md:flex-row gap-3">
+            <!-- Location Search -->
+            <div class="flex-1 flex items-center gap-3 px-4 py-3 bg-gray-50 rounded-xl">
+              <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+              <input 
+                v-model="searchQuery"
+                type="text" 
+                placeholder="Search tours by name or location..."
+                class="flex-1 bg-transparent text-sm font-medium focus:outline-none placeholder-gray-400"
+              />
+            </div>
+
+            <!-- Duration Filter -->
+            <select 
+              v-model="durationFilter"
+              class="px-4 py-3 bg-gray-50 rounded-xl text-sm font-medium text-gray-700 focus:outline-none cursor-pointer"
+            >
+              <option value="">Any Duration</option>
+              <option value="half">Half Day</option>
+              <option value="full">Full Day</option>
+              <option value="multi">Multi Day</option>
+            </select>
+
+            <!-- Search Button -->
+            <button 
+              @click="applySearch"
+              class="px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-2"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+              Search
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -39,8 +79,8 @@
             @click="viewTour(tour)"
           >
             <div class="relative overflow-hidden h-56">
-              <img :src="tour.image" :alt="tour.title" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-              <span class="absolute top-4 left-4 px-3 py-1 bg-primary text-white text-sm font-semibold rounded-full">
+              <img loading="lazy" :src="tour.image" :alt="tour.title" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+              <span class="absolute top-4 left-4 px-3 py-1 bg-brand-500 text-white text-sm font-semibold rounded-full">
                 {{ tour.category }}
               </span>
               <button 
@@ -49,7 +89,7 @@
               >
                 <svg 
                   class="w-6 h-6 transition-colors" 
-                  :class="isInWatchlist(tour) ? 'text-primary fill-current' : 'text-gray-400'"
+                  :class="isInWatchlist(tour) ? 'text-brand-600 fill-current' : 'text-gray-400'"
                   fill="none" 
                   stroke="currentColor" 
                   viewBox="0 0 24 24"
@@ -59,7 +99,7 @@
               </button>
             </div>
             <div class="p-6">
-              <h3 class="text-base font-bold text-text-primary mb-2 group-hover:text-primary transition-colors line-clamp-1">
+              <h3 class="text-base font-bold text-text-brand-600 mb-2 group-hover:text-brand-600 transition-colors line-clamp-1">
                 {{ tour.title }}
               </h3>
               <p class="text-text-secondary text-xs mb-3 line-clamp-2">{{ tour.description }}</p>
@@ -68,7 +108,7 @@
                   <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                   </svg>
-                  <span class="font-semibold text-text-primary">{{ tour.rating }}</span>
+                  <span class="font-semibold text-text-brand-600">{{ tour.rating }}</span>
                   <span class="text-text-muted text-sm">({{ tour.reviews }})</span>
                 </div>
                 <div class="flex items-center gap-1 text-text-secondary text-sm">
@@ -80,12 +120,12 @@
               </div>
               <div class="flex items-center justify-between">
                 <div>
-                  <span class="text-lg font-bold text-primary">{{ tour.price }} RWF</span>
+                  <span class="text-lg font-bold text-brand-600">{{ tour.price }} RWF</span>
                   <span class="text-text-muted text-xs">/person</span>
                 </div>
                 <button 
                   @click.stop="addToCart(tour)" 
-                  class="px-4 py-2 bg-primary text-sm text-white rounded-lg font-semibold hover:bg-red-600 transition-colors"
+                  class="px-4 py-2 bg-brand-500 text-sm text-white rounded-lg font-semibold hover:bg-red-600 transition-colors"
                 >
                   Book Now
                 </button>
@@ -109,6 +149,8 @@ const userStore = useUserStore()
 
 const categories = ref(['All', 'Nature', 'Adventure', 'Cultural', 'Wildlife', 'Historical'])
 const selectedCategory = ref('All')
+const searchQuery = ref('')
+const durationFilter = ref('')
 
 const tours = ref([
   {
@@ -180,11 +222,43 @@ const tours = ref([
 ])
 
 const filteredTours = computed(() => {
-  if (selectedCategory.value === 'All') return tours.value
-  return tours.value.filter(tour => 
-    tour.category.toLowerCase() === selectedCategory.value.toLowerCase()
-  )
+  let filtered = tours.value
+
+  // Filter by category
+  if (selectedCategory.value !== 'All') {
+    filtered = filtered.filter(tour => 
+      tour.category.toLowerCase() === selectedCategory.value.toLowerCase()
+    )
+  }
+
+  // Filter by search query
+  if (searchQuery.value.trim()) {
+    const query = searchQuery.value.toLowerCase()
+    filtered = filtered.filter(tour => 
+      tour.title.toLowerCase().includes(query) ||
+      tour.description.toLowerCase().includes(query) ||
+      tour.category.toLowerCase().includes(query)
+    )
+  }
+
+  // Filter by duration
+  if (durationFilter.value) {
+    filtered = filtered.filter(tour => {
+      const duration = tour.duration.toLowerCase()
+      if (durationFilter.value === 'half') return duration.includes('hour') && !duration.includes('day')
+      if (durationFilter.value === 'full') return duration === '1 day'
+      if (durationFilter.value === 'multi') return duration.includes('days') || parseInt(duration) > 1
+      return true
+    })
+  }
+
+  return filtered
 })
+
+const applySearch = () => {
+  // Trigger reactive update by accessing computed property
+  console.log('Search applied:', filteredTours.value.length, 'tours found')
+}
 
 const isInWatchlist = (tour) => {
   return userStore.isInWatchlist(tour.id, 'tour')

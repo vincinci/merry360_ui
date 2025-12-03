@@ -4,12 +4,12 @@
       <!-- Logo -->
       <div class="text-center mb-8 animate-fade-in">
         <router-link to="/" class="inline-flex items-center justify-center space-x-2">
-          <div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center">
+          <div class="w-12 h-12 bg-brand-500 rounded-xl flex items-center justify-center">
             <span class="text-white font-bold text-2xl">M</span>
           </div>
-          <span class="text-2xl font-bold text-text-primary">Merry360X</span>
+          <span class="text-2xl font-bold text-text-brand-600">Merry360X</span>
         </router-link>
-        <h2 class="mt-6 text-3xl font-bold text-text-primary">Create Account</h2>
+        <h2 class="mt-6 text-3xl font-bold text-text-brand-600">Create Account</h2>
         <p class="mt-2 text-text-secondary">Start your journey today</p>
       </div>
 
@@ -18,7 +18,7 @@
         <form @submit.prevent="handleSignup" class="space-y-5">
           <!-- Full Name -->
           <div>
-            <label class="block text-sm font-medium text-text-primary mb-2">Full Name</label>
+            <label class="block text-sm font-medium text-text-brand-600 mb-2">Full Name</label>
             <Input
               v-model="formData.name"
               type="text"
@@ -30,7 +30,7 @@
 
           <!-- Email -->
           <div>
-            <label class="block text-sm font-medium text-text-primary mb-2">Email Address</label>
+            <label class="block text-sm font-medium text-text-brand-600 mb-2">Email Address</label>
             <Input
               v-model="formData.email"
               type="email"
@@ -42,7 +42,7 @@
 
           <!-- Phone -->
           <div>
-            <label class="block text-sm font-medium text-text-primary mb-2">Phone Number</label>
+            <label class="block text-sm font-medium text-text-brand-600 mb-2">Phone Number</label>
             <Input
               v-model="formData.phone"
               type="tel"
@@ -54,7 +54,7 @@
 
           <!-- Password -->
           <div>
-            <label class="block text-sm font-medium text-text-primary mb-2">Password</label>
+            <label class="block text-sm font-medium text-text-brand-600 mb-2">Password</label>
             <Input
               v-model="formData.password"
               type="password"
@@ -66,7 +66,7 @@
 
           <!-- Confirm Password -->
           <div>
-            <label class="block text-sm font-medium text-text-primary mb-2">Confirm Password</label>
+            <label class="block text-sm font-medium text-text-brand-600 mb-2">Confirm Password</label>
             <Input
               v-model="formData.confirmPassword"
               type="password"
@@ -81,13 +81,13 @@
             <input 
               type="checkbox" 
               v-model="formData.acceptTerms" 
-              class="mt-1 rounded border-gray-300 text-primary focus:ring-primary"
+              class="mt-1 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
             >
             <span class="ml-2 text-sm text-text-secondary">
               I agree to the 
-              <a href="#" class="text-primary hover:text-opacity-80">Terms of Service</a> 
+              <a href="#" class="text-brand-600 hover:text-opacity-80">Terms of Service</a> 
               and 
-              <a href="#" class="text-primary hover:text-opacity-80">Privacy Policy</a>
+              <a href="#" class="text-brand-600 hover:text-opacity-80">Privacy Policy</a>
             </span>
           </div>
           <div v-if="errors.acceptTerms" class="text-sm text-error">{{ errors.acceptTerms }}</div>
@@ -137,7 +137,7 @@
       <div class="mt-6 text-center">
         <p class="text-text-secondary">
           Already have an account? 
-          <router-link to="/login" class="text-primary font-medium hover:text-opacity-80 ml-1">
+          <router-link to="/login" class="text-brand-600 font-medium hover:text-opacity-80 ml-1">
             Sign in
           </router-link>
         </p>

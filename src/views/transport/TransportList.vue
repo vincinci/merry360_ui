@@ -1,13 +1,41 @@
 <template>
   <MainLayout>
+    <!-- Search Bar Section -->
+    <div class="w-full py-12" style="margin-top: 80px;">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <div class="bg-white rounded-[20px] md:rounded-[35px] shadow-2xl p-3 md:p-2 flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-0" style="min-height: 70px;">
+          <div class="flex-1 px-2 md:px-6">
+            <label class="block text-xs font-bold mb-1.5" style="font-family: Montserrat, sans-serif; color: #484848; font-size: 12px;">Search Transport</label>
+            <input 
+              v-model="searchQuery"
+              type="text" 
+              placeholder="Search by type, route, or service..."
+              class="w-full text-sm font-semibold focus:outline-none placeholder-gray-400"
+              style="font-family: Montserrat, sans-serif; color: #484848; font-size: 14px;"
+              @keyup.enter="performSearch"
+            />
+          </div>
+          <button 
+            @click="performSearch"
+            class="w-full md:w-[54px] h-[54px] rounded-full flex items-center justify-center hover:scale-105 transition-all duration-200 flex-shrink-0 md:mr-2 shadow-lg"
+            style="background: #FE4F4F;"
+          >
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="container mx-auto px-4 lg:px-8 py-8">
       <h1 class="text-3xl font-bold mb-2">Transportation Services</h1>
       <p class="text-text-secondary text-lg mb-8">Get around Rwanda with ease</p>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
         <Card hover clickable padding="lg" class="text-center">
-          <div class="w-20 h-20 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-20 h-20 bg-brand-500 bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-10 h-10 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
             </svg>
           </div>
@@ -43,7 +71,16 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import MainLayout from '../../components/layout/MainLayout.vue'
 import Card from '../../components/common/Card.vue'
 import Button from '../../components/common/Button.vue'
+
+const searchQuery = ref('')
+
+const performSearch = () => {
+  if (searchQuery.value.trim()) {
+    console.log('Searching transport for:', searchQuery.value)
+  }
+}
 </script>

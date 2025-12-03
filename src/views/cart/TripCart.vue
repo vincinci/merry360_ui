@@ -4,7 +4,7 @@
     <section class="relative bg-gray-50 py-8 md:py-12">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl">
-          <h1 class="text-2xl sm:text-3xl font-bold mb-2 text-text-primary">Your Trip Cart</h1>
+          <h1 class="text-2xl sm:text-3xl font-bold mb-2 text-text-brand-600">Your Trip Cart</h1>
           <p class="text-sm md:text-base text-text-secondary">Review and book everything in one go</p>
         </div>
       </div>
@@ -17,9 +17,9 @@
           <svg class="w-24 h-24 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
           </svg>
-          <h3 class="text-2xl font-bold text-text-primary mb-2">Your cart is empty</h3>
+          <h3 class="text-2xl font-bold text-text-brand-600 mb-2">Your cart is empty</h3>
           <p class="text-text-secondary mb-6">Add accommodations, tours, and services to your cart</p>
-          <button @click="router.push('/home')" class="px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-red-600 transition-colors">
+          <button @click="router.push('/home')" class="px-6 py-3 bg-brand-500 text-white rounded-lg font-semibold hover:bg-red-600 transition-colors">
             Start Planning
           </button>
         </div>
@@ -27,11 +27,11 @@
         <div v-else class="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <!-- Cart Items -->
           <div class="lg:col-span-2 space-y-4">
-            <h2 class="text-2xl font-bold text-text-primary mb-6">Cart Items ({{ cartCount }})</h2>
+            <h2 class="text-2xl font-bold text-text-brand-600 mb-6">Cart Items ({{ cartCount }})</h2>
             
             <div v-for="item in tripCart" :key="`${item.type}-${item.id}`" class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
               <div class="flex flex-col sm:flex-row gap-4 p-6">
-                <img 
+                <img loading="lazy" 
                   :src="item.image" 
                   :alt="item.name || item.title" 
                   class="w-full sm:w-32 h-32 object-cover rounded-lg"
@@ -39,10 +39,10 @@
                 <div class="flex-1">
                   <div class="flex items-start justify-between mb-2">
                     <div>
-                      <span class="px-2 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full uppercase">
+                      <span class="px-2 py-1 bg-primary/10 text-brand-600 text-xs font-semibold rounded-full uppercase">
                         {{ item.type }}
                       </span>
-                      <h3 class="text-lg font-bold text-text-primary mt-2">{{ item.name || item.title }}</h3>
+                      <h3 class="text-lg font-bold text-text-brand-600 mt-2">{{ item.name || item.title }}</h3>
                       <p v-if="item.location" class="text-text-secondary text-sm">{{ item.location }}</p>
                       <p v-if="item.duration" class="text-text-secondary text-sm">Duration: {{ item.duration }}</p>
                     </div>
@@ -56,7 +56,7 @@
                     </button>
                   </div>
                   <div class="flex items-center justify-between mt-4">
-                    <span class="text-2xl font-bold text-primary">
+                    <span class="text-2xl font-bold text-brand-600">
                       {{ typeof item.price === 'string' ? item.price : item.price?.toLocaleString() }} RWF
                     </span>
                   </div>
@@ -68,7 +68,7 @@
           <!-- Order Summary -->
           <div class="lg:col-span-1">
             <div class="bg-white rounded-xl shadow-lg p-6 sticky top-24">
-              <h3 class="text-xl font-bold text-text-primary mb-6">Order Summary</h3>
+              <h3 class="text-xl font-bold text-text-brand-600 mb-6">Order Summary</h3>
               
               <div class="space-y-3 mb-6 pb-6 border-b border-gray-200">
                 <div class="flex justify-between text-text-secondary">
@@ -79,21 +79,21 @@
                   <span>Service Fee</span>
                   <span class="font-semibold">{{ serviceFee.toLocaleString() }} RWF</span>
                 </div>
-                <div class="flex justify-between text-primary">
+                <div class="flex justify-between text-brand-600">
                   <span>Loyalty Discount</span>
                   <span class="font-semibold">-{{ discount.toLocaleString() }} RWF</span>
                 </div>
               </div>
 
-              <div class="flex justify-between text-xl font-bold text-text-primary mb-6">
+              <div class="flex justify-between text-xl font-bold text-text-brand-600 mb-6">
                 <span>Total</span>
-                <span class="text-primary">{{ total.toLocaleString() }} RWF</span>
+                <span class="text-brand-600">{{ total.toLocaleString() }} RWF</span>
               </div>
 
               <div class="mb-6">
                 <div class="flex items-center justify-between mb-2">
                   <span class="text-sm text-text-secondary">Loyalty Points Available</span>
-                  <span class="text-sm font-semibold text-primary">{{ loyaltyPoints }} pts</span>
+                  <span class="text-sm font-semibold text-brand-600">{{ loyaltyPoints }} pts</span>
                 </div>
                 <div class="flex items-center gap-2">
                   <input 
@@ -102,11 +102,11 @@
                     :max="loyaltyPoints"
                     min="0"
                     placeholder="Points to redeem"
-                    class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20"
                   />
                   <button 
                     @click="applyPoints" 
-                    class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-red-600 transition-colors"
+                    class="px-4 py-2 bg-brand-500 text-white rounded-lg text-sm font-semibold hover:bg-red-600 transition-colors"
                   >
                     Apply
                   </button>
@@ -115,7 +115,7 @@
 
               <button 
                 @click="proceedToCheckout" 
-                class="w-full px-6 py-4 bg-primary text-white rounded-xl font-bold text-lg hover:bg-red-600 transition-colors shadow-lg hover:shadow-xl"
+                class="w-full px-6 py-4 bg-brand-500 text-white rounded-xl font-bold text-lg hover:bg-red-600 transition-colors shadow-lg hover:shadow-xl"
               >
                 Proceed to Checkout
               </button>
