@@ -44,7 +44,7 @@
                   </div>
                   <div class="flex items-center justify-between mt-4">
                     <span class="text-2xl font-bold text-brand-600">
-                      {{ typeof item.price === 'string' ? item.price : item.price?.toLocaleString() }} RWF
+                      {{ currencyStore.formatPrice(typeof item.price === 'string' ? parseInt(item.price.replace(/[^0-9]/g, '')) : item.price) }}
                     </span>
                   </div>
                 </div>
@@ -60,21 +60,21 @@
               <div class="space-y-3 mb-6 pb-6 border-b border-gray-200">
                 <div class="flex justify-between text-text-secondary">
                   <span>Subtotal ({{ cartCount }} items)</span>
-                  <span class="font-semibold">{{ subtotal.toLocaleString() }} RWF</span>
+                  <span class="font-semibold">{{ currencyStore.formatPrice(subtotal) }}</span>
                 </div>
                 <div class="flex justify-between text-text-secondary">
                   <span>Service Fee</span>
-                  <span class="font-semibold">{{ serviceFee.toLocaleString() }} RWF</span>
+                  <span class="font-semibold">{{ currencyStore.formatPrice(serviceFee) }}</span>
                 </div>
                 <div class="flex justify-between text-brand-600">
                   <span>Loyalty Discount</span>
-                  <span class="font-semibold">-{{ discount.toLocaleString() }} RWF</span>
+                  <span class="font-semibold">-{{ currencyStore.formatPrice(discount) }}</span>
                 </div>
               </div>
 
               <div class="flex justify-between text-xl font-bold text-text-brand-600 mb-6">
                 <span>Total</span>
-                <span class="text-brand-600">{{ total.toLocaleString() }} RWF</span>
+                <span class="text-brand-600">{{ currencyStore.formatPrice(total) }}</span>
               </div>
 
               <div class="mb-6">
@@ -125,10 +125,12 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../../stores/userStore'
+import { useCurrencyStore } from '../../stores/currency'
 import MainLayout from '../../components/layout/MainLayout.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
+const currencyStore = useCurrencyStore()
 
 const pointsToUse = ref(0)
 
@@ -169,6 +171,6 @@ const applyPoints = () => {
 }
 
 const proceedToCheckout = () => {
-  alert('Checkout functionality coming soon! Your total: ' + total.value.toLocaleString() + ' RWF')
+  alert('Checkout functionality coming soon! Your total: ' + currencyStore.formatPrice(total.value))
 }
 </script>

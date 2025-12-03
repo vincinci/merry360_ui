@@ -78,8 +78,8 @@
                   class="w-full"
                 />
                 <div class="flex justify-between text-sm text-text-secondary">
-                  <span>$0</span>
-                  <span class="font-semibold text-brand-600">${{ filters.maxPrice }}</span>
+                  <span>{{ currencyStore.formatPrice(0) }}</span>
+                  <span class="font-semibold text-brand-600">{{ currencyStore.formatPrice(filters.maxPrice) }}</span>
                 </div>
               </div>
             </div>
@@ -262,7 +262,7 @@
                   <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 pt-4 border-t border-gray-100">
                     <div>
                       <div class="flex items-baseline gap-1 flex-wrap">
-                        <span class="text-2xl sm:text-3xl font-bold text-brand-600">${{ accommodation.price }}</span>
+                        <span class="text-2xl sm:text-3xl font-bold text-brand-600">{{ currencyStore.formatPrice(accommodation.price) }}</span>
                         <span class="text-text-secondary text-sm sm:text-base whitespace-nowrap">/night</span>
                       </div>
                       <p class="text-xs text-text-secondary">Includes taxes and fees</p>
@@ -299,11 +299,13 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useCurrencyStore } from '../../stores/currency'
 import MainLayout from '../../components/layout/MainLayout.vue'
 import Card from '../../components/common/Card.vue'
 import MapView from '../../components/common/MapView.vue'
 
 const router = useRouter()
+const currencyStore = useCurrencyStore()
 
 const viewMode = ref('list')
 const sortBy = ref('recommended')

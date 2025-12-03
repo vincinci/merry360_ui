@@ -233,7 +233,7 @@
               </div>
               <div class="flex justify-between text-xs">
                 <span class="text-text-secondary">Service fee</span>
-                <span class="font-semibold">$25</span>
+                <span class="font-semibold">{{ currencyStore.formatPrice(25) }}</span>
               </div>
               <div class="flex justify-between pt-2 border-t border-gray-200">
                 <span class="text-sm font-semibold">Total</span>

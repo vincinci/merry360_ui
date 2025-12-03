@@ -120,7 +120,7 @@
               </div>
               <div class="flex items-center justify-between">
                 <div>
-                  <span class="text-lg font-bold text-green-600">{{ tour.price }} RWF</span>
+                  <span class="text-lg font-bold text-green-600">{{ currencyStore.formatPrice(parseFloat(tour.price.replace(/,/g, ''))) }}</span>
                   <span class="text-text-muted text-xs">/person</span>
                 </div>
                 <button 
@@ -142,10 +142,12 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../../stores/userStore'
+import { useCurrencyStore } from '../../stores/currency'
 import MainLayout from '../../components/layout/MainLayout.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
+const currencyStore = useCurrencyStore()
 
 const categories = ref(['All', 'Nature', 'Adventure', 'Cultural', 'Wildlife', 'Historical'])
 const selectedCategory = ref('All')

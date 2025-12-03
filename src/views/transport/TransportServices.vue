@@ -131,7 +131,7 @@
                   </div>
                 </div>
                 <div class="text-right">
-                  <div class="text-2xl font-bold text-brand-600">{{ route.price }}</div>
+                  <div class="text-2xl font-bold text-brand-600">{{ currencyStore.formatPrice(route.price) }}</div>
                   <div class="text-xs text-text-muted">{{ route.duration }}</div>
                 </div>
               </div>
@@ -190,21 +190,23 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../../stores/userStore'
+import { useCurrencyStore } from '../../stores/currency'
 import MainLayout from '../../components/layout/MainLayout.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
+const currencyStore = useCurrencyStore()
 
 const searchQuery = ref('')
 const vehicleFilter = ref('')
 
 const popularRoutes = ref([
-  { id: 1, from: 'Kigali', to: 'Musanze', price: '15,000 RWF', duration: '2.5 hrs' },
-  { id: 2, from: 'Kigali', to: 'Rubavu', price: '18,000 RWF', duration: '3 hrs' },
-  { id: 3, from: 'Kigali', to: 'Huye', price: '12,000 RWF', duration: '2 hrs' },
-  { id: 4, from: 'Musanze', to: 'Rubavu', price: '10,000 RWF', duration: '1.5 hrs' },
-  { id: 5, from: 'Kigali', to: 'Nyagatare', price: '20,000 RWF', duration: '3.5 hrs' },
-  { id: 6, from: 'Kigali', to: 'Rusizi', price: '22,000 RWF', duration: '4 hrs' }
+  { id: 1, from: 'Kigali', to: 'Musanze', price: 15000, duration: '2.5 hrs' },
+  { id: 2, from: 'Kigali', to: 'Rubavu', price: 18000, duration: '3 hrs' },
+  { id: 3, from: 'Kigali', to: 'Huye', price: 12000, duration: '2 hrs' },
+  { id: 4, from: 'Musanze', to: 'Rubavu', price: 10000, duration: '1.5 hrs' },
+  { id: 5, from: 'Kigali', to: 'Nyagatare', price: 20000, duration: '3.5 hrs' },
+  { id: 6, from: 'Kigali', to: 'Rusizi', price: 22000, duration: '4 hrs' }
 ])
 
 const filteredRoutes = computed(() => {
@@ -248,7 +250,7 @@ const bookRoute = (route) => {
     type: 'transport',
     service: 'route',
     name: `${route.from} → ${route.to}`,
-    price: parseInt(route.price.replace(/[^0-9]/g, '')),
+    price: route.price,
     duration: route.duration,
     image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&q=80'
   }

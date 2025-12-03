@@ -127,22 +127,22 @@
 
             <div class="space-y-3 py-4 border-b border-gray-200">
               <div class="flex justify-between text-sm">
-                <span class="text-text-secondary">${{ bookingDetails.price }} × 3 nights</span>
-                <span class="font-semibold">${{ bookingDetails.price * 3 }}</span>
+                <span class="text-text-secondary">{{ currencyStore.formatPrice(bookingDetails.price) }} × 3 nights</span>
+                <span class="font-semibold">{{ currencyStore.formatPrice(bookingDetails.price * 3) }}</span>
               </div>
               <div class="flex justify-between text-sm">
                 <span class="text-text-secondary">Service fee</span>
-                <span class="font-semibold">$25</span>
+                <span class="font-semibold">{{ currencyStore.formatPrice(25) }}</span>
               </div>
               <div class="flex justify-between text-sm">
                 <span class="text-text-secondary">Taxes</span>
-                <span class="font-semibold">$15</span>
+                <span class="font-semibold">{{ currencyStore.formatPrice(15) }}</span>
               </div>
             </div>
 
             <div class="flex justify-between pt-4 mb-6">
               <span class="font-bold text-lg">Total</span>
-              <span class="text-2xl font-bold text-brand-600">${{ bookingDetails.price * 3 + 40 }}</span>
+              <span class="text-2xl font-bold text-brand-600">{{ currencyStore.formatPrice(bookingDetails.price * 3 + 40) }}</span>
             </div>
 
             <Button 
@@ -177,6 +177,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useCurrencyStore } from '../../stores/currency'
 import MainLayout from '../../components/layout/MainLayout.vue'
 import Card from '../../components/common/Card.vue'
 import Input from '../../components/common/Input.vue'
@@ -184,6 +185,7 @@ import Button from '../../components/common/Button.vue'
 
 const router = useRouter()
 const route = useRoute()
+const currencyStore = useCurrencyStore()
 
 const guestInfo = ref({
   firstName: '',

@@ -122,7 +122,7 @@
                   </div>
                 </div>
                 <div class="flex items-center justify-between">
-                  <span class="text-2xl font-bold text-brand-600">{{ booking.price }} RWF</span>
+                  <span class="text-2xl font-bold text-brand-600">{{ currencyStore.formatPrice(typeof booking.price === 'string' ? parseInt(booking.price.replace(/[^0-9]/g, '')) : booking.price) }}</span>
                   <div class="flex gap-2">
                     <button class="px-4 py-2 border border-gray-300 text-text-brand-600 rounded-lg hover:bg-gray-50 transition-colors">
                       View Details
@@ -166,10 +166,12 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../../stores/userStore'
+import { useCurrencyStore } from '../../stores/currency'
 import MainLayout from '../../components/layout/MainLayout.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
+const currencyStore = useCurrencyStore()
 
 const tabs = ref([
   { id: 'upcoming', name: 'Upcoming Trips' },

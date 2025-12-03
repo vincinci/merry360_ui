@@ -50,7 +50,7 @@
               <p v-if="item.description" class="text-xs text-text-secondary line-clamp-2 mb-2">{{ item.description }}</p>
               <div class="flex items-center justify-between">
                 <span class="text-base font-bold text-brand-600">
-                  {{ typeof item.price === 'string' ? item.price : item.price?.toLocaleString() }} RWF
+                  {{ currencyStore.formatPrice(typeof item.price === 'string' ? parseInt(item.price.replace(/[^0-9]/g, '')) : item.price) }}
                 </span>
                 <button 
                   @click="addToCart(item)" 
@@ -71,10 +71,12 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../../stores/userStore'
+import { useCurrencyStore } from '../../stores/currency'
 import MainLayout from '../../components/layout/MainLayout.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
+const currencyStore = useCurrencyStore()
 
 const watchlist = computed(() => userStore.watchlist)
 const watchlistCount = computed(() => userStore.watchlistCount)
