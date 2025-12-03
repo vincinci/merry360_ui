@@ -399,6 +399,139 @@ const translations = {
     'about.description': 'Chez Merry360Global, nous nous spécialisons dans la fourniture de solutions complètes de marketing et de gestion adaptées aux secteurs de l\'immobilier et du tourisme au Rwanda. Notre mission est de stimuler une croissance durable pour les propriétaires immobiliers et les marques touristiques grâce à des stratégies innovantes, des insights basés sur les données et une prestation de services exceptionnelle.',
     'about.propertiesManaged': 'Propriétés Gérées',
     'about.customersServed': 'Clients Servis',
+  },
+  
+  ZH: {
+    // Navigation
+    'nav.home': '首页',
+    'nav.accommodations': '住宿',
+    'nav.tours': '旅游',
+    'nav.transport': '交通',
+    'nav.services': '服务',
+    'nav.myTrips': '我的行程',
+    'nav.login': '登录',
+    
+    // Home Page
+    'home.welcome': '欢迎来到 Merry360',
+    'home.tagline': '为您的下一次冒险寻找最佳住宿、交通、旅游和服务。将它们添加到购物车并一次性预订所有内容。',
+    'home.search': '搜索',
+    'home.whatLookingFor': '您在寻找什么？',
+    'home.accommodations': '住宿',
+    'home.toursActivities': '旅游与活动',
+    'home.transportation': '交通',
+    'home.aiConcierge': 'AI礼宾服务',
+    'home.recommendedStays': '推荐住宿',
+    'home.featuredTours': '精选旅游',
+    'home.nearbyProperties': '附近房源',
+    'home.topRated': '高评分房源',
+    'home.featured': '精选房源',
+    'home.guides': '租赁指南与提示',
+    'home.viewAll': '查看全部',
+    'home.viewMore': '查看更多',
+    
+    // Search Form
+    'search.whereGoing': '您要去哪里？',
+    'search.checkIn': '入住',
+    'search.checkOut': '退房',
+    'search.adults': '成人',
+    'search.rooms': '房间',
+    
+    // Transport
+    'transport.title': '交通服务',
+    'transport.subtitle': '轻松游览卢旺达',
+    'transport.taxi': '出租车服务',
+    'transport.taxiDesc': '城市快速出行',
+    'transport.shuttle': '班车服务',
+    'transport.shuttleDesc': '前往热门目的地的共享乘车',
+    'transport.carRental': '租车',
+    'transport.carRentalDesc': '为您的旅程租赁车辆',
+    'transport.bookTaxi': '预订出租车',
+    'transport.bookShuttle': '预订班车',
+    'transport.browseCars': '浏览车辆',
+    'transport.popularRoutes': '热门路线',
+    'transport.bookNow': '立即预订',
+    
+    // Tours
+    'tours.title': '旅游与体验',
+    'tours.subtitle': '探索卢旺达之美',
+    'tours.all': '全部',
+    'tours.nature': '自然',
+    'tours.adventure': '冒险',
+    'tours.cultural': '文化',
+    'tours.wildlife': '野生动物',
+    'tours.historical': '历史',
+    'tours.bookNow': '立即预订',
+    
+    // Services
+    'services.title': '服务',
+    'services.subtitle': '完美旅行所需的一切',
+    'services.bookNow': '立即预订',
+    
+    // My Trips
+    'myTrips.title': '我的行程',
+    'myTrips.subtitle': '管理您的预订和旅行计划',
+    'myTrips.upcoming': '即将到来的行程',
+    'myTrips.saved': '已保存',
+    'myTrips.cartItems': '购物车项目',
+    'myTrips.loyaltyPoints': '积分',
+    'myTrips.upcomingTab': '即将到来',
+    'myTrips.pastTab': '过去',
+    'myTrips.savedTab': '已保存',
+    
+    // Cart
+    'cart.title': '您的购物车',
+    'cart.subtitle': '一次性查看并预订所有内容',
+    'cart.empty': '您的购物车是空的',
+    'cart.emptyDesc': '将住宿、旅游和服务添加到您的购物车',
+    'cart.startPlanning': '开始规划',
+    'cart.items': '购物车项目',
+    'cart.orderSummary': '订单摘要',
+    'cart.subtotal': '小计',
+    'cart.discount': '折扣',
+    'cart.total': '总计',
+    'cart.checkout': '继续结账',
+    'cart.remove': '移除',
+    'cart.clearAll': '清空全部',
+    
+    // Wishlist
+    'wishlist.title': '我的愿望清单',
+    'wishlist.subtitle': '您保存的项目',
+    'wishlist.empty': '您的愿望清单是空的',
+    'wishlist.emptyDesc': '开始将项目添加到您的愿望清单',
+    'wishlist.explore': '探索',
+    'wishlist.addToCart': '添加到购物车',
+    
+    // Common
+    'common.loading': '加载中...',
+    'common.error': '错误',
+    'common.success': '成功',
+    'common.cancel': '取消',
+    'common.confirm': '确认',
+    'common.save': '保存',
+    'common.delete': '删除',
+    'common.edit': '编辑',
+    
+    // Hero Section
+    'hero.title': '推动房地产业主和旅游品牌的成功',
+    'hero.tagline': '为您在卢旺达的业务需求量身定制的营销与管理解决方案',
+    
+    // Services Section
+    'services.salesMarketing': '销售与营销',
+    'services.salesDesc': '收入增长',
+    'services.management': '管理',
+    'services.managementDesc': '房产与运营',
+    'services.marketInsights': '市场洞察',
+    'services.marketInsightsDesc': '数据与分析',
+    'services.crmLeads': 'CRM与客户',
+    'services.crmLeadsDesc': '潜在客户开发',
+    'services.aiConcierge': 'AI礼宾',
+    'services.aiConciergeDesc': '问我任何问题！',
+    
+    // About Section
+    'about.title': '您的业务增长合作伙伴',
+    'about.description': '在 Merry360Global，我们专门为卢旺达的房地产和旅游行业提供全面的营销和管理解决方案。我们的使命是通过创新战略、数据驱动的洞察和卓越的服务交付，为房地产业主和旅游品牌推动可持续增长。',
+    'about.propertiesManaged': '管理的房产',
+    'about.customersServed': '服务的客户',
   }
 }
 

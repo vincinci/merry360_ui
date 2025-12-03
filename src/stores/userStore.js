@@ -19,7 +19,7 @@ export const useUserStore = defineStore('user', () => {
   
   // User preferences
   const preferences = ref({
-    language: 'EN', // EN, RW, FR
+    language: 'EN', // EN, RW, FR, ZH
     currency: 'RWF',
     theme: 'light', // light, dark
     notifications: {

@@ -67,6 +67,7 @@
               <option value="EN">EN</option>
               <option value="RW">RW</option>
               <option value="FR">FR</option>
+              <option value="ZH">中文</option>
             </select>
 
             <router-link to="/dashboard/watchlist" class="relative p-1.5 hover:bg-transparent rounded" title="Wishlist">
@@ -356,6 +357,7 @@
                   <option value="EN">English</option>
                   <option value="RW">Kinyarwanda</option>
                   <option value="FR">Français</option>
+                  <option value="ZH">中文 (Mandarin)</option>
                 </select>
               </div>
             </div>
