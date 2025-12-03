@@ -111,6 +111,8 @@
                   <span class="text-white text-xs font-bold">{{ userStore.user?.name?.substring(0, 2).toUpperCase() || 'U' }}</span>
                 </div>
               </button>
+            </div>
+          </div>
 
           <!-- Mobile Right -->
           <div class="flex lg:hidden items-center gap-1">
