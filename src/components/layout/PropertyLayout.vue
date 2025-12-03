@@ -220,7 +220,7 @@
           </div>
         </div>
         <div class="mt-12 pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center">
-          <p class="text-white/60 text-sm">© 2025 Merry360X. Crafted with ❤️ in Africa</p>
+          <p class="text-white/60 text-sm">© 2025 Merry360X. All rights reserved.</p>
           <div class="flex space-x-6 mt-4 md:mt-0">
             <a href="#" class="text-white/60 hover:text-red-400 text-sm transition-colors">Privacy</a>
             <a href="#" class="text-white/60 hover:text-red-400 text-sm transition-colors">Terms</a>

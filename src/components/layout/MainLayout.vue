@@ -28,8 +28,8 @@
             </router-link>
             <router-link 
               to="/tours"
-              class="text-sm text-gray-700 font-medium hover:text-brand-600 transition-all px-4 py-2 border border-transparent rounded-[25px]"
-              active-class="!border-brand-500 !text-brand-600"
+              class="text-sm text-gray-700 font-medium hover:text-green-600 transition-all px-4 py-2 border border-transparent rounded-[25px]"
+              active-class="!border-green-500 !text-green-700 !bg-green-50"
             >
               Tours
             </router-link>
@@ -39,6 +39,13 @@
               active-class="!border-brand-500 !text-brand-600"
             >
               Transport
+            </router-link>
+            <router-link 
+              to="/services"
+              class="text-sm text-gray-700 font-medium hover:text-brand-600 transition-all px-4 py-2 border border-transparent rounded-[25px]"
+              active-class="!border-brand-500 !text-brand-600"
+            >
+              Services
             </router-link>
             <router-link 
               to="/dashboard"
@@ -51,6 +58,14 @@
 
           <!-- Desktop Right -->
           <div class="hidden lg:flex items-center gap-2">
+            <!-- Become a Host -->
+            <router-link 
+              to="/become-host"
+              class="px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 rounded-[20px] transition-all"
+            >
+              Become a Host
+            </router-link>
+            
             <!-- Currency Toggle -->
             <button 
               @click="currencyStore.toggleCurrency()"
@@ -392,27 +407,8 @@
       <slot></slot>
     </main>
 
-    <!-- AI Concierge Button - Draggable -->
-    <div 
-      ref="aiButtonContainer"
-      :style="{ position: 'fixed', left: aiPosition.x + 'px', top: aiPosition.y + 'px', zIndex: 1000 }"
-      @mousedown="startDrag"
-      @touchstart="startDrag"
-      class="cursor-move"
-    >
-      <button 
-        @click="showAIConcierge = true"
-        class="w-14 h-14 bg-gradient-to-br from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
-        title="AI Concierge"
-      >
-        <svg class="w-7 h-7 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
-        </svg>
-      </button>
-    </div>
-
-    <!-- AI Concierge Component -->
-    <AIConcierge v-if="showAIConcierge" @close="showAIConcierge = false" />
+    <!-- Enhanced AI Concierge Component -->
+    <AIConciergeEnhanced />
 
     <!-- Footer -->
     <footer class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-t border-white/10 mt-20 relative overflow-hidden">
@@ -453,7 +449,7 @@
           </div>
         </div>
         <div class="mt-12 pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center">
-          <p class="text-white/60 text-sm">© 2025 Merry360X. Crafted with ❤️ in Africa</p>
+          <p class="text-white/60 text-sm">© 2025 Merry360X. All rights reserved.</p>
           <div class="flex space-x-6 mt-4 md:mt-0">
             <a href="#" class="text-white/60 hover:text-red-400 text-sm transition-colors">Privacy</a>
             <a href="#" class="text-white/60 hover:text-red-400 text-sm transition-colors">Terms</a>
@@ -466,13 +462,13 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAppStore } from '../../stores/app'
 import { useUserStore } from '../../stores/userStore'
 import { useCurrencyStore } from '../../stores/currency'
 import { useLanguageStore } from '../../stores/language'
-import AIConcierge from '../ai/AIConcierge.vue'
+import AIConciergeEnhanced from '../ai/AIConciergeEnhanced.vue'
 
 const router = useRouter()
 const appStore = useAppStore()
@@ -481,73 +477,7 @@ const currencyStore = useCurrencyStore()
 const languageStore = useLanguageStore()
 
 const mobileMenuOpen = ref(false)
-const showAIConcierge = ref(false)
 const showUserMenu = ref(false)
-
-// AI Button draggable functionality
-const aiButtonContainer = ref(null)
-const aiPosition = ref({ x: window.innerWidth - 90, y: window.innerHeight - 90 })
-const isDragging = ref(false)
-const dragOffset = ref({ x: 0, y: 0 })
-
-const startDrag = (e) => {
-  isDragging.value = true
-  const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX
-  const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY
-  
-  dragOffset.value = {
-    x: clientX - aiPosition.value.x,
-    y: clientY - aiPosition.value.y
-  }
-  
-  document.addEventListener('mousemove', onDrag)
-  document.addEventListener('mouseup', stopDrag)
-  document.addEventListener('touchmove', onDrag)
-  document.addEventListener('touchend', stopDrag)
-}
-
-const onDrag = (e) => {
-  if (!isDragging.value) return
-  
-  e.preventDefault()
-  const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX
-  const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY
-  
-  let newX = clientX - dragOffset.value.x
-  let newY = clientY - dragOffset.value.y
-  
-  // Keep within viewport bounds
-  const maxX = window.innerWidth - 70
-  const maxY = window.innerHeight - 70
-  
-  newX = Math.max(10, Math.min(newX, maxX))
-  newY = Math.max(10, Math.min(newY, maxY))
-  
-  aiPosition.value = { x: newX, y: newY }
-}
-
-const stopDrag = () => {
-  isDragging.value = false
-  document.removeEventListener('mousemove', onDrag)
-  document.removeEventListener('mouseup', stopDrag)
-  document.removeEventListener('touchmove', onDrag)
-  document.removeEventListener('touchend', stopDrag)
-}
-
-// Initialize position
-onMounted(() => {
-  aiPosition.value = { 
-    x: window.innerWidth - 90, 
-    y: window.innerHeight - 90 
-  }
-})
-
-onUnmounted(() => {
-  document.removeEventListener('mousemove', onDrag)
-  document.removeEventListener('mouseup', stopDrag)
-  document.removeEventListener('touchmove', onDrag)
-  document.removeEventListener('touchend', stopDrag)
-})
 
 const mobileNavigation = [
   { name: 'Home', to: '/home' },
