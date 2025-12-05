@@ -23,7 +23,6 @@
               v-model="formData.email"
               type="email"
               placeholder="you@example.com"
-              :error="errors.email"
             />
             <p v-if="errors.email" class="mt-1 text-sm text-red-600">{{ errors.email }}</p>
           </div>
@@ -35,7 +34,6 @@
               v-model="formData.password"
               type="password"
               placeholder="Enter your password"
-              :error="errors.password"
             />
             <p v-if="errors.password" class="mt-1 text-sm text-red-600">{{ errors.password }}</p>
           </div>
@@ -116,10 +114,12 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../../stores/userStore'
 import { useAppStore } from '../../stores/app'
+import { useFormValidation } from '../../composables/useFormValidation'
+import { validators } from '../../utils/validation'
 import Card from '../../components/common/Card.vue'
 import Input from '../../components/common/Input.vue'
 import Button from '../../components/common/Button.vue'
@@ -127,16 +127,12 @@ import Button from '../../components/common/Button.vue'
 const router = useRouter()
 const userStore = useUserStore()
 const appStore = useAppStore()
+const { errors, validateAll, setError, clearErrors } = useFormValidation()
 
-const formData = ref({
+const formData = reactive({
   email: '',
   password: '',
   remember: false
-})
-
-const errors = ref({
-  email: '',
-  password: ''
 })
 
 const loading = ref(false)
