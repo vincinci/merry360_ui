@@ -146,71 +146,60 @@ watch(selectedLanguage, (newLang) => {
   appStore.setLanguage(newLang)
 })
 
-const validateForm = () => {
-  let isValid = true
-  errors.value = { email: '', password: '' }
-
-  if (!formData.value.email) {
-    errors.value.email = 'Email is required'
-    isValid = false
-  } else if (!/\S+@\S+\.\S+/.test(formData.value.email)) {
-    errors.value.email = 'Email is invalid'
-    isValid = false
-  }
-
-  if (!formData.value.password) {
-    errors.value.password = 'Password is required'
-    isValid = false
-  } else if (formData.value.password.length < 6) {
-    errors.value.password = 'Password must be at least 6 characters'
-    isValid = false
-  }
-
-  return isValid
+const validationRules = {
+  email: validators.email,
+  password: (value) => validators.required(value, 'Password')
 }
 
 const handleLogin = async () => {
-  console.log('Login form submitted', formData.value)
+  // Clear previous errors
+  clearErrors()
   
-  // Reset errors
-  errors.value = { email: '', password: '' }
+  // Validate form
+  const isValid = validateAll(formData, validationRules)
   
-  if (!validateForm()) {
-    console.log('Validation failed', errors.value)
+  if (!isValid) {
     return
   }
 
-  console.log('Validation passed, logging in...')
   loading.value = true
   
   try {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    // Simulate API call - Replace with actual API endpoint
+    // const response = await fetch('/api/auth/login', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({
+    //     email: formData.email,
+    //     password: formData.password
+    //   })
+    // })
+    
+    await new Promise((resolve) => setTimeout(resolve, 1500))
     
     // Login the user
     userStore.login({
       id: 1,
-      name: 'John Doe',
-      email: formData.value.email,
+      name: formData.email.split('@')[0],
+      email: formData.email,
       phone: '+250 788 123 456',
       dateOfBirth: '1990-01-01',
       bio: 'Travel enthusiast exploring Rwanda and beyond',
-      memberSince: 'Jan 2024'
+      memberSince: 'Dec 2025'
     })
     
     // Set some initial data
     userStore.loyaltyPoints = 2450
     userStore.addToWatchlist({ id: 1, type: 'accommodation', name: 'Sample Property' })
     
-    console.log('Login successful, redirecting to dashboard')
-    loading.value = false
-    
     // Navigate to dashboard
     router.push('/dashboard')
   } catch (error) {
     console.error('Login error:', error)
+    setError('email', 'Invalid email or password')
+    setError('password', ' ')
+  } finally {
     loading.value = false
-    errors.value.password = 'Login failed. Please try again.'
   }
 }
 </script>

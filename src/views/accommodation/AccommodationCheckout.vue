@@ -6,14 +6,36 @@
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- Main Form -->
         <div class="lg:col-span-2 space-y-6">
+          <!-- General Error Message -->
+          <div v-if="errors.general" class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+            <div class="flex items-center gap-2 text-red-800">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="font-medium">{{ errors.general }}</span>
+            </div>
+          </div>
+
           <!-- Guest Information -->
           <Card padding="lg">
             <h2 class="text-2xl font-bold mb-6">Guest Information</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Input v-model="guestInfo.firstName" placeholder="First Name" />
-              <Input v-model="guestInfo.lastName" placeholder="Last Name" />
-              <Input v-model="guestInfo.email" type="email" placeholder="Email" />
-              <Input v-model="guestInfo.phone" type="tel" placeholder="Phone Number" />
+              <div>
+                <Input v-model="guestInfo.firstName" placeholder="First Name" :class="errors.firstName ? 'border-red-500' : ''" />
+                <p v-if="errors.firstName" class="mt-1 text-sm text-red-600">{{ errors.firstName }}</p>
+              </div>
+              <div>
+                <Input v-model="guestInfo.lastName" placeholder="Last Name" :class="errors.lastName ? 'border-red-500' : ''" />
+                <p v-if="errors.lastName" class="mt-1 text-sm text-red-600">{{ errors.lastName }}</p>
+              </div>
+              <div>
+                <Input v-model="guestInfo.email" type="email" placeholder="Email" :class="errors.email ? 'border-red-500' : ''" />
+                <p v-if="errors.email" class="mt-1 text-sm text-red-600">{{ errors.email }}</p>
+              </div>
+              <div>
+                <Input v-model="guestInfo.phone" type="tel" placeholder="Phone Number (e.g., +250 7XX XXX XXX)" :class="errors.phone ? 'border-red-500' : ''" />
+                <p v-if="errors.phone" class="mt-1 text-sm text-red-600">{{ errors.phone }}</p>
+              </div>
             </div>
           </Card>
 
@@ -47,10 +69,37 @@
             </div>
 
             <div v-if="paymentMethod === 'card'" class="mt-6 space-y-4">
-              <Input v-model="cardInfo.number" placeholder="Card Number" />
+              <div>
+                <Input 
+                  v-model="cardInfo.number" 
+                  placeholder="Card Number (1234 5678 9012 3456)" 
+                  @input="formatCardNumber"
+                  maxlength="19"
+                  :class="errors.cardNumber ? 'border-red-500' : ''" 
+                />
+                <p v-if="errors.cardNumber" class="mt-1 text-sm text-red-600">{{ errors.cardNumber }}</p>
+              </div>
               <div class="grid grid-cols-2 gap-4">
-                <Input v-model="cardInfo.expiry" placeholder="MM/YY" />
-                <Input v-model="cardInfo.cvv" placeholder="CVV" />
+                <div>
+                  <Input 
+                    v-model="cardInfo.expiry" 
+                    placeholder="MM/YY" 
+                    @input="formatExpiry"
+                    maxlength="5"
+                    :class="errors.cardExpiry ? 'border-red-500' : ''" 
+                  />
+                  <p v-if="errors.cardExpiry" class="mt-1 text-sm text-red-600">{{ errors.cardExpiry }}</p>
+                </div>
+                <div>
+                  <Input 
+                    v-model="cardInfo.cvv" 
+                    placeholder="CVV" 
+                    type="password"
+                    maxlength="4"
+                    :class="errors.cardCvv ? 'border-red-500' : ''" 
+                  />
+                  <p v-if="errors.cardCvv" class="mt-1 text-sm text-red-600">{{ errors.cardCvv }}</p>
+                </div>
               </div>
             </div>
 
@@ -212,12 +261,123 @@ const bookingDetails = ref({
   image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400'
 })
 
-const confirmBooking = () => {
+const errors = ref({})
+
+const validateBooking = () => {
+  errors.value = {}
+  let isValid = true
+
+  // Validate guest info
+  if (!guestInfo.value.firstName.trim()) {
+    errors.value.firstName = 'First name is required'
+    isValid = false
+  }
+  if (!guestInfo.value.lastName.trim()) {
+    errors.value.lastName = 'Last name is required'
+    isValid = false
+  }
+  if (!guestInfo.value.email) {
+    errors.value.email = 'Email is required'
+    isValid = false
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(guestInfo.value.email)) {
+    errors.value.email = 'Please enter a valid email'
+    isValid = false
+  }
+  if (!guestInfo.value.phone) {
+    errors.value.phone = 'Phone number is required'
+    isValid = false
+  }
+
+  // Validate payment info if card payment
+  if (paymentMethod.value === 'card') {
+    if (!cardInfo.value.number) {
+      errors.value.cardNumber = 'Card number is required'
+      isValid = false
+    } else if (!/^\d{13,19}$/.test(cardInfo.value.number.replace(/\s/g, ''))) {
+      errors.value.cardNumber = 'Invalid card number'
+      isValid = false
+    }
+    
+    if (!cardInfo.value.expiry) {
+      errors.value.cardExpiry = 'Expiry date is required'
+      isValid = false
+    } else if (!/^(0[1-9]|1[0-2])\/([0-9]{2})$/.test(cardInfo.value.expiry)) {
+      errors.value.cardExpiry = 'Format should be MM/YY'
+      isValid = false
+    }
+    
+    if (!cardInfo.value.cvv) {
+      errors.value.cardCvv = 'CVV is required'
+      isValid = false
+    } else if (!/^\d{3,4}$/.test(cardInfo.value.cvv)) {
+      errors.value.cardCvv = 'Invalid CVV'
+      isValid = false
+    }
+  }
+
+  // Validate terms acceptance
+  if (!acceptTerms.value) {
+    errors.value.terms = 'You must accept the terms and conditions'
+    isValid = false
+  }
+
+  return isValid
+}
+
+const confirmBooking = async () => {
+  // Validate all fields
+  if (!validateBooking()) {
+    // Scroll to first error
+    const firstError = document.querySelector('.text-red-600')
+    if (firstError) {
+      firstError.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+    return
+  }
+
   processing.value = true
   
-  setTimeout(() => {
+  try {
+    // Simulate API call - Replace with actual booking endpoint
+    // const response = await fetch('/api/bookings', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({
+    //     accommodationId: bookingDetails.value.id,
+    //     guestInfo: guestInfo.value,
+    //     paymentMethod: paymentMethod.value,
+    //     specialRequests: specialRequests.value
+    //   })
+    // })
+    
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+    
+    // Booking successful
+    router.push({
+      path: '/dashboard',
+      query: { bookingSuccess: 'true' }
+    })
+  } catch (error) {
+    console.error('Booking error:', error)
+    errors.value.general = 'Booking failed. Please try again.'
+  } finally {
     processing.value = false
-    router.push('/dashboard')
-  }, 2000)
+  }
+}
+
+// Format card number with spaces
+const formatCardNumber = (event) => {
+  let value = event.target.value.replace(/\s/g, '')
+  let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value
+  cardInfo.value.number = formattedValue
+}
+
+// Format expiry date
+const formatExpiry = (event) => {
+  let value = event.target.value.replace(/\D/g, '')
+  if (value.length >= 2) {
+    value = value.slice(0, 2) + '/' + value.slice(2, 4)
+  }
+  cardInfo.value.expiry = value
 }
 </script>

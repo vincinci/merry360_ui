@@ -151,13 +151,16 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAppStore } from '../../stores/app'
+import { useUserStore } from '../../stores/userStore'
+import { useFormValidation } from '../../composables/useFormValidation'
+import { validators } from '../../utils/validation'
 import Card from '../../components/common/Card.vue'
 import Input from '../../components/common/Input.vue'
 import Button from '../../components/common/Button.vue'
 
 const router = useRouter()
-const appStore = useAppStore()
+const userStore = useUserStore()
+const { errors, validateAll, setError, clearErrors } = useFormValidation()
 
 const formData = ref({
   name: '',
@@ -166,15 +169,6 @@ const formData = ref({
   password: '',
   confirmPassword: '',
   acceptTerms: false
-})
-
-const errors = ref({
-  name: '',
-  email: '',
-  phone: '',
-  password: '',
-  confirmPassword: '',
-  acceptTerms: ''
 })
 
 const loading = ref(false)
@@ -195,70 +189,62 @@ const lockIcon = {
   template: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>`
 }
 
-const validateForm = () => {
-  let isValid = true
-  errors.value = {
-    name: '',
-    email: '',
-    phone: '',
-    password: '',
-    confirmPassword: '',
-    acceptTerms: ''
-  }
-
-  if (!formData.value.name) {
-    errors.value.name = 'Name is required'
-    isValid = false
-  }
-
-  if (!formData.value.email) {
-    errors.value.email = 'Email is required'
-    isValid = false
-  } else if (!/\S+@\S+\.\S+/.test(formData.value.email)) {
-    errors.value.email = 'Email is invalid'
-    isValid = false
-  }
-
-  if (!formData.value.phone) {
-    errors.value.phone = 'Phone is required'
-    isValid = false
-  }
-
-  if (!formData.value.password) {
-    errors.value.password = 'Password is required'
-    isValid = false
-  } else if (formData.value.password.length < 8) {
-    errors.value.password = 'Password must be at least 8 characters'
-    isValid = false
-  }
-
-  if (formData.value.password !== formData.value.confirmPassword) {
-    errors.value.confirmPassword = 'Passwords do not match'
-    isValid = false
-  }
-
-  if (!formData.value.acceptTerms) {
-    errors.value.acceptTerms = 'You must accept the terms and conditions'
-    isValid = false
-  }
-
-  return isValid
+const validationRules = {
+  name: validators.name,
+  email: validators.email,
+  phone: validators.phone,
+  password: validators.password,
+  confirmPassword: (value) => validators.confirmPassword(formData.value.password, value),
+  acceptTerms: validators.terms
 }
 
 const handleSignup = async () => {
-  if (!validateForm()) return
+  // Clear previous errors
+  clearErrors()
+  
+  // Validate form
+  const isValid = validateAll(formData.value, validationRules)
+  
+  if (!isValid) {
+    return
+  }
 
   loading.value = true
   
-  // Simulate API call
-  setTimeout(() => {
-    appStore.login({
+  try {
+    // Simulate API call - Replace with actual API endpoint
+    // const response = await fetch('/api/auth/signup', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({
+    //     name: formData.value.name,
+    //     email: formData.value.email,
+    //     phone: formData.value.phone,
+    //     password: formData.value.password
+    //   })
+    // })
+    
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+    
+    // Register user
+    userStore.login({
+      id: Date.now(),
       name: formData.value.name,
-      email: formData.value.email
+      email: formData.value.email,
+      phone: formData.value.phone,
+      dateOfBirth: '',
+      bio: '',
+      memberSince: 'Dec 2025'
     })
-    loading.value = false
+    
+    // Navigate to home
     router.push('/home')
-  }, 1500)
+  } catch (error) {
+    console.error('Signup error:', error)
+    setError('email', 'Registration failed. Email may already be in use.')
+  } finally {
+    loading.value = false
+  }
 }
 </script>
 
