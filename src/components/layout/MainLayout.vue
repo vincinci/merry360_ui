@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-white dark:bg-gray-900 font-sans transition-colors duration-200">
+  <div class="min-h-screen flex flex-col bg-white dark:bg-gray-800 font-sans transition-colors duration-200">
     <!-- Header -->
-    <header class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700 transition-colors duration-200">
+    <header class="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700 transition-colors duration-200">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
           <!-- Logo -->
@@ -242,7 +242,7 @@
         ></div>
         
         <!-- Menu Panel -->
-        <div class="fixed top-0 right-0 bottom-0 w-72 sm:w-80 bg-white dark:bg-gray-800 shadow-2xl overflow-y-auto transition-colors duration-200">
+        <div class="fixed top-0 right-0 bottom-0 w-72 sm:w-80 bg-white dark:bg-gray-900 shadow-2xl overflow-y-auto transition-colors duration-200">
           <!-- Header -->
           <div class="sticky top-0 bg-gradient-to-r from-red-500 to-red-600 dark:from-red-700 dark:to-red-800 px-6 py-4 flex items-center justify-between shadow-md">
             <h3 class="text-white font-bold text-lg" style="font-family: 'Montserrat', sans-serif;">Menu</h3>
@@ -255,14 +255,14 @@
 
           <div class="p-5">
             <!-- User Profile Section (when authenticated) -->
-            <div v-if="userStore.isAuthenticated" class="mb-6 p-4 bg-gradient-to-r from-red-50 to-orange-50 rounded-xl">
+            <div v-if="userStore.isAuthenticated" class="mb-6 p-4 bg-gradient-to-r from-red-50 to-orange-50 dark:from-gray-700 dark:to-gray-600 rounded-xl">
               <div class="flex items-center gap-3 mb-3">
                 <div class="w-12 h-12 bg-gradient-to-br from-brand-500 to-red-600 rounded-full flex items-center justify-center flex-shrink-0">
                   <span class="text-white text-sm font-bold">{{ userStore.user?.name?.substring(0, 2).toUpperCase() || 'U' }}</span>
                 </div>
                 <div class="flex-1 min-w-0">
-                  <p class="font-bold text-sm text-gray-900 truncate">{{ userStore.user?.name || 'User' }}</p>
-                  <p class="text-xs text-gray-600 truncate">{{ userStore.user?.email || '' }}</p>
+                  <p class="font-bold text-sm text-gray-900 dark:text-white truncate">{{ userStore.user?.name || 'User' }}</p>
+                  <p class="text-xs text-gray-600 dark:text-gray-300 truncate">{{ userStore.user?.email || '' }}</p>
                 </div>
               </div>
               <router-link 
@@ -518,7 +518,7 @@
     <AIConcierge :isOpen="showAIConcierge" @close="showAIConcierge = false" @minimize="aiMinimized = true; showAIConcierge = false" />
 
     <!-- Footer -->
-    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-20 relative overflow-hidden transition-colors duration-200">
+    <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 mt-20 relative overflow-hidden transition-colors duration-200">
       <div class="container mx-auto px-4 lg:px-8 py-16 relative z-10">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>

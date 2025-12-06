@@ -3,14 +3,14 @@
     <!-- Search Bar Section -->
     <div class="w-full py-12" style="margin-top: 80px;">
       <div class="container mx-auto px-4 max-w-4xl">
-        <div class="bg-white rounded-[20px] md:rounded-[35px] shadow-2xl p-3 md:p-2 flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-0" style="min-height: 70px;">
+        <div class="bg-white dark:bg-gray-100 rounded-[20px] md:rounded-[35px] shadow-2xl p-3 md:p-2 flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-0" style="min-height: 70px;">
           <div class="flex-1 px-2 md:px-6">
-            <label class="block text-xs font-bold mb-1.5" style="font-family: Montserrat, sans-serif; color: #484848; font-size: 12px;">{{ t('nav.accommodations') }}</label>
+            <label class="block text-xs font-bold mb-1.5 dark:text-gray-900" style="font-family: Montserrat, sans-serif; color: #484848; font-size: 12px;">{{ t('nav.accommodations') }}</label>
             <input 
               v-model="searchQuery"
               type="text" 
               :placeholder="t('home.search')"
-              class="w-full text-sm font-semibold focus:outline-none placeholder-gray-400"
+              class="w-full text-sm font-semibold focus:outline-none placeholder-gray-400 bg-transparent dark:text-gray-900"
               style="font-family: Montserrat, sans-serif; color: #484848; font-size: 14px;"
               @keyup.enter="performSearch"
             />
