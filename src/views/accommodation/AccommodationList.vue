@@ -313,11 +313,13 @@ import { useRouter } from 'vue-router'
 import { useCurrencyStore } from '../../stores/currency'
 import { useUserStore } from '../../stores/userStore'
 import { useTranslation } from '../../composables/useTranslation'
+import { useToast } from '../../composables/useToast.js'
 import MainLayout from '../../components/layout/MainLayout.vue'
 import Card from '../../components/common/Card.vue'
 import MapView from '../../components/common/MapView.vue'
 
 const router = useRouter()
+const { success } = useToast()
 const currencyStore = useCurrencyStore()
 const userStore = useUserStore()
 const { t } = useTranslation()
@@ -485,6 +487,6 @@ const addToCart = (accommodation) => {
     rating: accommodation.rating
   }
   userStore.addToCart(cartItem)
-  alert(`${accommodation.name} added to cart!`)
+  success(`${accommodation.name} added to cart!`)
 }
 </script>

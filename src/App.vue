@@ -1,9 +1,10 @@
 <template>
   <router-view />
+  <ToastNotification />
 </template>
 
 <script setup>
-// Main App Component
+import ToastNotification from './components/common/ToastNotification.vue'
 </script>
 
 <style>

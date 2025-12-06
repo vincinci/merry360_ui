@@ -144,12 +144,14 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '../../stores/userStore'
 import { useCurrencyStore } from '../../stores/currency'
 import { useTranslation } from '../../composables/useTranslation'
+import { useToast } from '../../composables/useToast.js'
 import MainLayout from '../../components/layout/MainLayout.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
 const currencyStore = useCurrencyStore()
 const { t } = useTranslation()
+const { success } = useToast()
 
 const categories = computed(() => [t('tours.all'), t('tours.nature'), t('tours.adventure'), t('tours.cultural'), t('tours.wildlife'), t('tours.historical')])
 const selectedCategory = ref(computed(() => t('tours.all')).value)
@@ -284,7 +286,7 @@ const addToCart = (tour) => {
     ...tour,
     type: 'tour'
   })
-  alert(`${tour.title} added to your trip cart!`)
+  success(`${tour.title} added to your trip cart!`)
 }
 
 const viewTour = (tour) => {

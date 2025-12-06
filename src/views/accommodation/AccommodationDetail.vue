@@ -307,12 +307,14 @@ import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCurrencyStore } from '../../stores/currency'
 import { useTranslation } from '../../composables/useTranslation'
+import { useToast } from '../../composables/useToast.js'
 import MainLayout from '../../components/layout/MainLayout.vue'
 import Card from '../../components/common/Card.vue'
 import Button from '../../components/common/Button.vue'
 import CrossCategorySuggestions from '../../components/common/CrossCategorySuggestions.vue'
 
 const router = useRouter()
+const { success } = useToast()
 const route = useRoute()
 const currencyStore = useCurrencyStore()
 const { t } = useTranslation()
@@ -335,7 +337,7 @@ const addToCart = () => {
     image: accommodation.value.mainImage
   }
   // You can integrate with userStore here
-  alert(`${accommodation.value.name} added to cart!`)
+  success(`${accommodation.value.name} added to cart!`)
 }
 
 const transportOptions = ref([

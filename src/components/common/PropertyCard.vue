@@ -138,6 +138,7 @@ import { computed, ref, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCurrencyStore } from '@/stores/currency'
 import { useUserStore } from '@/stores/userStore'
+import { useToast } from '../../composables/useToast.js'
 
 const props = defineProps({
   property: {
@@ -148,6 +149,7 @@ const props = defineProps({
 
 const router = useRouter()
 const currencyStore = useCurrencyStore()
+const { success } = useToast()
 const userStore = useUserStore()
 const isFavorite = ref(false)
 const currentImageIndex = ref(0)
@@ -221,7 +223,7 @@ const addToCart = () => {
     baths: props.property.baths
   }
   userStore.addToCart(cartItem)
-  alert(`${props.property.title} added to cart!`)
+  success(`${props.property.title} added to cart!`)
 }
 
 const viewDetails = () => {

@@ -65,8 +65,8 @@
               </div>
               <h3 class="text-lg font-bold text-text-brand-600 mb-2">{{ t('transport.taxi') }}</h3>
               <p class="text-sm text-text-secondary mb-4">{{ t('transport.taxiDesc') }}</p>
-              <button @click="bookService('taxi')" class="w-full px-5 py-2.5 bg-brand-500 text-sm text-white rounded-xl font-semibold hover:bg-red-600 transition-colors">
-                {{ t('transport.bookTaxi') }}
+              <button @click="bookService('taxi')" class="w-full px-5 py-2.5 bg-red-500 text-sm text-white rounded-xl font-semibold hover:bg-red-600 transition-colors">
+                Add to Cart
               </button>
             </div>
           </div>
@@ -81,8 +81,8 @@
               </div>
               <h3 class="text-lg font-bold text-text-brand-600 mb-2">{{ t('transport.shuttle') }}</h3>
               <p class="text-sm text-text-secondary mb-4">{{ t('transport.shuttleDesc') }}</p>
-              <button @click="bookService('shuttle')" class="w-full px-5 py-2.5 bg-gray-900 text-sm text-white rounded-xl font-semibold hover:bg-gray-800 transition-colors">
-                {{ t('transport.bookShuttle') }}
+              <button @click="bookService('shuttle')" class="w-full px-5 py-2.5 bg-red-500 text-sm text-white rounded-xl font-semibold hover:bg-red-600 transition-colors">
+                Add to Cart
               </button>
             </div>
           </div>
@@ -135,8 +135,8 @@
                   <div class="text-xs text-text-muted">{{ route.duration }}</div>
                 </div>
               </div>
-              <button @click="bookRoute(route)" class="w-full px-4 py-2 bg-gray-100 hover:bg-gray-200 text-text-brand-600 rounded-lg font-medium transition-colors">
-                Book Now
+              <button @click="bookRoute(route)" class="w-full px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition-colors">
+                Add to Cart
               </button>
             </div>
           </div>
@@ -192,12 +192,14 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '../../stores/userStore'
 import { useCurrencyStore } from '../../stores/currency'
 import { useTranslation } from '../../composables/useTranslation'
+import { useToast } from '../../composables/useToast.js'
 import MainLayout from '../../components/layout/MainLayout.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
 const currencyStore = useCurrencyStore()
 const { t } = useTranslation()
+const { success } = useToast()
 
 const searchQuery = ref('')
 const vehicleFilter = ref('')
@@ -239,7 +241,7 @@ const bookService = (type) => {
     image: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400&q=80'
   }
   userStore.addToCart(serviceItem)
-  alert(`${serviceItem.name} added to cart!`)
+  success(`${serviceItem.name} added to cart!`)
 }
 
 const browseCars = () => {
@@ -257,6 +259,6 @@ const bookRoute = (route) => {
     image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&q=80'
   }
   userStore.addToCart(routeItem)
-  alert(`Route ${route.from} → ${route.to} added to cart!`)
+  success(`Route ${route.from} → ${route.to} added to cart!`)
 }
 </script>

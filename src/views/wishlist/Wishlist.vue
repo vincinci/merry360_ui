@@ -72,11 +72,13 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../../stores/userStore'
 import { useCurrencyStore } from '../../stores/currency'
+import { useToast } from '../../composables/useToast.js'
 import MainLayout from '../../components/layout/MainLayout.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
 const currencyStore = useCurrencyStore()
+const { success } = useToast()
 
 const watchlist = computed(() => userStore.watchlist)
 const watchlistCount = computed(() => userStore.watchlistCount)
@@ -87,6 +89,6 @@ const removeItem = (item) => {
 
 const addToCart = (item) => {
   userStore.addToCart(item)
-  alert(`${item.name || item.title} added to cart!`)
+  success(`${item.name || item.title} added to cart!`)
 }
 </script>

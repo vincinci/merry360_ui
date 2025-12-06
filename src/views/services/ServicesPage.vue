@@ -303,7 +303,7 @@
                   <span>Revenue optimization</span>
                 </li>
               </ul>
-              <router-link to="/become-host" class="block w-full text-center px-6 py-3 bg-gray-900 text-white rounded-xl font-semibold hover:bg-gray-800 transition-colors">
+              <router-link to="/become-host" class="block w-full text-center px-6 py-3 bg-red-500 text-white rounded-xl font-semibold hover:bg-red-600 transition-colors">
                 Become a Host
               </router-link>
             </div>
