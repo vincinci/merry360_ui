@@ -130,7 +130,7 @@
             <textarea 
               v-model="specialRequests"
               rows="4" 
-              class="w-full px-4 py-3 border border-gray-200 rounded-button focus:outline-none focus:ring-2 focus:ring-accent-blue"
+              class="w-full px-4 py-3 border border-gray-200 dark:border-gray-600 rounded-button focus:outline-none focus:ring-2 focus:ring-accent-blue bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               placeholder="Any special requirements or requests?"
             ></textarea>
           </Card>
