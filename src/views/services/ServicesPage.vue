@@ -25,7 +25,7 @@
     <section class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-4 max-w-7xl">
         <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-5xl font-bold mb-4" style="font-family: 'Montserrat', sans-serif; color: #484848;">
+          <h2 class="text-3xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white" style="font-family: 'Montserrat', sans-serif;">
             What We Offer
           </h2>
           <div class="w-24 h-1.5 bg-brand-500 rounded-full mx-auto"></div>
