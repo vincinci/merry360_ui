@@ -60,31 +60,31 @@
               <div class="grid grid-cols-2 gap-3 max-w-md mx-auto">
                 <button 
                   @click="sendMessage('Tell me about accommodations in Kigali')"
-                  class="p-4 bg-white hover:bg-brand-50 border-2 border-gray-200 hover:border-brand-500 rounded-xl transition-all shadow-sm hover:shadow-md group"
+                  class="p-4 bg-white dark:bg-gray-800 hover:bg-brand-50 dark:hover:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 hover:border-brand-500 rounded-xl transition-all shadow-sm hover:shadow-md group"
                 >
                   <div class="text-2xl mb-2">🏨</div>
-                  <div class="text-xs font-semibold text-gray-700 group-hover:text-brand-600">Accommodations</div>
+                  <div class="text-xs font-semibold text-gray-700 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400">Accommodations</div>
                 </button>
                 <button 
                   @click="sendMessage('Show me available tours')"
-                  class="p-4 bg-white hover:bg-green-50 border-2 border-gray-200 hover:border-green-500 rounded-xl transition-all shadow-sm hover:shadow-md group"
+                  class="p-4 bg-white dark:bg-gray-800 hover:bg-green-50 dark:hover:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 hover:border-green-500 rounded-xl transition-all shadow-sm hover:shadow-md group"
                 >
                   <div class="text-2xl mb-2">🌿</div>
-                  <div class="text-xs font-semibold text-gray-700 group-hover:text-green-600">Tours & Activities</div>
+                  <div class="text-xs font-semibold text-gray-700 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400">Tours & Activities</div>
                 </button>
                 <button 
                   @click="sendMessage('I need transportation options')"
-                  class="p-4 bg-white hover:bg-blue-50 border-2 border-gray-200 hover:border-blue-500 rounded-xl transition-all shadow-sm hover:shadow-md group"
+                  class="p-4 bg-white dark:bg-gray-800 hover:bg-blue-50 dark:hover:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 hover:border-blue-500 rounded-xl transition-all shadow-sm hover:shadow-md group"
                 >
                   <div class="text-2xl mb-2">🚗</div>
-                  <div class="text-xs font-semibold text-gray-700 group-hover:text-blue-600">Transportation</div>
+                  <div class="text-xs font-semibold text-gray-700 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400">Transportation</div>
                 </button>
                 <button 
                   @click="sendMessage('What are popular destinations in Rwanda?')"
-                  class="p-4 bg-white hover:bg-purple-50 border-2 border-gray-200 hover:border-purple-500 rounded-xl transition-all shadow-sm hover:shadow-md group"
+                  class="p-4 bg-white dark:bg-gray-800 hover:bg-purple-50 dark:hover:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 hover:border-purple-500 rounded-xl transition-all shadow-sm hover:shadow-md group"
                 >
                   <div class="text-2xl mb-2">💡</div>
-                  <div class="text-xs font-semibold text-gray-700 group-hover:text-purple-600">Travel Tips</div>
+                  <div class="text-xs font-semibold text-gray-700 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400">Travel Tips</div>
                 </button>
               </div>
             </div>
@@ -97,7 +97,7 @@
                   v-for="suggestion in quickSuggestions" 
                   :key="suggestion"
                   @click="sendMessage(suggestion)"
-                  class="px-3 py-1.5 bg-white text-gray-700 rounded-full text-xs hover:bg-brand-500 hover:text-white transition-colors shadow-sm border border-gray-200"
+                  class="px-3 py-1.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-white rounded-full text-xs hover:bg-brand-500 hover:text-white transition-colors shadow-sm border border-gray-200 dark:border-gray-600"
                 >
                   {{ suggestion }}
                 </button>
