@@ -83,7 +83,7 @@
             <!-- Currency Toggle -->
             <button 
               @click="currencyStore.toggleCurrency()"
-              class="px-2.5 py-1 border border-gray-300 rounded-full text-xs font-semibold text-gray-700 hover:border-brand-500 hover:text-brand-600 transition-all bg-white flex items-center gap-1"
+              class="px-2.5 py-1 border border-gray-300 dark:border-gray-600 rounded-full text-xs font-semibold text-gray-700 dark:text-white hover:border-brand-500 hover:text-brand-600 dark:hover:text-brand-400 transition-all bg-white dark:bg-gray-700 flex items-center gap-1"
               :title="'Switch to ' + (currencyStore.currentCurrency === 'USD' ? 'RWF' : 'USD')"
             >
               <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -92,7 +92,7 @@
               {{ currencyStore.currentCurrency }}
             </button>
 
-            <select v-model="languageStore.currentLanguage" @change="languageStore.setLanguage(languageStore.currentLanguage)" class="px-2.5 py-1 border border-gray-300 rounded-full text-xs font-semibold text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 bg-white cursor-pointer transition-all">
+            <select v-model="languageStore.currentLanguage" @change="languageStore.setLanguage(languageStore.currentLanguage)" class="px-2.5 py-1 border border-gray-300 dark:border-gray-600 rounded-full text-xs font-semibold text-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 bg-white dark:bg-gray-700 cursor-pointer transition-all">
               <option value="EN">EN</option>
               <option value="RW">RW</option>
               <option value="FR">FR</option>
