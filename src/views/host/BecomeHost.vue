@@ -222,7 +222,7 @@
                     type="text" 
                     required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
-                    placeholder="John Doe"
+                    placeholder="Enter your full legal name"
                   />
                 </div>
                 <div>
@@ -232,7 +232,7 @@
                     type="email" 
                     required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
-                    placeholder="john@example.com"
+                    placeholder="your.email@example.com"
                   />
                 </div>
                 <div>
@@ -242,7 +242,7 @@
                     type="tel" 
                     required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
-                    placeholder="+250 XXX XXX XXX"
+                    placeholder="+250 788 123 456"
                   />
                 </div>
                 <div>
@@ -252,7 +252,7 @@
                     type="text" 
                     required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
-                    placeholder="Kigali, Rwanda"
+                    placeholder="City or District, e.g., Kigali, Musanze, Rubavu"
                   />
                 </div>
               </div>
@@ -283,7 +283,7 @@
                     required
                     rows="4"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
-                    placeholder="Describe your property, tour, service, or experience..."
+                    placeholder="Example: I have a 3-bedroom lakeside villa in Gisenyi with stunning views, or I offer guided gorilla trekking tours in Volcanoes National Park..."
                   ></textarea>
                 </div>
                 <div>
