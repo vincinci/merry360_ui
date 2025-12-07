@@ -100,7 +100,7 @@ const translations = {
     'wishlist.empty': 'Your wishlist is empty',
     'wishlist.emptyDesc': 'Start adding items to your wishlist',
     'wishlist.explore': 'Explore',
-    'wishlist.addToCart': 'Add to Cart',
+    'wishlist.addToCart': 'Add to Trip Cart',
     
     // Common
     'common.loading': 'Loading...',
@@ -141,7 +141,7 @@ const translations = {
     'accommodation.location': 'Location',
     'accommodation.host': 'Your Host',
     'accommodation.getDirections': 'Get Directions',
-    'accommodation.addToCart': 'Add to Cart',
+    'accommodation.addToCart': 'Add to Trip Cart',
     'accommodation.reserveNow': 'Reserve Now',
     'accommodation.perNight': 'per night',
     'accommodation.guests': 'Guests',

@@ -66,7 +66,7 @@
               <h3 class="text-lg font-bold text-text-brand-600 mb-2">{{ t('transport.taxi') }}</h3>
               <p class="text-sm text-text-secondary mb-4">{{ t('transport.taxiDesc') }}</p>
               <button @click="bookService('taxi')" class="w-full px-5 py-2.5 bg-red-500 text-sm text-white rounded-xl font-semibold hover:bg-red-600 transition-colors">
-                Add to Cart
+                Add to Trip Cart
               </button>
             </div>
           </div>
@@ -82,7 +82,7 @@
               <h3 class="text-lg font-bold text-text-brand-600 mb-2">{{ t('transport.shuttle') }}</h3>
               <p class="text-sm text-text-secondary mb-4">{{ t('transport.shuttleDesc') }}</p>
               <button @click="bookService('shuttle')" class="w-full px-5 py-2.5 bg-red-500 text-sm text-white rounded-xl font-semibold hover:bg-red-600 transition-colors">
-                Add to Cart
+                Add to Trip Cart
               </button>
             </div>
           </div>
@@ -136,7 +136,7 @@
                 </div>
               </div>
               <button @click="bookRoute(route)" class="w-full px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition-colors">
-                Add to Cart
+                Add to Trip Cart
               </button>
             </div>
           </div>

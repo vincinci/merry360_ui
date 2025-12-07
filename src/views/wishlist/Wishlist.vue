@@ -56,7 +56,7 @@
                   @click="addToCart(item)" 
                   class="px-3 py-1 bg-brand-500 text-white rounded text-xs font-semibold hover:bg-red-600 transition-colors"
                 >
-                  Add to Cart
+                  Add to Trip Cart
                 </button>
               </div>
             </div>
