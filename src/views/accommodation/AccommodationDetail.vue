@@ -216,7 +216,7 @@
             <h2 class="text-xl font-bold mb-4">Location</h2>
             <div class="space-y-4">
               <!-- Map Container -->
-              <div class="relative w-full h-80 bg-gray-100 rounded-xl overflow-hidden">
+              <div class="relative w-full h-80 bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden">
                 <iframe
                   :src="`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${encodeURIComponent(accommodation.location + ', Rwanda')}&zoom=14`"
                   width="100%"

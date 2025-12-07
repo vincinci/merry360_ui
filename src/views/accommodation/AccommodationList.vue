@@ -47,7 +47,7 @@
               <div class="flex gap-2">
                 <button 
                   @click="viewMode = 'list'"
-                  :class="viewMode === 'list' ? 'bg-primary text-white' : 'bg-gray-100 text-text-brand-600 hover:bg-gray-200'"
+                  :class="viewMode === 'list' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-text-brand-600 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600'"
                   class="flex-1 py-2 rounded-lg transition-all duration-200 transform hover:scale-105"
                 >
                   <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -56,7 +56,7 @@
                 </button>
                 <button 
                   @click="viewMode = 'map'"
-                  :class="viewMode === 'map' ? 'bg-primary text-white' : 'bg-gray-100 text-text-brand-600 hover:bg-gray-200'"
+                  :class="viewMode === 'map' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-text-brand-600 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600'"
                   class="flex-1 py-2 rounded-button transition-colors"
                 >
                   <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,7 +108,7 @@
                   v-for="rating in [3, 4, 4.5]"
                   :key="rating"
                   @click="filters.minRating = rating"
-                  :class="filters.minRating === rating ? 'bg-primary text-white' : 'bg-gray-100 text-text-brand-600 hover:bg-gray-200'"
+                  :class="filters.minRating === rating ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-text-brand-600 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600'"
                   class="flex-1 py-2 px-3 rounded-button text-sm transition-colors"
                 >
                   {{ rating }}+⭐
@@ -160,7 +160,7 @@
             <p class="text-text-secondary text-sm sm:text-base">
               <span class="font-semibold text-text-brand-600">{{ filteredAccommodations.length }}</span> properties found
             </p>
-            <select v-model="sortBy" class="px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm sm:text-base">
+            <select v-model="sortBy" class="px-3 sm:px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 text-sm sm:text-base">
               <option value="recommended">Recommended</option>
               <option value="price-low">Price: Low to High</option>
               <option value="price-high">Price: High to Low</option>
@@ -249,7 +249,7 @@
                     <span 
                       v-for="amenity in accommodation.amenities.slice(0, 4)" 
                       :key="amenity"
-                      class="px-2 py-1 bg-gray-100 text-text-secondary text-xs rounded"
+                      class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-text-secondary dark:text-gray-300 text-xs rounded"
                     >
                       {{ amenity }}
                     </span>
