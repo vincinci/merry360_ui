@@ -3,9 +3,9 @@
     <!-- Stories Header -->
     <section class="bg-gradient-to-br from-purple-50 to-pink-50 py-12">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl mx-auto text-center">
-          <h1 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900">{{ t('stories.title') }}</h1>
-          <p class="text-base md:text-lg text-gray-600">{{ t('stories.subtitle') }}</p>
+        <div class="max-w-4xl mx-auto text-center mb-8">
+          <h1 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900 dark:text-white">{{ t('stories.title') }}</h1>
+          <p class="text-base md:text-lg text-gray-600 dark:text-gray-300">{{ t('stories.subtitle') }}</p>
         </div>
       </div>
     </section>

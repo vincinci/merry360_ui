@@ -4,8 +4,8 @@
     <section class="relative bg-gradient-to-br from-green-50 to-white py-12 md:py-16">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto text-center mb-8">
-          <h1 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900">{{ t('tours.title') }}</h1>
-          <p class="text-base md:text-lg text-gray-600">{{ t('tours.subtitle') }}</p>
+          <h1 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900 dark:text-white">{{ t('tours.title') }}</h1>
+          <p class="text-base md:text-lg text-gray-600 dark:text-gray-300">{{ t('tours.subtitle') }}</p>
         </div>
 
         <!-- Search Bar -->
