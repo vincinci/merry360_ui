@@ -5,12 +5,12 @@
     enter-from-class="opacity-0"
     leave-to-class="opacity-0"
   >
-    <div v-if="isOpen" class="fixed inset-0 z-[999] flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div v-if="isOpen" class="fixed inset-0 z-40 flex items-end sm:items-center justify-center p-0 sm:p-4">
       <!-- Backdrop -->
       <div @click="close" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
       
       <!-- Chat Window -->
-      <div class="relative bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl w-full sm:max-w-2xl max-h-[90vh] sm:max-h-[80vh] flex flex-col animate-slide-up">
+      <div class="relative bg-white dark:bg-gray-800 rounded-t-3xl sm:rounded-3xl shadow-2xl w-full sm:max-w-2xl max-h-[85vh] sm:max-h-[80vh] flex flex-col animate-slide-up mb-0 sm:mb-0">
         <!-- Header -->
         <div class="bg-gradient-to-r from-brand-500 to-brand-600 text-white p-4 sm:p-6 rounded-t-3xl flex items-center justify-between">
           <div class="flex items-center gap-3">

@@ -458,7 +458,7 @@
     <transition name="slide-fade">
       <div 
         v-if="!aiMinimized"
-        class="fixed bottom-6 right-6 z-[1000]"
+        class="fixed bottom-20 right-4 lg:bottom-6 lg:right-6 z-40"
       >
         <button 
           @click="showAIConcierge = !showAIConcierge"
@@ -496,7 +496,7 @@
       <button 
         v-if="aiMinimized"
         @click="aiMinimized = false; showAIConcierge = true"
-        class="fixed bottom-6 right-6 z-[1000] w-14 h-14 bg-gradient-to-br from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+        class="fixed bottom-20 right-4 lg:bottom-6 lg:right-6 z-40 w-12 h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
         title="Open AI Trip Advisor"
       >
         <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
