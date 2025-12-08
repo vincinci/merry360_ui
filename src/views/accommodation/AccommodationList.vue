@@ -36,7 +36,7 @@
       </div>
 
       <!-- Filters and Search -->
-      <div class="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6">
+      <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
         <!-- Filters Sidebar -->
         <div class="lg:col-span-1">
           <div class="bg-white dark:bg-gray-800 rounded-xl shadow-card p-4 sm:p-6 sticky top-24">

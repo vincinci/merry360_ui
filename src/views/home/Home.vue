@@ -111,7 +111,7 @@
         <h2 class="text-2xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-gray-100" style="font-family: 'Montserrat', sans-serif; font-weight: 700; line-height: 1.3;">Latest on the Property Listing</h2>
         <div class="w-24 md:w-36 h-1.5 rounded-full mx-auto bg-brand-500"></div>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
         <PropertyCard v-for="property in latestProperties" :key="property.id" :property="property" />
       </div>
     </section>
@@ -130,7 +130,7 @@
           {{ t('accommodation.location') }}
         </button>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
         <PropertyCard v-for="property in nearbyProperties" :key="property.id" :property="property" />
       </div>
     </section>
@@ -141,7 +141,7 @@
         <h2 class="text-4xl font-bold mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 36px; line-height: 48px; color: #484848;">{{ t('home.topRated') }}</h2>
         <div class="w-36 h-1.5 rounded-full mx-auto" style="background: #484848;"></div>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
         <PropertyCard v-for="property in topRatedProperties" :key="property.id" :property="property" />
       </div>
     </section>
@@ -170,7 +170,7 @@
         <h2 class="text-2xl md:text-4xl font-bold mb-3 md:mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 700; line-height: 1.3; color: #484848;">{{ t('home.featured') }}</h2>
         <div class="w-24 md:w-36 h-1.5 rounded-full mx-auto" style="background: #484848;"></div>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
         <PropertyCard v-for="property in featuredProperties" :key="property.id" :property="property" />
       </div>
     </section>

@@ -113,7 +113,7 @@
             </svg>
             <p class="text-gray-600">No routes found matching your search</p>
           </div>
-          <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div v-else class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             <div v-for="route in filteredRoutes" :key="route.id" class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6">
               <div class="flex items-start justify-between mb-4">
                 <div class="flex-1">
