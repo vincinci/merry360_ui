@@ -1,12 +1,12 @@
 <template>
   <div class="min-h-screen flex flex-col bg-white dark:bg-gray-800 font-sans transition-colors duration-200">
     <!-- Header -->
-    <header class="bg-white dark:bg-gray-900 shadow-sm lg:shadow-md sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700 transition-colors duration-200">
+    <header class="bg-white/80 dark:bg-gray-900/80 lg:bg-white lg:dark:bg-gray-900 backdrop-blur-md shadow-md sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700 transition-colors duration-200">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16 lg:h-20">
+        <div class="flex items-center justify-between h-20">
           <!-- Logo -->
-          <router-link to="/" class="flex items-center flex-shrink-0">
-            <img loading="lazy" src="/logo.png" alt="Merry360" class="h-8 lg:h-12 w-auto" />
+          <router-link to="/" class="flex items-center flex-shrink-0 mr-4">
+            <img loading="lazy" src="/logo.png" alt="Merry360" class="h-10 md:h-12 w-auto" />
           </router-link>
 
           <!-- Desktop Navigation -->
@@ -193,17 +193,40 @@
             </router-link>
           </div>
 
-          <!-- Mobile Right - Hidden for clean Airbnb look -->
-          <div class="lg:hidden">
-            <!-- Empty for minimal look -->
+          <!-- Mobile Right -->
+          <div class="flex lg:hidden items-center gap-2">
+            <!-- Currency Toggle Mobile -->
+            <button 
+              @click="currencyStore.toggleCurrency()"
+              class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-full text-xs font-semibold text-gray-700 dark:text-white hover:border-brand-500 transition-all bg-white dark:bg-gray-800"
+            >
+              {{ currencyStore.currentCurrency }}
+            </button>
+
+            <router-link to="/dashboard/watchlist" class="relative p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors">
+              <svg class="w-5 h-5 text-gray-700 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </router-link>
+
+            <button 
+              @click="mobileMenuOpen = !mobileMenuOpen"
+              class="p-1.5 text-gray-900 dark:text-white"
+              aria-label="Menu"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
           </div>
         </div>
       </div>
     </header>
 
-    <!-- Mobile Menu Drawer - Hidden, using bottom nav instead -->
+    <!-- Mobile Menu Drawer -->
     <transition name="mobile-menu">
-      <div v-if="false" class="fixed inset-0 z-50 lg:hidden">
+      <div v-if="mobileMenuOpen" class="fixed inset-0 z-50 lg:hidden">
         <!-- Backdrop -->
         <div 
           class="fixed inset-0 bg-black/60 backdrop-blur-sm"
@@ -427,76 +450,15 @@
     </transition>
 
     <!-- Main Content -->
-    <main class="flex-grow pb-20 lg:pb-0">
+    <main class="flex-grow">
       <slot></slot>
     </main>
-
-    <!-- Bottom Navigation Bar - Mobile Only (Airbnb Style) -->
-    <nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 z-40">
-      <div class="grid grid-cols-5 h-16">
-        <!-- Explore -->
-        <router-link 
-          to="/"
-          class="flex flex-col items-center justify-center transition-colors tap-highlight-transparent"
-          exact
-        >
-          <svg class="w-6 h-6 mb-0.5" :class="$route.path === '/' ? 'text-brand-500 dark:text-brand-400' : 'text-gray-400 dark:text-gray-500'" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-          </svg>
-          <span class="text-[10px] font-semibold" :class="$route.path === '/' ? 'text-brand-500 dark:text-brand-400' : 'text-gray-500 dark:text-gray-500'">Explore</span>
-        </router-link>
-
-        <!-- Wishlist -->
-        <router-link 
-          to="/dashboard/watchlist"
-          class="flex flex-col items-center justify-center transition-colors tap-highlight-transparent"
-        >
-          <svg class="w-6 h-6 mb-0.5" :class="$route.path.includes('/watchlist') ? 'text-brand-500 dark:text-brand-400' : 'text-gray-400 dark:text-gray-500'" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-          </svg>
-          <span class="text-[10px] font-semibold" :class="$route.path.includes('/watchlist') ? 'text-brand-500 dark:text-brand-400' : 'text-gray-500 dark:text-gray-500'">Wishlist</span>
-        </router-link>
-
-        <!-- Trips -->
-        <router-link 
-          to="/dashboard"
-          class="flex flex-col items-center justify-center transition-colors tap-highlight-transparent"
-        >
-          <svg class="w-6 h-6 mb-0.5" :class="$route.path.includes('/dashboard') && !$route.path.includes('/watchlist') ? 'text-brand-500 dark:text-brand-400' : 'text-gray-400 dark:text-gray-500'" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-          </svg>
-          <span class="text-[10px] font-semibold" :class="$route.path.includes('/dashboard') && !$route.path.includes('/watchlist') ? 'text-brand-500 dark:text-brand-400' : 'text-gray-500 dark:text-gray-500'">Trips</span>
-        </router-link>
-
-        <!-- Inbox -->
-        <router-link 
-          to="/messages"
-          class="flex flex-col items-center justify-center transition-colors tap-highlight-transparent"
-        >
-          <svg class="w-6 h-6 mb-0.5" :class="$route.path.includes('/messages') ? 'text-brand-500 dark:text-brand-400' : 'text-gray-400 dark:text-gray-500'" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
-          </svg>
-          <span class="text-[10px] font-semibold" :class="$route.path.includes('/messages') ? 'text-brand-500 dark:text-brand-400' : 'text-gray-500 dark:text-gray-500'">Inbox</span>
-        </router-link>
-
-        <!-- Profile -->
-        <router-link 
-          :to="userStore.isAuthenticated ? '/profile' : '/login'"
-          class="flex flex-col items-center justify-center transition-colors tap-highlight-transparent"
-        >
-          <svg class="w-6 h-6 mb-0.5" :class="$route.path.includes('/profile') || $route.path.includes('/login') ? 'text-brand-500 dark:text-brand-400' : 'text-gray-400 dark:text-gray-500'" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-          </svg>
-          <span class="text-[10px] font-semibold" :class="$route.path.includes('/profile') || $route.path.includes('/login') ? 'text-brand-500 dark:text-brand-400' : 'text-gray-500 dark:text-gray-500'">Profile</span>
-        </router-link>
-      </div>
-    </nav>
 
     <!-- AI Trip Advisor Button - Fixed Position with Minimize -->
     <transition name="slide-fade">
       <div 
         v-if="!aiMinimized"
-        class="fixed bottom-24 lg:bottom-6 right-6 z-[1000]"
+        class="fixed bottom-6 right-6 z-[1000]"
       >
         <button 
           @click="showAIConcierge = !showAIConcierge"
@@ -534,7 +496,7 @@
       <button 
         v-if="aiMinimized"
         @click="aiMinimized = false; showAIConcierge = true"
-        class="fixed bottom-24 lg:bottom-6 right-6 z-[1000] w-14 h-14 bg-gradient-to-br from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+        class="fixed bottom-6 right-6 z-[1000] w-14 h-14 bg-gradient-to-br from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
         title="Open AI Trip Advisor"
       >
         <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
