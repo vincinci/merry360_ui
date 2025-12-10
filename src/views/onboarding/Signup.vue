@@ -212,36 +212,46 @@ const handleSignup = async () => {
   loading.value = true
   
   try {
-    // Simulate API call - Replace with actual API endpoint
-    // const response = await fetch('/api/auth/signup', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({
-    //     name: formData.value.name,
-    //     email: formData.value.email,
-    //     phone: formData.value.phone,
-    //     password: formData.value.password
-    //   })
-    // })
+    // Import API service dynamically
+    const api = (await import('../../services/api')).default
     
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    // Split name into first and last
+    const nameParts = formData.value.name.trim().split(' ')
+    const firstName = nameParts[0]
+    const lastName = nameParts.slice(1).join(' ') || firstName
+    
+    // Call signup API
+    const response = await api.auth.signup({
+      firstName,
+      lastName,
+      email: formData.value.email,
+      phone: formData.value.phone,
+      password: formData.value.password
+    })
     
     // Register user
     userStore.login({
-      id: Date.now(),
-      name: formData.value.name,
-      email: formData.value.email,
-      phone: formData.value.phone,
+      id: response.user.id,
+      name: `${response.user.firstName} ${response.user.lastName}`,
+      email: response.user.email,
+      firstName: response.user.firstName,
+      lastName: response.user.lastName,
+      phone: response.user.phone,
+      role: response.user.role,
+      verified: response.user.verified,
       dateOfBirth: '',
       bio: '',
       memberSince: 'Dec 2025'
     })
     
+    // Store auth token
+    localStorage.setItem('auth_token', response.token)
+    
     // Navigate to home
-    router.push('/home')
+    router.push('/')
   } catch (error) {
     console.error('Signup error:', error)
-    setError('email', 'Registration failed. Email may already be in use.')
+    setError('email', error.message || 'Registration failed. Email may already be in use.')
   } finally {
     loading.value = false
   }

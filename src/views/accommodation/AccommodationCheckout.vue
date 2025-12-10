@@ -330,28 +330,46 @@ const confirmBooking = async () => {
   processing.value = true
   
   try {
-    // Simulate API call - Replace with actual booking endpoint
-    // const response = await fetch('/api/bookings', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({
-    //     accommodationId: bookingDetails.value.id,
-    //     guestInfo: guestInfo.value,
-    //     paymentMethod: paymentMethod.value,
-    //     specialRequests: specialRequests.value
-    //   })
-    // })
+    // Import API service
+    const api = (await import('../../services/api')).default
     
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    // Create payment intent first
+    const totalAmount = bookingDetails.value.price * 3 + 75 // 3 nights + fees
+    const paymentIntent = await api.payments.createIntent(
+      totalAmount,
+      currencyStore.selectedCurrency
+    )
+    
+    // Confirm payment
+    await api.payments.confirm(paymentIntent.data.intentId)
+    
+    // Create booking
+    const bookingData = {
+      accommodationId: route.params.id,
+      accommodationName: bookingDetails.value.name,
+      guestInfo: guestInfo.value,
+      paymentMethod: paymentMethod.value,
+      specialRequests: specialRequests.value,
+      totalAmount,
+      currency: currencyStore.selectedCurrency,
+      nights: 3,
+      checkIn: new Date().toISOString(),
+      checkOut: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString()
+    }
+    
+    const response = await api.bookings.create(bookingData)
     
     // Booking successful
     router.push({
-      path: '/dashboard',
-      query: { bookingSuccess: 'true' }
+      path: '/profile/trips',
+      query: { 
+        bookingSuccess: 'true',
+        bookingNumber: response.data.bookingNumber
+      }
     })
   } catch (error) {
     console.error('Booking error:', error)
-    errors.value.general = 'Booking failed. Please try again.'
+    errors.value.general = error.message || 'Booking failed. Please try again.'
   } finally {
     processing.value = false
   }

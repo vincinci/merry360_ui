@@ -305,7 +305,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCurrencyStore } from '../../stores/currency'
 import { useUserStore } from '../../stores/userStore'
@@ -314,6 +314,7 @@ import { useToast } from '../../composables/useToast.js'
 import MainLayout from '../../components/layout/MainLayout.vue'
 import Card from '../../components/common/Card.vue'
 import MapView from '../../components/common/MapView.vue'
+import api from '../../services/api'
 
 const router = useRouter()
 const { success } = useToast()
@@ -324,11 +325,23 @@ const { t } = useTranslation()
 const viewMode = ref('list')
 const sortBy = ref('recommended')
 const searchQuery = ref('')
+const loading = ref(true)
 
-const performSearch = () => {
+const performSearch = async () => {
   if (searchQuery.value.trim()) {
-    // Add search logic here - filter accommodations based on searchQuery
-    console.log('Searching for:', searchQuery.value)
+    loading.value = true
+    try {
+      const response = await api.accommodations.getAll({ search: searchQuery.value })
+      accommodations.value = response.data.map(acc => ({
+        ...acc,
+        eco: acc.ecoFriendly,
+        isFavorite: false
+      }))
+    } catch (error) {
+      console.error('Search error:', error)
+    } finally {
+      loading.value = false
+    }
   }
 }
 
@@ -343,78 +356,23 @@ const filters = ref({
 const propertyTypes = ['Hotel', 'Resort', 'Apartment', 'Villa', 'Lodge', 'Guesthouse']
 const amenities = ['WiFi', 'Pool', 'Parking', 'Restaurant', 'Spa', 'Gym', 'Air Conditioning', 'Pet Friendly']
 
-const accommodations = ref([
-  {
-    id: 1,
-    name: 'Kigali Serena Hotel',
-    type: 'Hotel',
-    location: 'Kigali, Rwanda',
-    price: 95,
-    rating: 4.8,
-    reviews: 324,
-    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800',
-    description: 'Luxury hotel in the heart of Kigali with stunning city views and world-class amenities.',
-    amenities: ['WiFi', 'Pool', 'Restaurant', 'Spa', 'Gym', 'Air Conditioning'],
-    eco: true,
-    isFavorite: false
-  },
-  {
-    id: 2,
-    name: 'Lake Kivu Resort',
-    type: 'Resort',
-    location: 'Gisenyi, Rwanda',
-    price: 85,
-    rating: 4.6,
-    reviews: 198,
-    image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800',
-    description: 'Beautiful lakeside resort perfect for relaxation and water activities.',
-    amenities: ['WiFi', 'Pool', 'Restaurant', 'Parking', 'Beach Access'],
-    eco: false,
-    isFavorite: false
-  },
-  {
-    id: 3,
-    name: 'Akagera Safari Lodge',
-    type: 'Lodge',
-    location: 'Akagera National Park',
-    price: 125,
-    rating: 4.9,
-    reviews: 267,
-    image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800',
-    description: 'Eco-friendly safari lodge offering unforgettable wildlife experiences.',
-    amenities: ['WiFi', 'Restaurant', 'Safari Tours', 'Parking'],
-    eco: true,
-    isFavorite: false
-  },
-  {
-    id: 4,
-    name: 'Volcanoes View Lodge',
-    type: 'Lodge',
-    location: 'Musanze, Rwanda',
-    price: 140,
-    rating: 4.7,
-    reviews: 156,
-    image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800',
-    description: 'Stunning mountain views with easy access to gorilla trekking.',
-    amenities: ['WiFi', 'Restaurant', 'Parking', 'Fireplace'],
-    eco: true,
-    isFavorite: false
-  },
-  {
-    id: 5,
-    name: 'Nyungwe Forest Lodge',
-    type: 'Lodge',
-    location: 'Nyungwe National Park',
-    price: 130,
-    rating: 4.8,
-    reviews: 189,
-    image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800',
-    description: 'Luxury eco-lodge nestled in the heart of ancient rainforest.',
-    amenities: ['WiFi', 'Restaurant', 'Spa', 'Hiking Tours'],
-    eco: true,
-    isFavorite: false
+const accommodations = ref([])
+
+// Load accommodations on mount
+onMounted(async () => {
+  try {
+    const response = await api.accommodations.getAll()
+    accommodations.value = response.data.map(acc => ({
+      ...acc,
+      eco: acc.ecoFriendly,
+      isFavorite: false
+    }))
+  } catch (error) {
+    console.error('Failed to load accommodations:', error)
+  } finally {
+    loading.value = false
   }
-])
+})
 
 const filteredAccommodations = computed(() => {
   return accommodations.value.filter(acc => {
