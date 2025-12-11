@@ -162,7 +162,7 @@
 
 <script setup>
 import { ref, watch, nextTick } from 'vue'
-import { openai } from '@/services/openai'
+import openAIService from '@/services/openai'
 import { useToast } from '@/composables/useToast'
 
 const props = defineProps({
@@ -217,7 +217,7 @@ const sendMessage = async (text) => {
   
   try {
     // Get AI response using OpenAI GPT-4
-    const response = await openai.sendMessage(text, messages.value.slice(0, -1))
+    const response = await openAIService.sendMessage(text, messages.value.slice(0, -1))
     
     messages.value.push({
       type: 'ai',
