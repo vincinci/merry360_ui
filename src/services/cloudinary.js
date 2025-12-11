@@ -3,16 +3,12 @@
  * Image hosting and 360° virtual tour integration
  */
 
-import { Cloudinary } from 'cloudinary-core'
+const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dqzvhxsy8'
+const apiKey = import.meta.env.VITE_CLOUDINARY_API_KEY
+const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'merry360_uploads'
 
-const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
-const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
-
-// Initialize Cloudinary
-let cloudinary = null
-if (cloudName) {
-  cloudinary = new Cloudinary({ cloud_name: cloudName, secure: true })
-}
+// Base Cloudinary URL
+const baseUrl = `https://res.cloudinary.com/${cloudName}`
 
 /**
  * Cloudinary Service
@@ -26,10 +22,26 @@ export const cloudinaryService = {
   },
 
   /**
+   * Build transformation string
+   */
+  buildTransformations(transformations = {}) {
+    const parts = []
+    
+    if (transformations.width) parts.push(`w_${transformations.width}`)
+    if (transformations.height) parts.push(`h_${transformations.height}`)
+    if (transformations.crop) parts.push(`c_${transformations.crop}`)
+    if (transformations.gravity) parts.push(`g_${transformations.gravity}`)
+    if (transformations.quality) parts.push(`q_${transformations.quality}`)
+    if (transformations.fetch_format) parts.push(`f_${transformations.fetch_format}`)
+    
+    return parts.join(',')
+  },
+
+  /**
    * Get optimized image URL
    */
   getImageUrl(publicId, transformations = {}) {
-    if (!cloudinary) {
+    if (!cloudName) {
       console.warn('Cloudinary not configured')
       return publicId
     }
@@ -40,7 +52,8 @@ export const cloudinaryService = {
       ...transformations
     }
 
-    return cloudinary.url(publicId, defaultTransformations)
+    const transformString = this.buildTransformations(defaultTransformations)
+    return `${baseUrl}/image/upload/${transformString}/${publicId}`
   },
 
   /**
