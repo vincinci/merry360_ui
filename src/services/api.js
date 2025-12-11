@@ -3,12 +3,15 @@
  * Centralized HTTP client for all API requests
  */
 
-// Import mock API for MVP
+// Import Supabase service
+import { supabaseAuth, supabaseDB } from './supabase'
+// Import mock API for fallback
 import { mockApiService } from './mockApi'
 
 // Base API URL - should be from environment variable
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api'
-const USE_MOCK_API = import.meta.env.VITE_USE_MOCK_API !== 'false' // Default to true for MVP
+const USE_MOCK_API = import.meta.env.VITE_USE_MOCK_API === 'true' // Use Supabase by default
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL
 
 /**
  * Custom API Error class
@@ -251,5 +254,136 @@ export const api = {
   }
 }
 
-// Export both for flexibility
-export default USE_MOCK_API ? mockApiService : api
+/**
+ * Supabase-based API wrapper
+ */
+const supabaseApi = {
+  // Authentication
+  auth: {
+    login: async (credentials) => {
+      const result = await supabaseAuth.signIn(credentials)
+      if (result.error) throw new APIError(result.error.message, 401)
+      return { user: result.user, token: result.session?.access_token }
+    },
+    signup: async (userData) => {
+      const result = await supabaseAuth.signUp(userData)
+      if (result.error) throw new APIError(result.error.message, 400)
+      return { user: result.user, token: result.session?.access_token }
+    },
+    logout: async () => {
+      const { error } = await supabaseAuth.signOut()
+      if (error) throw new APIError(error.message, 500)
+      return { success: true }
+    },
+    refreshToken: async () => {
+      const session = await supabaseAuth.getSession()
+      if (!session) throw new APIError('No session found', 401)
+      return { token: session.access_token }
+    },
+    forgotPassword: (email) => mockApiService.auth.forgotPassword(email),
+    resetPassword: (token, password) => mockApiService.auth.resetPassword(token, password),
+    verifyEmail: (token) => mockApiService.auth.verifyEmail(token)
+  },
+
+  // Accommodations
+  accommodations: {
+    getAll: async (params) => {
+      const result = await supabaseDB.getAccommodations({ filters: params })
+      return result || []
+    },
+    getById: async (id) => {
+      const result = await supabaseDB.getAccommodationById(id)
+      if (!result) throw new APIError('Accommodation not found', 404)
+      return result
+    },
+    search: async (query) => {
+      const result = await supabaseDB.getAccommodations({ filters: query })
+      return result || []
+    },
+    getNearby: (lat, lng, radius) => mockApiService.accommodations.getNearby(lat, lng, radius),
+    getReviews: (id) => mockApiService.accommodations.getReviews(id)
+  },
+
+  // Bookings
+  bookings: {
+    create: async (bookingData) => {
+      const result = await supabaseDB.createBooking(bookingData)
+      if (!result) throw new APIError('Failed to create booking', 500)
+      return result
+    },
+    getById: (id) => mockApiService.bookings.getById(id),
+    getMyBookings: async () => {
+      const result = await supabaseDB.getUserBookings()
+      return result || []
+    },
+    cancel: (id) => mockApiService.bookings.cancel(id),
+    update: (id, data) => mockApiService.bookings.update(id, data)
+  },
+
+  // Tours
+  tours: {
+    getAll: async (params) => {
+      const result = await supabaseDB.getTours({ filters: params })
+      return result || []
+    },
+    getById: async (id) => {
+      const result = await supabaseDB.getTourById(id)
+      if (!result) throw new APIError('Tour not found', 404)
+      return result
+    },
+    search: async (query) => {
+      const result = await supabaseDB.getTours({ filters: query })
+      return result || []
+    },
+    book: (tourId, data) => mockApiService.tours.book(tourId, data)
+  },
+
+  // Transport
+  transport: {
+    getRoutes: async (params) => {
+      const result = await supabaseDB.getTransportOptions({ filters: params })
+      return result || []
+    },
+    getVehicles: async (params) => {
+      const result = await supabaseDB.getTransportOptions({ filters: params })
+      return result || []
+    },
+    book: (data) => mockApiService.transport.book(data)
+  },
+
+  // User
+  user: {
+    getProfile: async () => {
+      const result = await supabaseDB.getProfile()
+      if (!result) throw new APIError('Profile not found', 404)
+      return result
+    },
+    updateProfile: async (data) => {
+      const result = await supabaseDB.updateProfile(data)
+      if (!result) throw new APIError('Failed to update profile', 500)
+      return result
+    },
+    changePassword: (data) => mockApiService.user.changePassword(data),
+    getWatchlist: () => mockApiService.user.getWatchlist(),
+    addToWatchlist: (item) => mockApiService.user.addToWatchlist(item),
+    removeFromWatchlist: (id) => mockApiService.user.removeFromWatchlist(id),
+    uploadAvatar: (file) => mockApiService.user.uploadAvatar(file)
+  },
+
+  // Payments
+  payments: {
+    createIntent: (amount, currency) => mockApiService.payments.createIntent(amount, currency),
+    confirm: (intentId) => mockApiService.payments.confirm(intentId),
+    getHistory: () => mockApiService.payments.getHistory()
+  },
+
+  // Reviews
+  reviews: {
+    create: (accommodationId, review) => mockApiService.reviews.create(accommodationId, review),
+    update: (reviewId, review) => mockApiService.reviews.update(reviewId, review),
+    delete: (reviewId) => mockApiService.reviews.delete(reviewId)
+  }
+}
+
+// Export the appropriate API based on configuration
+export default SUPABASE_URL && !USE_MOCK_API ? supabaseApi : mockApiService
