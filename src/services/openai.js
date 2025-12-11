@@ -6,7 +6,7 @@
 import OpenAI from 'openai'
 
 const apiKey = import.meta.env.VITE_OPENAI_API_KEY
-const model = import.meta.env.VITE_OPENAI_MODEL || 'gpt-4-turbo'
+const model = import.meta.env.VITE_OPENAI_MODEL || 'gpt-4o'
 
 // Initialize OpenAI client
 let openai = null
