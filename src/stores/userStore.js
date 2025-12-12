@@ -5,13 +5,15 @@ export const useUserStore = defineStore('user', () => {
   // Load initial state from localStorage
   const savedUser = localStorage.getItem('user')
   const savedAuth = localStorage.getItem('isAuthenticated')
+  const savedCart = localStorage.getItem('tripCart')
+  const savedWatchlist = localStorage.getItem('watchlist')
   
   // User data
   const user = ref(savedUser ? JSON.parse(savedUser) : null)
   const isAuthenticated = ref(savedAuth === 'true')
   
   // Watchlist / Saved Items
-  const watchlist = ref([])
+  const watchlist = ref(savedWatchlist ? JSON.parse(savedWatchlist) : [])
   
   // Loyalty Points
   const loyaltyPoints = ref(0)
@@ -35,7 +37,7 @@ export const useUserStore = defineStore('user', () => {
   const pastBookings = ref([])
   
   // Trip cart
-  const tripCart = ref([])
+  const tripCart = ref(savedCart ? JSON.parse(savedCart) : [])
   
   // Subscription
   const subscription = ref({
@@ -71,6 +73,8 @@ export const useUserStore = defineStore('user', () => {
     // Clear localStorage
     localStorage.removeItem('user')
     localStorage.removeItem('isAuthenticated')
+    localStorage.removeItem('tripCart')
+    localStorage.removeItem('watchlist')
   }
   
   const addToWatchlist = (item) => {
@@ -80,11 +84,13 @@ export const useUserStore = defineStore('user', () => {
         ...item,
         savedAt: new Date().toISOString()
       })
+      localStorage.setItem('watchlist', JSON.stringify(watchlist.value))
     }
   }
   
   const removeFromWatchlist = (id, type) => {
     watchlist.value = watchlist.value.filter(w => !(w.id === id && w.type === type))
+    localStorage.setItem('watchlist', JSON.stringify(watchlist.value))
   }
   
   const isInWatchlist = (id, type) => {
@@ -98,15 +104,18 @@ export const useUserStore = defineStore('user', () => {
         ...item,
         addedAt: new Date().toISOString()
       })
+      localStorage.setItem('tripCart', JSON.stringify(tripCart.value))
     }
   }
   
   const removeFromCart = (id, type) => {
     tripCart.value = tripCart.value.filter(c => !(c.id === id && c.type === type))
+    localStorage.setItem('tripCart', JSON.stringify(tripCart.value))
   }
   
   const clearCart = () => {
     tripCart.value = []
+    localStorage.setItem('tripCart', JSON.stringify(tripCart.value))
   }
   
   const addLoyaltyPoints = (points) => {
