@@ -161,44 +161,38 @@ const handleLogin = async () => {
   loading.value = true
   
   try {
-    // Import API service dynamically
-    const api = (await import('../../services/api')).default
+    // Simulate API call - Replace with actual API endpoint
+    // const response = await fetch('/api/auth/login', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({
+    //     email: formData.email,
+    //     password: formData.password
+    //   })
+    // })
     
-    // Call login API
-    const response = await api.auth.login({
-      email: formData.email,
-      password: formData.password
-    })
+    await new Promise((resolve) => setTimeout(resolve, 1500))
     
     // Login the user
     userStore.login({
-      id: response.user.id,
-      name: `${response.user.firstName} ${response.user.lastName}`,
-      email: response.user.email,
-      firstName: response.user.firstName,
-      lastName: response.user.lastName,
-      phone: response.user.phone,
-      role: response.user.role,
-      verified: response.user.verified,
-      dateOfBirth: '',
+      id: 1,
+      name: formData.email.split('@')[0],
+      email: formData.email,
+      phone: '+250 788 123 456',
+      dateOfBirth: '1990-01-01',
       bio: 'Travel enthusiast exploring Rwanda and beyond',
       memberSince: 'Dec 2025'
     })
     
-    // Store auth token
-    localStorage.setItem('auth_token', response.token)
+    // Set some initial data
+    userStore.loyaltyPoints = 2450
+    userStore.addToWatchlist({ id: 1, type: 'accommodation', name: 'Sample Property' })
     
-    // Navigate based on role
-    if (response.user.role === 'admin') {
-      router.push('/admin')
-    } else if (response.user.role === 'vendor') {
-      router.push('/vendor')
-    } else {
-      router.push('/profile')
-    }
+    // Navigate to profile
+    router.push('/profile')
   } catch (error) {
     console.error('Login error:', error)
-    setError('email', error.message || 'Invalid email or password')
+    setError('email', 'Invalid email or password')
     setError('password', ' ')
   } finally {
     loading.value = false

@@ -162,8 +162,6 @@
 
 <script setup>
 import { ref, watch, nextTick } from 'vue'
-import openAIService from '@/services/openai'
-import { useToast } from '@/composables/useToast'
 
 const props = defineProps({
   isOpen: {
@@ -173,7 +171,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['close', 'minimize'])
-const toast = useToast()
 
 const messages = ref([])
 const inputMessage = ref('')
@@ -215,35 +212,19 @@ const sendMessage = async (text) => {
   // Show typing indicator
   isTyping.value = true
   
-  try {
-    // Get AI response using OpenAI GPT-4
-    const response = await openAIService.sendMessage(text, messages.value.slice(0, -1))
-    
+  // Simulate AI response
+  setTimeout(() => {
+    const response = getAIResponse(text)
     messages.value.push({
       type: 'ai',
       text: response
     })
-  } catch (error) {
-    console.error('AI response error:', error)
-    
-    // Fallback to basic response
-    const fallbackResponse = getBasicResponse(text)
-    messages.value.push({
-      type: 'ai',
-      text: fallbackResponse
-    })
-    
-    // Show error toast only if it's not a configuration issue
-    if (!error.message?.includes('OpenAI API key not configured')) {
-      toast.show('AI service temporarily unavailable. Using basic responses.', 'warning')
-    }
-  } finally {
     isTyping.value = false
     scrollToBottom()
-  }
+  }, 1000 + Math.random() * 1000)
 }
 
-const getBasicResponse = (userMessage) => {
+const getAIResponse = (userMessage) => {
   const msg = userMessage.toLowerCase()
   
   // Accommodation queries

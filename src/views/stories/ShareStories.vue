@@ -58,7 +58,7 @@
                 type="text" 
                 required
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                placeholder="Enter your name"
+                :placeholder="t('placeholder.fullName')"
               />
             </div>
 
@@ -69,7 +69,7 @@
                 type="text" 
                 required
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                placeholder="Give your story a catchy title"
+                :placeholder="t('placeholder.storyTitle')"
               />
             </div>
 
@@ -80,7 +80,7 @@
                 type="text" 
                 required
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                placeholder="Where did this happen?"
+                :placeholder="t('placeholder.storyLocation')"
               />
             </div>
 
@@ -91,7 +91,7 @@
                 required
                 rows="6"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                placeholder="Tell us about your amazing experience..."
+                :placeholder="t('placeholder.storyContent')"
               ></textarea>
             </div>
 

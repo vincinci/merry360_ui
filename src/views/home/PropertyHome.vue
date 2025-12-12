@@ -25,7 +25,7 @@
                 v-model="searchForm.location" 
                 type="text" 
                 placeholder="Where to?" 
-                class="w-full bg-transparent border-0 focus:outline-none text-sm text-gray-900 placeholder-gray-400 font-medium"
+                class="w-full bg-transparent border-0 focus:outline-none text-sm text-gray-900 dark:text-white placeholder-gray-400 font-medium"
               />
             </div>
 
@@ -34,11 +34,13 @@
               <svg class="w-4 h-4 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
               </svg>
-              <input 
-                v-model="searchForm.checkIn" 
-                type="date" 
-                class="bg-transparent border-0 focus:outline-none text-xs text-gray-900 w-full"
-              />
+              <DatePicker v-model="searchForm.checkIn" position="left">
+                <template #default="{ formattedDate }">
+                  <div class="text-xs text-gray-900 dark:text-white cursor-pointer hover:text-accent-blue transition-colors">
+                    {{ formattedDate || 'Check in' }}
+                  </div>
+                </template>
+              </DatePicker>
             </div>
 
             <!-- Check-out -->
@@ -46,11 +48,13 @@
               <svg class="w-4 h-4 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
               </svg>
-              <input 
-                v-model="searchForm.checkOut" 
-                type="date" 
-                class="bg-transparent border-0 focus:outline-none text-xs text-gray-900 w-full"
-              />
+              <DatePicker v-model="searchForm.checkOut" position="left" :minDate="searchForm.checkIn">
+                <template #default="{ formattedDate }">
+                  <div class="text-xs text-gray-900 dark:text-white cursor-pointer hover:text-accent-blue transition-colors">
+                    {{ formattedDate || 'Check out' }}
+                  </div>
+                </template>
+              </DatePicker>
             </div>
 
             <!-- Guests -->
@@ -58,14 +62,14 @@
               <svg class="w-4 h-4 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
               </svg>
-              <input 
-                v-model="searchForm.adults" 
-                type="number" 
-                min="1" 
-                placeholder="2" 
-                class="bg-transparent border-0 focus:outline-none text-xs text-gray-900 w-12 text-center font-medium"
-              />
-              <span class="text-xs text-gray-500 ml-1">guests</span>
+              <GuestSelector v-model="searchForm.guests" position="left">
+                <template #default="{ totalGuests }">
+                  <div class="flex items-center cursor-pointer hover:text-accent-blue transition-colors">
+                    <span class="text-xs text-gray-900 dark:text-white font-medium">{{ totalGuests }}</span>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 ml-1">guests</span>
+                  </div>
+                </template>
+              </GuestSelector>
             </div>
 
             <!-- Search Button -->
@@ -94,7 +98,7 @@
                 v-model="searchForm.location" 
                 type="text" 
                 placeholder="Where to?" 
-                class="w-full bg-transparent border-0 focus:outline-none text-sm text-gray-900 placeholder-gray-400"
+                class="w-full bg-transparent border-0 focus:outline-none text-sm text-gray-900 dark:text-white placeholder-gray-400"
               />
             </div>
 
@@ -104,11 +108,13 @@
                 <svg class="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
-                <input 
-                  v-model="searchForm.checkIn" 
-                  type="date" 
-                  class="bg-transparent border-0 focus:outline-none text-xs text-gray-900 w-full"
-                />
+                <DatePicker v-model="searchForm.checkIn" position="left">
+                  <template #default="{ formattedDate }">
+                    <div class="text-xs text-gray-900 dark:text-white w-full cursor-pointer">
+                      {{ formattedDate || 'Check in' }}
+                    </div>
+                  </template>
+                </DatePicker>
               </div>
 
               <!-- Check-out -->
@@ -116,11 +122,13 @@
                 <svg class="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
-                <input 
-                  v-model="searchForm.checkOut" 
-                  type="date" 
-                  class="bg-transparent border-0 focus:outline-none text-xs text-gray-900 w-full"
-                />
+                <DatePicker v-model="searchForm.checkOut" position="left" :minDate="searchForm.checkIn">
+                  <template #default="{ formattedDate }">
+                    <div class="text-xs text-gray-900 dark:text-white w-full cursor-pointer">
+                      {{ formattedDate || 'Check out' }}
+                    </div>
+                  </template>
+                </DatePicker>
               </div>
             </div>
 
@@ -129,14 +137,14 @@
               <svg class="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
               </svg>
-              <input 
-                v-model="searchForm.adults" 
-                type="number" 
-                min="1" 
-                placeholder="2" 
-                class="bg-transparent border-0 focus:outline-none text-sm text-gray-900 w-12 text-center"
-              />
-              <span class="text-sm text-gray-500 ml-1">guests</span>
+              <GuestSelector v-model="searchForm.guests" position="left">
+                <template #default="{ totalGuests }">
+                  <div class="flex items-center cursor-pointer w-full">
+                    <span class="text-sm text-gray-900 dark:text-white font-medium">{{ totalGuests }}</span>
+                    <span class="text-sm text-gray-500 dark:text-gray-400 ml-1">guests</span>
+                  </div>
+                </template>
+              </GuestSelector>
             </div>
 
             <!-- Search Button -->
@@ -391,57 +399,48 @@ import { useTranslation } from '../../composables/useTranslation'
 import MainLayout from '../../components/layout/MainLayout.vue'
 import PropertyCard from '../../components/common/PropertyCard.vue'
 import AIConcierge from '../../components/ai/AIConcierge.vue'
+import DatePicker from '../../components/common/DatePicker.vue'
+import GuestSelector from '../../components/common/GuestSelector.vue'
+import api from '../../services/api'
 
 const router = useRouter()
 const userStore = useUserStore()
 const currencyStore = useCurrencyStore()
 const { t } = useTranslation()
 
-// Add sample data on first load
-onMounted(() => {
-  // Only add if empty (first time)
-  if (userStore.watchlistCount === 0) {
-    // Add sample properties to watchlist
-    userStore.addToWatchlist({
-      id: 101,
-      type: 'property',
-      name: 'Lake Kivu Resort',
-      location: 'Rubavu, Rwanda',
-      image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&q=80',
-      price: '750,000',
-      beds: 3,
-      baths: 2
-    })
+// Load real data from API
+onMounted(async () => {
+  try {
+    const response = await api.accommodations.getAll()
+    const accommodations = response.data.map(acc => ({
+      id: acc.id,
+      image: acc.thumbnail_url || acc.images?.[0] || 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400&q=80',
+      badge: acc.is_eco_friendly ? 'Eco-Friendly' : 'Featured',
+      title: acc.title,
+      location: `${acc.city}, ${acc.country}`,
+      beds: acc.bedrooms,
+      baths: acc.bathrooms,
+      area: acc.max_guests * 400,
+      price: acc.price_per_night
+    }))
     
-    userStore.addToWatchlist({
-      id: 102,
-      type: 'tour',
-      title: 'Akagera Safari Experience',
-      category: 'WILDLIFE',
-      description: 'Two-day safari adventure',
-      image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=400&q=80',
-      price: '280,000',
-      duration: '2 days'
-    })
-  }
-  
-  if (userStore.cartCount === 0) {
-    // Add sample item to cart
-    userStore.addToCart({
-      id: 201,
-      type: 'property',
-      name: 'Kigali City Apartment',
-      location: 'Kigali, Rwanda',
-      image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&q=80',
-      price: '450,000',
-      beds: 2,
-      baths: 1
-    })
-  }
-  
-  // Add some loyalty points
-  if (userStore.loyaltyPoints === 0) {
-    userStore.addLoyaltyPoints(2500) // Silver tier
+    latestProperties.value = accommodations.slice(0, 4)
+    nearbyProperties.value = accommodations.slice(0, 4)
+    topRatedProperties.value = [...accommodations].sort((a, b) => (b.rating || 0) - (a.rating || 0)).slice(0, 4)
+    featuredProperties.value = accommodations.slice(0, 6)
+    
+    const toursResponse = await api.tours.getAll()
+    featuredTours.value = toursResponse.data.slice(0, 3).map(tour => ({
+      id: tour.id,
+      image: tour.images?.[0] || 'https://images.unsplash.com/photo-1571752239935-74f3d4d23816?w=600&q=80',
+      category: tour.category?.toUpperCase() || 'ADVENTURE',
+      title: tour.title,
+      description: tour.description,
+      duration: tour.duration,
+      price: tour.price
+    }))
+  } catch (error) {
+    console.error('Failed to load data:', error)
   }
 })
 
@@ -449,8 +448,11 @@ const searchForm = ref({
   location: 'Kigali, Rwanda',
   checkIn: '',
   checkOut: '',
-  adults: 2,
-  children: 0,
+  guests: {
+    adults: 2,
+    children: 0,
+    infants: 0
+  },
   rooms: 1
 })
 
@@ -464,86 +466,12 @@ const navigateTo = (path) => {
   router.push(path)
 }
 
-const featuredTours = ref([
-  {
-    id: 1,
-    image: 'https://images.unsplash.com/photo-1571752239935-74f3d4d23816?w=600&q=80',
-    category: 'NATURE',
-    title: 'Gorilla Trekking Experience',
-    description: 'Get up close with mountain gorillas in Volcanoes National Park',
-    duration: '3 days',
-    price: 1500
-  },
-  {
-    id: 2,
-    image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600&q=80',
-    category: 'CULTURE',
-    title: 'Kigali City Tour',
-    description: 'Explore the vibrant capital city and its rich history',
-    duration: '1 day',
-    price: 80
-  },
-  {
-    id: 3,
-    image: 'https://images.unsplash.com/photo-1516826435551-36a8a09e4526?w=600&q=80',
-    category: 'ADVENTURE',
-    title: 'Lake Kivu Island Hopping',
-    description: 'Discover beautiful islands and pristine beaches',
-    duration: '2 days',
-    price: 250
-  }
-])
+const featuredTours = ref([])
 
-const latestProperties = ref([
-  {
-    id: 1,
-    image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400&q=80',
-    badge: 'Featured',
-    title: 'Modern Apartment',
-    location: 'Kigali, Rwanda',
-    beds: 3,
-    baths: 2,
-    area: 1200,
-    price: 150
-  },
-  {
-    id: 2,
-    image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=400&q=80',
-    badge: 'Hot Offer',
-    title: 'Luxury Villa',
-    location: 'Musanze, Rwanda',
-    beds: 4,
-    baths: 3,
-    area: 2500,
-    price: 250
-  },
-  {
-    id: 3,
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&q=80',
-    badge: 'New Listing',
-    title: 'Family House',
-    location: 'Gisenyi, Rwanda',
-    beds: 5,
-    baths: 3,
-    area: 1800,
-    price: 200
-  },
-  {
-    id: 4,
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=80',
-    badge: 'Featured',
-    title: 'Cozy Cottage',
-    location: 'Rubavu, Rwanda',
-    beds: 2,
-    baths: 1,
-    area: 900,
-    price: 120
-  }
-])
-
-const nearbyProperties = ref([...latestProperties.value])
-const topRatedProperties = ref([...latestProperties.value])
-const featuredProperties = ref([...latestProperties.value, ...latestProperties.value.slice(0, 2)])
+const latestProperties = ref([])
+const nearbyProperties = ref([])
+const topRatedProperties = ref([])
+const featuredProperties = ref([])
 
 const guides = ref([
   {

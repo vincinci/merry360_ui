@@ -42,7 +42,7 @@
             <!-- Tooltip -->
             <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
               <div class="bg-white rounded-lg shadow-xl p-3 min-w-[200px]">
-                <p class="font-bold text-sm text-gray-900 mb-1">{{ property.title }}</p>
+                <p class="font-bold text-sm text-gray-900 dark:text-white mb-1">{{ property.title }}</p>
                 <p class="text-xs text-gray-600 mb-2">{{ property.location }}</p>
                 <p class="text-teal-600 font-bold text-sm">{{ formatPrice(property.price) }}/night</p>
               </div>

@@ -9,7 +9,7 @@
             <input 
               v-model="searchQuery"
               type="text" 
-              placeholder="Search by type, route, or service..."
+              :placeholder="t('placeholder.searchTransport')"
               class="w-full text-sm font-semibold focus:outline-none placeholder-gray-400"
               style="font-family: Montserrat, sans-serif; color: #484848; font-size: 14px;"
               @keyup.enter="performSearch"

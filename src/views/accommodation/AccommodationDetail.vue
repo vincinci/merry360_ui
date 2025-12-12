@@ -420,27 +420,44 @@ const accommodation = ref({
     'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400',
     'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=400'
   ],
-  description: 'Experience luxury in the heart of Kigali at the Serena Hotel.',
-  amenities: [],
-  reviewsList: []
-})
-
-// Load accommodation details on mount
-import { onMounted } from 'vue'
-import api from '../../services/api'
-
-onMounted(async () => {
-  try {
-    const response = await api.accommodations.getById(route.params.id)
-    accommodation.value = {
-      ...response.data,
-      mainImage: response.data.images[0] || response.data.image,
-      gallery: response.data.images.slice(1) || [],
-      eco: response.data.ecoFriendly
+  description: 'Experience luxury in the heart of Kigali at the Serena Hotel. Our eco-certified property combines modern comfort with traditional Rwandan hospitality. Featuring stunning views, world-class dining, and exceptional service, we ensure your stay is memorable.',
+  amenities: [
+    'Free WiFi',
+    'Swimming Pool',
+    'Restaurant & Bar',
+    'Spa & Wellness',
+    'Fitness Center',
+    'Room Service',
+    'Air Conditioning',
+    'Parking',
+    'Conference Rooms',
+    'Airport Shuttle',
+    'Laundry Service',
+    'Concierge'
+  ],
+  reviewsList: [
+    {
+      id: 1,
+      author: 'Sarah Johnson',
+      date: 'November 2025',
+      rating: 5.0,
+      comment: 'Absolutely wonderful stay! The staff was incredibly welcoming and the facilities were top-notch. The eco-friendly practices were impressive too.'
+    },
+    {
+      id: 2,
+      author: 'Michael Chen',
+      date: 'October 2025',
+      rating: 4.5,
+      comment: 'Great location in the heart of Kigali. Rooms were spacious and clean. The restaurant served delicious local and international cuisine.'
+    },
+    {
+      id: 3,
+      author: 'Emma Williams',
+      date: 'September 2025',
+      rating: 5.0,
+      comment: 'Perfect for business and leisure. The conference facilities were excellent and the pool area was a great place to unwind.'
     }
-  } catch (error) {
-    console.error('Failed to load accommodation:', error)
-  }
+  ]
 })
 </script>
 

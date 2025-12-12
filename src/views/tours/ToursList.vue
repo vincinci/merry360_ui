@@ -9,7 +9,7 @@
             <input 
               v-model="searchQuery"
               type="text" 
-              placeholder="Search by destination, activity, or duration..."
+              :placeholder="t('placeholder.searchTours')"
               class="w-full text-sm font-semibold focus:outline-none placeholder-gray-400"
               style="font-family: Montserrat, sans-serif; color: #484848; font-size: 14px;"
               @keyup.enter="performSearch"
@@ -32,7 +32,22 @@
       <h1 class="text-3xl font-bold mb-2">Discover Amazing Tours</h1>
       <p class="text-text-secondary text-lg mb-8">Unforgettable experiences across Rwanda</p>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <!-- Loading State -->
+      <div v-if="loading" class="flex justify-center items-center py-20">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+
+      <!-- Empty State -->
+      <div v-else-if="tours.length === 0" class="text-center py-20">
+        <svg class="w-24 h-24 mx-auto mb-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+        </svg>
+        <h3 class="text-xl font-semibold text-gray-700 mb-2">No Tours Available</h3>
+        <p class="text-gray-500 mb-8">There are no tours listed yet. Check back soon!</p>
+      </div>
+
+      <!-- Tours Grid -->
+      <div v-else class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card v-for="tour in tours" :key="tour.id" hover clickable padding="none" @click="router.push(`/tour/${tour.id}`)">
           <div class="relative h-64">
             <img loading="lazy" :src="tour.image" :alt="tour.name" class="w-full h-full object-cover rounded-t-card" />
@@ -61,11 +76,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCurrencyStore } from '../../stores/currency'
 import MainLayout from '../../components/layout/MainLayout.vue'
 import Card from '../../components/common/Card.vue'
+import api from '../../services/api'
 
 const router = useRouter()
 const currencyStore = useCurrencyStore()
@@ -78,33 +94,26 @@ const performSearch = () => {
   }
 }
 
-const tours = ref([
-  {
-    id: 1,
-    name: 'Gorilla Trekking',
-    category: 'Adventure',
-    duration: '1 Day',
-    price: 450,
-    image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=600',
-    description: 'Experience mountain gorillas up close'
-  },
-  {
-    id: 2,
-    name: 'Kigali City Tour',
-    category: 'Cultural',
-    duration: '4 Hours',
-    price: 45,
-    image: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=600',
-    description: 'Explore Rwanda\'s vibrant capital'
-  },
-  {
-    id: 3,
-    name: 'Lake Kivu Adventure',
-    category: 'Nature',
-    duration: '1 Day',
-    price: 75,
-    image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600',
-    description: 'Island hopping and water activities'
+const tours = ref([])
+const loading = ref(true)
+
+// Fetch tours from API
+onMounted(async () => {
+  try {
+    const response = await api.tours.getAll()
+    tours.value = response.data.map(tour => ({
+      id: tour.id,
+      name: tour.title,
+      category: tour.category || 'Adventure',
+      duration: tour.duration,
+      price: tour.price,
+      image: tour.images?.[0] || 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=600',
+      description: tour.description
+    }))
+  } catch (error) {
+    console.error('Failed to load tours:', error)
+  } finally {
+    loading.value = false
   }
-])
+})
 </script>
