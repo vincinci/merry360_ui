@@ -34,13 +34,11 @@
               <svg class="w-4 h-4 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
               </svg>
-              <DatePicker v-model="searchForm.checkIn" position="left">
-                <template #default="{ formattedDate }">
-                  <div class="text-xs text-gray-900 dark:text-white cursor-pointer hover:text-accent-blue transition-colors">
-                    {{ formattedDate || 'Check in' }}
-                  </div>
-                </template>
-              </DatePicker>
+              <input 
+                v-model="searchForm.checkIn" 
+                type="date" 
+                class="w-full bg-transparent border-0 focus:outline-none text-xs text-gray-900 dark:text-white cursor-pointer"
+              />
             </div>
 
             <!-- Check-out -->
@@ -48,13 +46,12 @@
               <svg class="w-4 h-4 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
               </svg>
-              <DatePicker v-model="searchForm.checkOut" position="left" :minDate="searchForm.checkIn">
-                <template #default="{ formattedDate }">
-                  <div class="text-xs text-gray-900 dark:text-white cursor-pointer hover:text-accent-blue transition-colors">
-                    {{ formattedDate || 'Check out' }}
-                  </div>
-                </template>
-              </DatePicker>
+              <input 
+                v-model="searchForm.checkOut" 
+                type="date" 
+                :min="searchForm.checkIn"
+                class="w-full bg-transparent border-0 focus:outline-none text-xs text-gray-900 dark:text-white cursor-pointer"
+              />
             </div>
 
             <!-- Guests -->
@@ -62,14 +59,14 @@
               <svg class="w-4 h-4 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
               </svg>
-              <GuestSelector v-model="searchForm.guests" position="left">
-                <template #default="{ totalGuests }">
-                  <div class="flex items-center cursor-pointer hover:text-accent-blue transition-colors">
-                    <span class="text-xs text-gray-900 dark:text-white font-medium">{{ totalGuests }}</span>
-                    <span class="text-xs text-gray-500 dark:text-gray-400 ml-1">guests</span>
-                  </div>
-                </template>
-              </GuestSelector>
+              <input 
+                v-model.number="searchForm.guests.adults" 
+                type="number" 
+                min="1" 
+                placeholder="Guests"
+                class="w-16 bg-transparent border-0 focus:outline-none text-xs text-gray-900 dark:text-white"
+              />
+              <span class="text-xs text-gray-500 dark:text-gray-400 ml-1">guests</span>
             </div>
 
             <!-- Search Button -->
@@ -108,13 +105,11 @@
                 <svg class="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
-                <DatePicker v-model="searchForm.checkIn" position="left">
-                  <template #default="{ formattedDate }">
-                    <div class="text-xs text-gray-900 dark:text-white w-full cursor-pointer">
-                      {{ formattedDate || 'Check in' }}
-                    </div>
-                  </template>
-                </DatePicker>
+                <input 
+                  v-model="searchForm.checkIn" 
+                  type="date" 
+                  class="w-full bg-transparent border-0 focus:outline-none text-xs text-gray-900 dark:text-white"
+                />
               </div>
 
               <!-- Check-out -->
@@ -122,13 +117,12 @@
                 <svg class="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
-                <DatePicker v-model="searchForm.checkOut" position="left" :minDate="searchForm.checkIn">
-                  <template #default="{ formattedDate }">
-                    <div class="text-xs text-gray-900 dark:text-white w-full cursor-pointer">
-                      {{ formattedDate || 'Check out' }}
-                    </div>
-                  </template>
-                </DatePicker>
+                <input 
+                  v-model="searchForm.checkOut" 
+                  type="date" 
+                  :min="searchForm.checkIn"
+                  class="w-full bg-transparent border-0 focus:outline-none text-xs text-gray-900 dark:text-white"
+                />
               </div>
             </div>
 
@@ -137,14 +131,14 @@
               <svg class="w-4 h-4 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
               </svg>
-              <GuestSelector v-model="searchForm.guests" position="left">
-                <template #default="{ totalGuests }">
-                  <div class="flex items-center cursor-pointer w-full">
-                    <span class="text-sm text-gray-900 dark:text-white font-medium">{{ totalGuests }}</span>
-                    <span class="text-sm text-gray-500 dark:text-gray-400 ml-1">guests</span>
-                  </div>
-                </template>
-              </GuestSelector>
+              <input 
+                v-model.number="searchForm.guests.adults" 
+                type="number" 
+                min="1" 
+                placeholder="Guests"
+                class="w-full bg-transparent border-0 focus:outline-none text-sm text-gray-900 dark:text-white"
+              />
+              <span class="text-sm text-gray-500 dark:text-gray-400 ml-1">guests</span>
             </div>
 
             <!-- Search Button -->
@@ -399,8 +393,6 @@ import { useTranslation } from '../../composables/useTranslation'
 import MainLayout from '../../components/layout/MainLayout.vue'
 import PropertyCard from '../../components/common/PropertyCard.vue'
 import AIConcierge from '../../components/ai/AIConcierge.vue'
-import DatePicker from '../../components/common/DatePicker.vue'
-import GuestSelector from '../../components/common/GuestSelector.vue'
 import api from '../../services/api'
 
 const router = useRouter()
