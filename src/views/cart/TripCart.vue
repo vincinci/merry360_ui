@@ -1,11 +1,11 @@
 <template>
   <MainLayout>
     <!-- Cart Content -->
-    <section class="py-12 md:py-16">
+    <section class="py-12 md:py-16 bg-white dark:bg-gray-900 min-h-screen">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div v-if="cartCount === 0" class="text-center py-16">
-          <h3 class="text-2xl font-bold text-text-brand-600 mb-2">Your cart is empty</h3>
-          <p class="text-text-secondary mb-6">Add accommodations, tours, and services to your cart</p>
+          <h3 class="text-2xl font-bold text-text-brand-600 dark:text-white mb-2">Your cart is empty</h3>
+          <p class="text-text-secondary dark:text-gray-300 mb-6">Add accommodations, tours, and services to your cart</p>
           <button @click="router.push('/home')" class="px-6 py-3 bg-brand-500 text-white rounded-lg font-semibold hover:bg-red-600 transition-colors">
             Start Planning
           </button>
@@ -14,9 +14,9 @@
         <div v-else class="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <!-- Cart Items -->
           <div class="lg:col-span-2 space-y-4">
-            <h2 class="text-2xl font-bold text-text-brand-600 mb-6">Cart Items ({{ cartCount }})</h2>
+            <h2 class="text-2xl font-bold text-text-brand-600 dark:text-white mb-6">Cart Items ({{ cartCount }})</h2>
             
-            <div v-for="item in tripCart" :key="`${item.type}-${item.id}`" class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+            <div v-for="item in tripCart" :key="`${item.type}-${item.id}`" class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
               <div class="flex flex-col sm:flex-row gap-4 p-6">
                 <img loading="lazy" 
                   :src="item.image" 
@@ -26,12 +26,12 @@
                 <div class="flex-1">
                   <div class="flex items-start justify-between mb-2">
                     <div>
-                      <span class="px-2 py-1 bg-primary/10 text-brand-600 text-xs font-semibold rounded-full uppercase">
+                      <span class="px-2 py-1 bg-primary/10 text-brand-600 dark:text-red-400 text-xs font-semibold rounded-full uppercase">
                         {{ item.type }}
                       </span>
-                      <h3 class="text-lg font-bold text-text-brand-600 mt-2">{{ item.name || item.title }}</h3>
-                      <p v-if="item.location" class="text-text-secondary text-sm">{{ item.location }}</p>
-                      <p v-if="item.duration" class="text-text-secondary text-sm">Duration: {{ item.duration }}</p>
+                      <h3 class="text-lg font-bold text-text-brand-600 dark:text-white mt-2">{{ item.name || item.title }}</h3>
+                      <p v-if="item.location" class="text-text-secondary dark:text-gray-300 text-sm">{{ item.location }}</p>
+                      <p v-if="item.duration" class="text-text-secondary dark:text-gray-300 text-sm">Duration: {{ item.duration }}</p>
                     </div>
                     <button 
                       @click="removeItem(item)" 
@@ -54,33 +54,33 @@
 
           <!-- Order Summary -->
           <div class="lg:col-span-1">
-            <div class="bg-white rounded-xl shadow-lg p-6 sticky top-24">
-              <h3 class="text-xl font-bold text-text-brand-600 mb-6">Order Summary</h3>
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 sticky top-24">
+              <h3 class="text-xl font-bold text-text-brand-600 dark:text-white mb-6">Order Summary</h3>
               
-              <div class="space-y-3 mb-6 pb-6 border-b border-gray-200">
-                <div class="flex justify-between text-text-secondary">
+              <div class="space-y-3 mb-6 pb-6 border-b border-gray-200 dark:border-gray-700">
+                <div class="flex justify-between text-text-secondary dark:text-gray-300">
                   <span>Subtotal ({{ cartCount }} items)</span>
                   <span class="font-semibold">{{ currencyStore.formatPrice(subtotal) }}</span>
                 </div>
-                <div class="flex justify-between text-text-secondary">
+                <div class="flex justify-between text-text-secondary dark:text-gray-300">
                   <span>Service Fee</span>
                   <span class="font-semibold">{{ currencyStore.formatPrice(serviceFee) }}</span>
                 </div>
-                <div class="flex justify-between text-brand-600">
+                <div class="flex justify-between text-brand-600 dark:text-red-400">
                   <span>Loyalty Discount</span>
                   <span class="font-semibold">-{{ currencyStore.formatPrice(discount) }}</span>
                 </div>
               </div>
 
-              <div class="flex justify-between text-xl font-bold text-text-brand-600 mb-6">
+              <div class="flex justify-between text-xl font-bold text-text-brand-600 dark:text-white mb-6">
                 <span>Total</span>
-                <span class="text-brand-600">{{ currencyStore.formatPrice(total) }}</span>
+                <span class="text-brand-600 dark:text-red-400">{{ currencyStore.formatPrice(total) }}</span>
               </div>
 
               <div class="mb-6">
                 <div class="flex items-center justify-between mb-2">
-                  <span class="text-sm text-text-secondary">Loyalty Points Available</span>
-                  <span class="text-sm font-semibold text-brand-600">{{ loyaltyPoints }} pts</span>
+                  <span class="text-sm text-text-secondary dark:text-gray-300">Loyalty Points Available</span>
+                  <span class="text-sm font-semibold text-brand-600 dark:text-red-400">{{ loyaltyPoints }} pts</span>
                 </div>
                 <div class="flex items-center gap-2">
                   <input 
@@ -89,7 +89,7 @@
                     :max="loyaltyPoints"
                     min="0"
                     placeholder="Points to redeem"
-                    class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20"
+                    class="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                   <button 
                     @click="applyPoints" 
@@ -109,7 +109,7 @@
 
               <button 
                 @click="clearAllItems" 
-                class="w-full px-6 py-3 mt-3 border-2 border-gray-300 text-text-secondary rounded-xl font-semibold hover:border-red-500 hover:text-red-500 transition-colors"
+                class="w-full px-6 py-3 mt-3 border-2 border-gray-300 dark:border-gray-600 text-text-secondary dark:text-gray-300 rounded-xl font-semibold hover:border-red-500 hover:text-red-500 transition-colors"
               >
                 Clear Cart
               </button>
