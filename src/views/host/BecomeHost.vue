@@ -329,7 +329,7 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="py-16 md:py-20 bg-gray-50">
+    <section class="py-16 md:py-20 bg-gray-50 dark:bg-gray-800">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto">
           <div class="text-center mb-12">
@@ -337,14 +337,14 @@
           </div>
 
           <div class="space-y-4">
-            <div v-for="(faq, index) in faqs" :key="index" class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div v-for="(faq, index) in faqs" :key="index" class="bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-hidden">
               <button 
                 @click="toggleFaq(index)"
-                class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+                class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
               >
                 <span class="font-semibold text-gray-900 dark:text-white">{{ faq.question }}</span>
                 <svg 
-                  class="w-5 h-5 text-gray-500 transition-transform"
+                  class="w-5 h-5 text-gray-500 dark:text-gray-300 transition-transform"
                   :class="{ 'rotate-180': faq.open }"
                   fill="none" 
                   stroke="currentColor" 
