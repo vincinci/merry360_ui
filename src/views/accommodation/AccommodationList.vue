@@ -3,6 +3,10 @@
     <!-- Search Bar Section -->
     <div class="w-full py-12 bg-white dark:bg-gray-900" style="margin-top: 80px;">
       <div class="container mx-auto px-4 max-w-4xl">
+        <div class="text-center mb-6">
+          <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">Find Your Perfect Accommodation</h1>
+          <p class="text-base md:text-lg text-gray-600 dark:text-gray-300">Discover amazing stays across Rwanda and Africa</p>
+        </div>
         <div class="bg-white dark:bg-gray-800 rounded-[20px] md:rounded-[35px] shadow-2xl p-3 md:p-2 flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-0" style="min-height: 70px;">
           <div class="flex-1 px-2 md:px-6">
             <label class="block text-xs font-bold mb-1.5 dark:text-gray-200" style="font-family: Montserrat, sans-serif; color: #484848; font-size: 12px;">{{ t('nav.accommodations') }}</label>
