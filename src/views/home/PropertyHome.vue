@@ -285,16 +285,16 @@
 
     <!-- Property Rental Guides -->
     <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-      <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-text-primary mb-6">Property Rental Guides & Tips</h2>
+      <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-text-primary dark:text-white mb-6">Property Rental Guides & Tips</h2>
       
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        <div v-for="guide in guides" :key="guide.id" class="bg-white rounded-xl shadow-card overflow-hidden hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 cursor-pointer">
+        <div v-for="guide in guides" :key="guide.id" class="bg-white dark:bg-gray-700 rounded-xl shadow-card overflow-hidden hover:shadow-card-hover transition-all duration-300 transform hover:-translate-y-1 cursor-pointer">
           <div class="relative overflow-hidden">
             <img :src="guide.image" :alt="guide.title" class="w-full h-48 sm:h-56 object-cover transform transition-transform duration-500 hover:scale-110" />
           </div>
           <div class="p-4 sm:p-6">
             <span class="inline-block px-3 py-1 bg-primary text-white text-xs font-medium rounded-full mb-3">{{ guide.category }}</span>
-            <h3 class="font-semibold text-base sm:text-lg text-text-primary mb-2">{{ guide.title }}</h3>
+            <h3 class="font-semibold text-base sm:text-lg text-text-primary dark:text-white mb-2">{{ guide.title }}</h3>
           </div>
         </div>
       </div>
@@ -308,11 +308,11 @@
 
     <!-- Download App -->
     <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-      <div class="bg-gray-100 rounded-xl md:rounded-2xl p-6 sm:p-8 md:p-12">
+      <div class="bg-gray-100 dark:bg-gray-800 rounded-xl md:rounded-2xl p-6 sm:p-8 md:p-12">
         <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div>
-            <h2 class="text-2xl sm:text-3xl font-bold text-text-primary mb-3 sm:mb-4">Download Our Mobile App</h2>
-            <p class="text-text-secondary mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
+            <h2 class="text-2xl sm:text-3xl font-bold text-text-primary dark:text-white mb-3 sm:mb-4">Download Our Mobile App</h2>
+            <p class="text-text-secondary dark:text-gray-300 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
               Discover more about property buying, selling and renting with our mobile app. Available on iOS and Android.
             </p>
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
