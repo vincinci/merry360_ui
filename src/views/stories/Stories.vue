@@ -1,7 +1,7 @@
 <template>
   <MainLayout>
     <!-- Stories Header -->
-    <section class="bg-gradient-to-br from-purple-50 to-pink-50 py-12">
+    <section class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-900 py-12">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto text-center mb-8">
           <h1 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900 dark:text-white">{{ t('stories.title') }}</h1>

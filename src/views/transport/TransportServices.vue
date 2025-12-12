@@ -1,7 +1,7 @@
 <template>
   <MainLayout>
     <!-- Hero Section with Search -->
-    <section class="relative bg-gradient-to-br from-brand-50 to-white py-12 md:py-16">
+    <section class="relative bg-gradient-to-br from-brand-50 to-white dark:from-gray-800 dark:to-gray-900 py-12 md:py-16">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto text-center mb-8">
           <h1 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900 dark:text-white">{{ t('transport.title') }}</h1>
@@ -10,9 +10,9 @@
 
         <!-- Search Bar -->
         <div class="max-w-3xl mx-auto">
-          <div class="bg-white rounded-2xl shadow-xl p-4 flex flex-col md:flex-row gap-3">
+          <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-4 flex flex-col md:flex-row gap-3">
             <!-- Route Search -->
-            <div class="flex-1 flex items-center gap-3 px-4 py-3 bg-gray-50 rounded-xl">
+            <div class="flex-1 flex items-center gap-3 px-4 py-3 bg-gray-50 dark:bg-gray-700 rounded-xl">
               <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -21,14 +21,14 @@
                 v-model="searchQuery"
                 type="text" 
                 placeholder="Search routes or destinations..."
-                class="flex-1 bg-transparent text-sm font-medium focus:outline-none placeholder-gray-400"
+                class="flex-1 bg-transparent text-sm font-medium focus:outline-none placeholder-gray-400 dark:text-white"
               />
             </div>
 
             <!-- Vehicle Type Filter -->
             <select 
               v-model="vehicleFilter"
-              class="px-4 py-3 bg-gray-50 rounded-xl text-sm font-medium text-gray-700 focus:outline-none cursor-pointer"
+              class="px-4 py-3 bg-gray-50 dark:bg-gray-700 rounded-xl text-sm font-medium text-gray-700 dark:text-white focus:outline-none cursor-pointer"
             >
               <option value="">All Vehicles</option>
               <option value="taxi">Taxi</option>
