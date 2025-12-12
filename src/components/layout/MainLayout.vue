@@ -107,6 +107,14 @@
               </svg>
             </router-link>
 
+            <!-- Trip Cart Button -->
+            <router-link to="/cart" class="relative px-4 py-2 border-2 border-brand-500 text-brand-500 dark:border-red-400 dark:text-red-400 rounded-full hover:bg-brand-50 dark:hover:bg-gray-700 transition-all font-semibold text-sm flex items-center gap-2" title="Trip Cart">
+              <span>Trip Cart</span>
+              <span v-if="userStore.cartCount > 0" class="absolute -top-1 -right-1 bg-brand-500 dark:bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {{ userStore.cartCount }}
+              </span>
+            </router-link>
+
             <!-- User Menu (when authenticated) -->
             <div v-if="userStore.isAuthenticated" class="relative" v-click-outside="closeUserMenu">
               <button 
@@ -208,6 +216,14 @@
               <svg class="w-5 h-5 text-gray-700 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
               </svg>
+            </router-link>
+
+            <!-- Trip Cart Button Mobile -->
+            <router-link to="/cart" class="relative px-3 py-1.5 border-2 border-brand-500 text-brand-500 dark:border-red-400 dark:text-red-400 rounded-full hover:bg-brand-50 dark:hover:bg-gray-700 transition-all font-semibold text-xs flex items-center gap-1">
+              <span>Cart</span>
+              <span v-if="userStore.cartCount > 0" class="absolute -top-1 -right-1 bg-brand-500 dark:bg-red-500 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                {{ userStore.cartCount }}
+              </span>
             </router-link>
 
             <button 
