@@ -184,9 +184,10 @@ const routes = [
     component: UserDashboard
   },
   {
-    path: '/trip-cart',
-    name: 'trip-cart',
-    component: TripCart
+    path: '/cart',
+    name: 'cart',
+    component: TripCart,
+    alias: '/trip-cart' // Support old URL
   },
   {
     path: '/admin',
