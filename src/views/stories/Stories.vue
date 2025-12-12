@@ -55,7 +55,7 @@
                 <svg class="w-3 h-3 text-brand-600" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
                 </svg>
-                <span class="text-xs font-semibold text-gray-800 truncate">{{ story.location }}</span>
+                <span class="text-xs font-semibold text-gray-800 dark:text-white truncate">{{ story.location }}</span>
               </div>
             </div>
 
@@ -74,8 +74,8 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-2">{{ t('stories.noStories') }}</h3>
-          <p class="text-gray-600">{{ t('stories.subtitle') }}</p>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{{ t('stories.noStories') }}</h3>
+          <p class="text-gray-600 dark:text-gray-300">{{ t('stories.subtitle') }}</p>
         </div>
       </div>
     </section>
